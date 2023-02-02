@@ -34,7 +34,7 @@ public class Organism : MonoBehaviour
     void SecondPassed() 
     {
         WaitASecond();
-        this.energy--;
+        //this.energy--;
         this.age++;
     }
 
