@@ -19,6 +19,8 @@ public class Genetics : MonoBehaviour
 
     public float deathAge;
 
+    public float physicalRange;
+
 
     // Start is called before the first frame update
     void Start()

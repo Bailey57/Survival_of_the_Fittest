@@ -4,6 +4,18 @@ using UnityEngine;
 
 public class Plant : MonoBehaviour
 {
+    public GameObject inGamePlant;
+
+
+    public float condition;
+
+    public float nutreance;
+
+    public float age;
+
+
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -13,6 +25,12 @@ public class Plant : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        if (condition <= 0 || nutreance <= 0) 
+        {
+            Destroy(inGamePlant);
+
+        }
         
     }
 }

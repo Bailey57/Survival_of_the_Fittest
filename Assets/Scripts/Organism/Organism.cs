@@ -26,7 +26,10 @@ public class Organism : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        SecondPassed();
+        //tmp solution
+        energy -= .00001f;
+        age += .00001f;
+        //SecondPassed();
 
     }
 

@@ -6,6 +6,8 @@ public class OrganismActions : MonoBehaviour
 {
     public GameObject inGameOrganism;
 
+    public BoxCollider2D visionArea;
+
     public Organism organism;
 
     public Brain brain;
@@ -13,6 +15,12 @@ public class OrganismActions : MonoBehaviour
     public Genetics genetics;
 
     public Rigidbody2D rb;
+
+
+    public GameObject travelTarget;
+
+
+    public List<GameObject> gameobjectsInSight = new List<GameObject>();
 
 
     // Start is called before the first frame update
@@ -28,12 +36,104 @@ public class OrganismActions : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Swim();
-        Turn();
+
+        MoveToTravelTarget();
+
+        //visionArea.
+        // Swim();
+        //Turn();
+        Eat();
         LayEgg();
 
     }
 
+
+
+    public bool TargetInRange()
+    {
+        if (this.travelTarget == null)
+        {
+            return false;
+        }
+        if (GetDistance() < this.genetics.physicalRange)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+
+    }
+
+
+    public void Eat() 
+    {
+        if (this.travelTarget == null)
+        {
+            return;
+        }
+
+        if ((travelTarget.gameObject.GetComponent("Plant") as Plant) != null && TargetInRange()) 
+        {
+            float nutrianceTransferRate = .001f;
+            (travelTarget.gameObject.GetComponent("Plant") as Plant).condition -= nutrianceTransferRate;
+            (travelTarget.gameObject.GetComponent("Plant") as Plant).nutreance -= nutrianceTransferRate;
+            organism.energy += nutrianceTransferRate;
+
+        }
+
+
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        //add object to in view list
+        Debug.Log("Trigger entered");
+        gameobjectsInSight.Add(other.gameObject);
+    }
+
+
+    private void OnTriggerExit(Collider other)
+    {
+        Debug.Log("Trigger exited");
+        //add object to in view list
+        gameobjectsInSight.Remove(other.gameObject);
+    }
+
+
+    void MoveToTravelTarget() 
+    {
+        if (this.travelTarget == null)
+        {
+            return;
+        }
+
+        //distanceToTarget and direction unused for now 
+        float distanceToTarget = GetDistance();
+        Vector2 direction = GetDirection();
+        transform.position = Vector2.MoveTowards(this.transform.position, travelTarget.transform.position, genetics.agility * Time.deltaTime);
+        
+        
+        //temp bandaid code for turning twords target
+        direction.Normalize();
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90;
+        transform.rotation = Quaternion.Euler(Vector3.forward * angle);
+
+    }
+    public float GetDistance()
+    {
+        if (this.travelTarget == null)
+        {
+            return -1;
+        }
+        Debug.Log("Distance to target: " + Vector2.Distance(transform.position, travelTarget.transform.position));
+        return Vector2.Distance(transform.position, travelTarget.transform.position);
+    }
+    public Vector2 GetDirection()
+    {
+        return (travelTarget.transform.position - transform.position);
+    }
 
     void Turn() 
     {
@@ -54,7 +154,12 @@ public class OrganismActions : MonoBehaviour
 
     void LayEgg() 
     {
-        if (organism.age > 300 && organism.energy > 100) 
+        float eggLayingAge = 3;
+        float energyNeededToLayEgg = 100;
+
+        float energyLossRatioAfterLayingEgg = 3;
+
+        if (organism.age > eggLayingAge && organism.energy > energyNeededToLayEgg) 
         {
             //GameObject newOrganism = inGameOrganism;
             //add atributes
@@ -67,9 +172,10 @@ public class OrganismActions : MonoBehaviour
 
             (newOrganism.GetComponent(typeof(Organism)) as Organism).energy = 0;
 
-
+            Vector2 newV = new Vector2(inGameOrganism.transform.position.x, inGameOrganism.transform.position.y -2);
+            newOrganism.transform.position = newV;
             //loose energy after laying egg
-            organism.energy = organism.energy / 3;
+            organism.energy = organism.energy / energyLossRatioAfterLayingEgg;
 
 
         }
