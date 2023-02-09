@@ -27,15 +27,19 @@ public class OrganismActions : MonoBehaviour
     void Start()
     {
 
-        rb.velocity = new Vector2(genetics.agility, rb.velocity.y);
+        //rb.velocity = new Vector2(genetics.agility, rb.velocity.y);
+        StartCoroutine(Eat2());
 
-            
+
 
     }
 
     // Update is called once per frame
     void Update()
     {
+        DeathCheck();
+
+
         GetPlantTarget();
 
         MoveToTravelTarget();
@@ -43,20 +47,94 @@ public class OrganismActions : MonoBehaviour
         //visionArea.
         // Swim();
         //Turn();
-        Eat();
+        //Eat();
         LayEgg();
+
+
+
+        Wonder();
+        //Spin();
+    }
+
+
+    //if there is no food in sight, then wonder around 
+    public void Wonder() 
+    {
+        if (gameobjectsInSight.Count <= 0 || travelTarget  == null) 
+        {
+
+            Spin();
+            float moveSpeed = 5f;
+
+
+            inGameOrganism.transform.Translate(0f, moveSpeed * Time.deltaTime, 0f);
+
+
+        }
+
+        
+
 
     }
 
 
+    //if there is nothing in sight, spin around to find something
+    public void Spin()
+    {
+        if (gameobjectsInSight.Count <= 0 || travelTarget  == null) 
+        {
+            float rotateSpeed = 30f;
 
+
+            inGameOrganism.transform.Rotate(0f, 0f, rotateSpeed * Time.deltaTime);
+
+
+        }
+        else
+        {
+            
+
+
+        }
+
+    }
+
+
+    public void DeathCheck() 
+    {
+        if (organism.health <= 0 || organism.age >= genetics.deathAge || organism.energy <= 0)
+        {
+            inGameOrganism.SetActive(false);
+            Destroy(inGameOrganism);
+
+        }
+    }
 
     public void GetPlantTarget()
     {
         if (this.travelTarget == null && gameobjectsInSight.Count > 0)
         {
-            this.travelTarget = gameobjectsInSight[0];
+            for (int i = 0; i < gameobjectsInSight.Count; i++) 
+            {
+                if (gameobjectsInSight[i] == null) 
+                {
+                    gameobjectsInSight.Remove(gameobjectsInSight[i]);
 
+
+                }
+                if (gameobjectsInSight[i] != null && (gameobjectsInSight[i].gameObject.GetComponent("Plant") as Plant))
+                {
+                    this.travelTarget = gameobjectsInSight[i];
+                    return;
+
+                }
+                else if (gameobjectsInSight[i] == null) 
+                {
+                    gameobjectsInSight.Remove(gameobjectsInSight[i]);
+                }
+
+            }
+            
 
         }
         else if (gameobjectsInSight.Count <= 0)
@@ -67,7 +145,15 @@ public class OrganismActions : MonoBehaviour
 
     }
 
-        public bool TargetInRange()
+
+    public void BiteTarget() 
+    {
+    
+    
+    }
+
+
+    public bool TargetInRange()
     {
         if (this.travelTarget == null)
         {
@@ -89,15 +175,47 @@ public class OrganismActions : MonoBehaviour
     {
         if (this.travelTarget == null)
         {
+            //Debug.Log("TT = Null");
             return;
         }
 
         if ((travelTarget.gameObject.GetComponent("Plant") as Plant) != null && TargetInRange()) 
         {
+            //Debug.Log("Eating");
             float nutrianceTransferRate = .001f;
             (travelTarget.gameObject.GetComponent("Plant") as Plant).condition -= nutrianceTransferRate;
             (travelTarget.gameObject.GetComponent("Plant") as Plant).nutreance -= nutrianceTransferRate;
             organism.energy += nutrianceTransferRate;
+
+        }
+
+
+    }
+
+
+    IEnumerator Eat2() 
+    {
+        Debug.Log("Eat2 running");
+
+        while (true)
+        {
+            yield return new WaitForSeconds(1);
+            Debug.Log("Eat2 waited");
+            if (this.travelTarget != null)
+            {
+                if ((travelTarget.gameObject.GetComponent("Plant") as Plant) != null && TargetInRange())
+                {
+
+                    Debug.Log("Eat2 eating!");
+                    //Debug.Log("Eating");
+                    float nutrianceTransferRate = .5f;
+                    (travelTarget.gameObject.GetComponent("Plant") as Plant).condition -= nutrianceTransferRate;
+                    (travelTarget.gameObject.GetComponent("Plant") as Plant).nutreance -= nutrianceTransferRate;
+                    organism.energy += nutrianceTransferRate;
+
+                }
+            }
+
 
         }
 
@@ -114,9 +232,15 @@ public class OrganismActions : MonoBehaviour
 
     void OnTriggerExit2D(Collider2D other)
     {
-        Debug.Log("Trigger exited");
+        //Debug.Log("Trigger exited");
         //add object to in view list
         gameobjectsInSight.Remove(other.gameObject);
+        if (this.travelTarget == other.gameObject) 
+        {
+            this.travelTarget = null;
+
+
+        }
     }
 
 
@@ -174,7 +298,7 @@ public class OrganismActions : MonoBehaviour
     {
         //change later to get genetics
         float eggLayingAge = 3;
-        float energyNeededToLayEgg = 100;
+        float energyNeededToLayEgg = 200;
 
         float energyLossRatioAfterLayingEgg = 3;
 
@@ -189,7 +313,8 @@ public class OrganismActions : MonoBehaviour
 
             GameObject newOrganism = Instantiate(inGameOrganism) as GameObject;
 
-            (newOrganism.GetComponent(typeof(Organism)) as Organism).energy = 0;
+            (newOrganism.GetComponent(typeof(Organism)) as Organism).energy = 100;
+            (newOrganism.GetComponent(typeof(Organism)) as Organism).age = 0;
 
             Vector2 newV = new Vector2(inGameOrganism.transform.position.x, inGameOrganism.transform.position.y -2);
             newOrganism.transform.position = newV;

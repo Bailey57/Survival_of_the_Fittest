@@ -7,7 +7,7 @@ public class Organism : MonoBehaviour
 
     public float health;
 
-    //public float 
+    //public float fatStorage;
 
     public float energy;
 
@@ -20,18 +20,53 @@ public class Organism : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        StartCoroutine(EnergyDrain());
+        StartCoroutine(AgeIncease());
         
+        
+
     }
 
     // Update is called once per frame
     void Update()
     {
         //tmp solution
-        energy -= .00001f;
-        age += .00001f;
+        //energy -= .00001f;
+        //age += .00001f;
         //SecondPassed();
 
     }
+
+
+
+
+    IEnumerator EnergyDrain()
+    {
+        while (true)
+        {
+            Debug.Log("waited for 20 sec");
+            yield return new WaitForSeconds(1);
+            energy -= .01f;
+
+
+        }
+
+    }
+
+    IEnumerator AgeIncease()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(1);
+            age += 1;
+
+
+        }
+
+    }
+
+
+
 
 
     void SecondPassed() 

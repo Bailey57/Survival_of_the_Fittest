@@ -28,6 +28,7 @@ public class Plant : MonoBehaviour
 
         if (condition <= 0 || nutreance <= 0) 
         {
+            inGamePlant.SetActive(false);
             Destroy(inGamePlant);
 
         }

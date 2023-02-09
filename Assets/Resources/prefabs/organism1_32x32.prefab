@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &8513124725670628983
+--- !u!1 &9178935729385013971
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,14 +8,15 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 8513124725670628981}
-  - component: {fileID: 8513124725670628980}
-  - component: {fileID: 8513124725670628976}
-  - component: {fileID: 8513124725670628979}
-  - component: {fileID: 8513124725670628978}
-  - component: {fileID: 8513124725670629006}
-  - component: {fileID: 8513124725670628977}
-  - component: {fileID: 8513124725670629007}
+  - component: {fileID: 9178935729385013931}
+  - component: {fileID: 9178935729385013930}
+  - component: {fileID: 9178935729385013929}
+  - component: {fileID: 9178935729385013928}
+  - component: {fileID: 9178935729385013975}
+  - component: {fileID: 9178935729385013974}
+  - component: {fileID: 9178935729385013973}
+  - component: {fileID: 9178935729385013972}
+  - component: {fileID: 9178935729385013932}
   m_Layer: 0
   m_Name: organism1_32x32
   m_TagString: Untagged
@@ -23,13 +24,13 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &8513124725670628981
+--- !u!4 &9178935729385013931
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8513124725670628983}
+  m_GameObject: {fileID: 9178935729385013971}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -4.3, y: 1.4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -37,13 +38,13 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &8513124725670628980
+--- !u!212 &9178935729385013930
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8513124725670628983}
+  m_GameObject: {fileID: 9178935729385013971}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -88,20 +89,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &8513124725670628976
+--- !u!61 &9178935729385013929
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8513124725670628983}
+  m_GameObject: {fileID: 9178935729385013971}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0013580322, y: -0.20056915}
+  m_Offset: {x: -0.05239868, y: 27.959818}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -112,16 +113,16 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.5989075, y: 2.3992767}
+  m_Size: {x: 27.884933, y: 56.62721}
   m_EdgeRadius: 0
---- !u!50 &8513124725670628979
+--- !u!50 &9178935729385013928
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8513124725670628983}
+  m_GameObject: {fileID: 9178935729385013971}
   m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
@@ -135,66 +136,141 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &8513124725670628978
+--- !u!114 &9178935729385013975
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8513124725670628983}
+  m_GameObject: {fileID: 9178935729385013971}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3572788715d527242896d05e60a005be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   health: 100
-  energy: 400
+  energy: 90.31
   age: 0
---- !u!114 &8513124725670629006
+--- !u!114 &9178935729385013974
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8513124725670628983}
+  m_GameObject: {fileID: 9178935729385013971}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ac56e28ee3b2c3f46b7c428523418335, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &8513124725670628977
+--- !u!114 &9178935729385013973
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8513124725670628983}
+  m_GameObject: {fileID: 9178935729385013971}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d72979c022023274cadf70c2ebaed477, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  agility: 0
+  agility: 0.88
   metabolism: 0
   eggLayingAge: 0
   visualDistance: 0
   visualAngle: 0
-  maxHealth: 0
-  deathAge: 0
---- !u!114 &8513124725670629007
+  maxHealth: 1.69
+  deathAge: 100
+  physicalRange: 3
+--- !u!114 &9178935729385013972
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8513124725670628983}
+  m_GameObject: {fileID: 9178935729385013971}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 406b1bfdac3f85a4da2e2b3242bb9076, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inGameOrganism: {fileID: 8513124725670628983}
-  organism: {fileID: 8513124725670628978}
-  brain: {fileID: 8513124725670629006}
-  genetics: {fileID: 8513124725670628977}
-  rb: {fileID: 8513124725670628979}
+  inGameOrganism: {fileID: 9178935729385013971}
+  visionArea: {fileID: 9178935729385013929}
+  organism: {fileID: 9178935729385013975}
+  brain: {fileID: 9178935729385013974}
+  genetics: {fileID: 9178935729385013973}
+  rb: {fileID: 9178935729385013928}
+  travelTarget: {fileID: 0}
+  gameobjectsInSight: []
+--- !u!60 &9178935729385013932
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9178935729385013971}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 3.2, y: 3.2}
+    newSize: {x: 3.2, y: 3.2}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.32999998, y: -1.42}
+      - {x: 0.5, y: -1.42}
+      - {x: 0.53, y: -1.41}
+      - {x: 0.52, y: -1.1}
+      - {x: 0.5037086, y: -1.0988739}
+      - {x: 0.2856954, y: -0.84913903}
+      - {x: 0.52, y: -0.41}
+      - {x: 0.62, y: -0.29999998}
+      - {x: 0.6132152, y: -0.0007638931}
+      - {x: 0.82, y: 0}
+      - {x: 0.82, y: 0.099999994}
+      - {x: 0.79999995, y: 0.12}
+      - {x: 0.6981182, y: 0.20815642}
+      - {x: 0.63, y: 0.24}
+      - {x: 0.61771053, y: 0.5660657}
+      - {x: 0.82, y: 0.65999997}
+      - {x: 0.82, y: 1.02}
+      - {x: 0.7, y: 1.02}
+      - {x: 0.68, y: 1}
+      - {x: 0.59, y: 0.94}
+      - {x: 0.42, y: 0.82}
+      - {x: 0.42999998, y: 1.02}
+      - {x: -0.48999998, y: 1.02}
+      - {x: -0.53999996, y: 0.91999996}
+      - {x: -0.65, y: 1.02}
+      - {x: -0.79999995, y: 1.02}
+      - {x: -0.82, y: 1.01}
+      - {x: -0.82, y: 0.7}
+      - {x: -0.7024602, y: 0.5957368}
+      - {x: -0.60639465, y: 0.5521316}
+      - {x: -0.62138844, y: 0.23409426}
+      - {x: -0.69124746, y: 0.20354378}
+      - {x: -0.75, y: 0.14}
+      - {x: -0.82, y: 0.11}
+      - {x: -0.82, y: -0.02}
+      - {x: -0.612898, y: -0.017415084}
+      - {x: -0.62, y: -0.29999998}
+      - {x: -0.53, y: -0.42}
+      - {x: -0.44, y: -0.61}
+      - {x: -0.27225173, y: -0.84999996}
+      - {x: -0.5085433, y: -1.0537087}
+      - {x: -0.52, y: -1.42}
+      - {x: -0.39999998, y: -1.42}
+      - {x: -0.28, y: -1.35}
+      - {x: -0.15404573, y: -1.1147317}
+      - {x: 0.14259455, y: -1.1054177}

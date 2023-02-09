@@ -16,7 +16,7 @@ public class Spawner : MonoBehaviour
     void Start()
     {
         StartCoroutine(SpawnPlant());
-        
+        //SpawnOrganism()
 
 
     }
@@ -32,15 +32,35 @@ public class Spawner : MonoBehaviour
     {
         while (true) 
         {
-            Debug.Log("waited for 3 sec");
-            yield return new WaitForSeconds(3);
-            
+            Debug.Log("waited for 20 sec");
+            yield return new WaitForSeconds(40);
+
+
+            GameObject newObject = (GameObject)Instantiate(Resources.Load("Prefabs/plant1_32x32"));
+
 
 
         }
         
     }
 
+
+    IEnumerator SpawnOrganism()
+    {
+        while (true)
+        {
+            Debug.Log("waited for 20 sec");
+            yield return new WaitForSeconds(20);
+
+
+            GameObject newObject = (GameObject)Instantiate(Resources.Load("Prefabs/organism1_32x32"));
+            (newObject.GetComponent(typeof(Organism)) as Organism).energy = 100;
+            (newObject.GetComponent(typeof(Genetics)) as Genetics).deathAge = 1000;
+
+
+        }
+
+    }
 
 
 
