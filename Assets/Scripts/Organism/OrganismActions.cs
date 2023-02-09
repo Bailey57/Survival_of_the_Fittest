@@ -36,6 +36,7 @@ public class OrganismActions : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        GetPlantTarget();
 
         MoveToTravelTarget();
 
@@ -49,7 +50,24 @@ public class OrganismActions : MonoBehaviour
 
 
 
-    public bool TargetInRange()
+
+    public void GetPlantTarget()
+    {
+        if (this.travelTarget == null && gameobjectsInSight.Count > 0)
+        {
+            this.travelTarget = gameobjectsInSight[0];
+
+
+        }
+        else if (gameobjectsInSight.Count <= 0)
+        {
+            this.travelTarget = null;
+        }
+
+
+    }
+
+        public bool TargetInRange()
     {
         if (this.travelTarget == null)
         {
@@ -86,7 +104,7 @@ public class OrganismActions : MonoBehaviour
 
     }
 
-    private void OnTriggerEnter(Collider other)
+    void OnTriggerEnter2D(Collider2D other)
     {
         //add object to in view list
         Debug.Log("Trigger entered");
@@ -94,7 +112,7 @@ public class OrganismActions : MonoBehaviour
     }
 
 
-    private void OnTriggerExit(Collider other)
+    void OnTriggerExit2D(Collider2D other)
     {
         Debug.Log("Trigger exited");
         //add object to in view list
@@ -127,7 +145,7 @@ public class OrganismActions : MonoBehaviour
         {
             return -1;
         }
-        Debug.Log("Distance to target: " + Vector2.Distance(transform.position, travelTarget.transform.position));
+        //Debug.Log("Distance to target: " + Vector2.Distance(transform.position, travelTarget.transform.position));
         return Vector2.Distance(transform.position, travelTarget.transform.position);
     }
     public Vector2 GetDirection()
@@ -154,6 +172,7 @@ public class OrganismActions : MonoBehaviour
 
     void LayEgg() 
     {
+        //change later to get genetics
         float eggLayingAge = 3;
         float energyNeededToLayEgg = 100;
 

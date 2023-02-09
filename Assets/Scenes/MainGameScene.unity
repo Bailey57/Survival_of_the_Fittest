@@ -162,16 +162,17 @@ PolygonCollider2D:
       - {x: 0.5, y: -1.42}
       - {x: 0.53, y: -1.41}
       - {x: 0.52, y: -1.1}
-      - {x: 0.52, y: -1.05}
-      - {x: 0.34, y: -0.85999995}
+      - {x: 0.5037086, y: -1.0988739}
+      - {x: 0.2856954, y: -0.84913903}
       - {x: 0.52, y: -0.41}
       - {x: 0.62, y: -0.29999998}
+      - {x: 0.6132152, y: -0.0007638931}
       - {x: 0.82, y: 0}
       - {x: 0.82, y: 0.099999994}
       - {x: 0.79999995, y: 0.12}
-      - {x: 0.74, y: 0.21}
+      - {x: 0.6981182, y: 0.20815642}
       - {x: 0.63, y: 0.24}
-      - {x: 0.71999997, y: 0.57}
+      - {x: 0.61771053, y: 0.5660657}
       - {x: 0.82, y: 0.65999997}
       - {x: 0.82, y: 1.02}
       - {x: 0.7, y: 1.02}
@@ -185,22 +186,24 @@ PolygonCollider2D:
       - {x: -0.79999995, y: 1.02}
       - {x: -0.82, y: 1.01}
       - {x: -0.82, y: 0.7}
-      - {x: -0.72999996, y: 0.58}
-      - {x: -0.63, y: 0.56}
+      - {x: -0.7024602, y: 0.5957368}
+      - {x: -0.60639465, y: 0.5521316}
+      - {x: -0.62138844, y: 0.23409426}
+      - {x: -0.69124746, y: 0.20354378}
       - {x: -0.75, y: 0.14}
       - {x: -0.82, y: 0.11}
       - {x: -0.82, y: -0.02}
-      - {x: -0.64, y: -0.04}
+      - {x: -0.612898, y: -0.017415084}
       - {x: -0.62, y: -0.29999998}
       - {x: -0.53, y: -0.42}
       - {x: -0.44, y: -0.61}
-      - {x: -0.37, y: -0.84999996}
-      - {x: -0.59, y: -1.0699999}
+      - {x: -0.27225173, y: -0.84999996}
+      - {x: -0.5085433, y: -1.0537087}
       - {x: -0.52, y: -1.42}
       - {x: -0.39999998, y: -1.42}
       - {x: -0.28, y: -1.35}
-      - {x: -0.16, y: -1.2099999}
-      - {x: 0.22, y: -1.29}
+      - {x: -0.15404573, y: -1.1147317}
+      - {x: 0.14259455, y: -1.1054177}
 --- !u!1 &225888602
 GameObject:
   m_ObjectHideFlags: 0
@@ -768,6 +771,49 @@ RectTransform:
   m_AnchoredPosition: {x: -0.000027716, y: 20.231}
   m_SizeDelta: {x: 118.6519, y: 20.4624}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1074531404
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1074531405}
+  - component: {fileID: 1074531406}
+  m_Layer: 0
+  m_Name: Spawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1074531405
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1074531404}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.02, y: -0.02, z: -97.214325}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1074531406
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1074531404}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: baaddd1b5f6304745897781ab4a8c3b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1112161199
 GameObject:
   m_ObjectHideFlags: 0
@@ -1549,11 +1595,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1560270772705745535, guid: 4ec7412c3b50d5540b7b68090792f3ad, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.33
+      value: -4.7
       objectReference: {fileID: 0}
     - target: {fileID: 1560270772705745535, guid: 4ec7412c3b50d5540b7b68090792f3ad, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 7.83
+      value: 23.73
       objectReference: {fileID: 0}
     - target: {fileID: 1560270772705745535, guid: 4ec7412c3b50d5540b7b68090792f3ad, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1627,7 +1673,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8513124725670628977, guid: 0153a39e3b023704a847b99e07bca32e, type: 3}
       propertyPath: agility
-      value: 0.5
+      value: 0.88
       objectReference: {fileID: 0}
     - target: {fileID: 8513124725670628977, guid: 0153a39e3b023704a847b99e07bca32e, type: 3}
       propertyPath: physicalRange
@@ -1692,7 +1738,7 @@ PrefabInstance:
     - target: {fileID: 8513124725670629007, guid: 0153a39e3b023704a847b99e07bca32e, type: 3}
       propertyPath: travelTarget
       value: 
-      objectReference: {fileID: 423125162}
+      objectReference: {fileID: 0}
     - target: {fileID: 8513124725670629007, guid: 0153a39e3b023704a847b99e07bca32e, type: 3}
       propertyPath: gameobjectsInSight.Array.size
       value: 1
