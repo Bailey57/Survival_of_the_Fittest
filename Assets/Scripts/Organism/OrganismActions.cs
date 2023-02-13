@@ -311,10 +311,21 @@ public class OrganismActions : MonoBehaviour
 
             //newOrganism.SetActive(true);
 
+            //make new organism and give genes
+            float geneChangeChance = 100;
+            float maxGeneChangeAmmount = 1;
+
+            float brainChangeChance = 100;
+            float maxBrainChangeAmmount = 1;
+
             GameObject newOrganism = Instantiate(inGameOrganism) as GameObject;
 
             (newOrganism.GetComponent(typeof(Organism)) as Organism).energy = 100;
             (newOrganism.GetComponent(typeof(Organism)) as Organism).age = 0;
+
+            (newOrganism.GetComponent(typeof(Genetics)) as Genetics).generationNum += 1;
+
+
 
             Vector2 newV = new Vector2(inGameOrganism.transform.position.x, inGameOrganism.transform.position.y -2);
             newOrganism.transform.position = newV;

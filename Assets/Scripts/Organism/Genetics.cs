@@ -5,7 +5,13 @@ using UnityEngine;
 public class Genetics : MonoBehaviour
 {
 
+    public int generationNum;
+
     public float agility;
+
+    //public float maxSpeed;
+    //public float cruiseSpeed;
+
 
     public float metabolism;
 
