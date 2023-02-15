@@ -416,7 +416,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &765059609
 GameObject:
@@ -476,8 +476,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   numOfOrganisms: 0
   numOfPlants: 0
-  numOfOrganismsMax: 0
-  numOfPlantsMax: 0
+  MaxnumOfOrganisms: 0
+  MaxNumOfPlants: 0
   longestLastingGenNum: 0
   familyTree: {fileID: 765059611}
 --- !u!1 &899470974
@@ -1564,7 +1564,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 9178935729385013931, guid: 0153a39e3b023704a847b99e07bca32e, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 9178935729385013931, guid: 0153a39e3b023704a847b99e07bca32e, type: 3}
       propertyPath: m_LocalPosition.x
