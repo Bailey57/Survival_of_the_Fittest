@@ -277,7 +277,7 @@ public class OrganismActions : MonoBehaviour
         return (travelTarget.transform.position - transform.position);
     }
 
-    void Turn() 
+    public void Turn() 
     {
         //change the angle of the organism
         //inGameOrganism.transform.rotation
@@ -285,7 +285,7 @@ public class OrganismActions : MonoBehaviour
     }
 
 
-    void Swim()
+    public void Swim()
     {
         //inGameOrganism.transform.rotation
         rb.velocity = new Vector2(genetics.agility, rb.velocity.y);
@@ -294,7 +294,7 @@ public class OrganismActions : MonoBehaviour
 
     }
 
-    void LayEgg() 
+    public void LayEgg() 
     {
         //change later to get genetics
         float eggLayingAge = 3;
@@ -318,7 +318,35 @@ public class OrganismActions : MonoBehaviour
             float brainChangeChance = 100;
             float maxBrainChangeAmmount = 1;
 
+
+            float changeAmmount = 0;
             GameObject newOrganism = Instantiate(inGameOrganism) as GameObject;
+
+            float randNum = Random.Range(0, 100);
+            
+            //see if by chance the genes change 
+            if (geneChangeChance >= randNum) 
+            {
+                //change genes
+
+                changeAmmount = Random.Range(-changeAmmount, maxGeneChangeAmmount);
+                (newOrganism.GetComponent(typeof(Genetics)) as Genetics).agility += changeAmmount;
+                changeAmmount = Random.Range(-changeAmmount, maxGeneChangeAmmount);
+                (newOrganism.GetComponent(typeof(Genetics)) as Genetics).deathAge += changeAmmount;
+                changeAmmount = Random.Range(-changeAmmount, maxGeneChangeAmmount);
+                (newOrganism.GetComponent(typeof(Genetics)) as Genetics).eggLayingAge += changeAmmount;
+                changeAmmount = Random.Range(-changeAmmount, maxGeneChangeAmmount);
+                (newOrganism.GetComponent(typeof(Genetics)) as Genetics).maxHealth += changeAmmount;
+                changeAmmount = Random.Range(-changeAmmount, maxGeneChangeAmmount);
+                (newOrganism.GetComponent(typeof(Genetics)) as Genetics).visualAngle += changeAmmount;
+                changeAmmount = Random.Range(-changeAmmount, maxGeneChangeAmmount);
+                (newOrganism.GetComponent(typeof(Genetics)) as Genetics).physicalRange += changeAmmount;
+                changeAmmount = Random.Range(-changeAmmount, maxGeneChangeAmmount);
+                (newOrganism.GetComponent(typeof(Genetics)) as Genetics).visualDistance += changeAmmount;
+
+
+            }
+
 
             (newOrganism.GetComponent(typeof(Organism)) as Organism).energy = 100;
             (newOrganism.GetComponent(typeof(Organism)) as Organism).age = 0;
