@@ -5,6 +5,8 @@ using UnityEngine;
 public class Organism : MonoBehaviour
 {
 
+    
+
     public float health;
 
     //public float fatStorage;

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Brain : MonoBehaviour
+public class Synapse : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -14,5 +14,13 @@ public class Brain : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public double bias;
+
+
+    public Synapse() 
+    {
+    
     }
 }

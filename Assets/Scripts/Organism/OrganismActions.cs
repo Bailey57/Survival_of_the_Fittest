@@ -29,7 +29,9 @@ public class OrganismActions : MonoBehaviour
 
         //rb.velocity = new Vector2(genetics.agility, rb.velocity.y);
         StartCoroutine(Eat2());
-
+        //StartCoroutine(TurnTwardsTarget());
+        
+       
 
 
     }
@@ -253,10 +255,10 @@ public class OrganismActions : MonoBehaviour
 
         //distanceToTarget and direction unused for now 
         float distanceToTarget = GetDistance();
-        Vector2 direction = GetDirection();
+        Vector2 direction = GetTravelTargetDirection();
         transform.position = Vector2.MoveTowards(this.transform.position, travelTarget.transform.position, genetics.agility * Time.deltaTime);
-        
-        
+
+
         //temp bandaid code for turning twords target
         direction.Normalize();
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90;
@@ -272,13 +274,23 @@ public class OrganismActions : MonoBehaviour
         //Debug.Log("Distance to target: " + Vector2.Distance(transform.position, travelTarget.transform.position));
         return Vector2.Distance(transform.position, travelTarget.transform.position);
     }
-    public Vector2 GetDirection()
+    public Vector2 GetTravelTargetDirection()
     {
         return (travelTarget.transform.position - transform.position);
     }
 
-    public void Turn() 
+    public IEnumerator TurnTwardsTarget() 
     {
+        Vector2 direction = GetTravelTargetDirection();
+        while (true) 
+        {
+            direction = GetTravelTargetDirection();
+            direction.Normalize();
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90;
+            transform.rotation = Quaternion.Euler(Vector3.forward * angle);
+            yield return new WaitForSeconds(1);
+
+        }
         //change the angle of the organism
         //inGameOrganism.transform.rotation
 
