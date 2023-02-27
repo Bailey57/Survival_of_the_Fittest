@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,7 +12,7 @@ public class Brain : MonoBehaviour
 
     public List<Neuron> inputNeurons = new List<Neuron>();
 
-
+    //inputs
     public double targetAngle;
 
     public double targetDistance;
@@ -39,6 +40,12 @@ public class Brain : MonoBehaviour
     //input get
     public double GetTargetAngle() 
     {
+        if (organismActions.travelTarget == null) 
+        {
+            return 0;
+        }
+
+
         Vector2 organismVector2 = new Vector2(inGameOrganism.transform.position.x, inGameOrganism.transform.position.y);
         Vector2 targetVector2 = new Vector2(organismActions.travelTarget.transform.position.x, organismActions.travelTarget.transform.position.y);
         this.targetAngle = Vector2.Angle(organismVector2, targetVector2);
@@ -76,6 +83,8 @@ public class Brain : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        GetTanH(1);
+        GetSigmoid(1);
         
     }
 
@@ -87,7 +96,78 @@ public class Brain : MonoBehaviour
     }
 
 
+    public void UpdateAllBrainNeurons()
+    {
+        //run through all the input neurons
+        for (int i = 0; i < inputNeurons.Count; i++) 
+        {
+            //
+            bool lastNeuronUpdated = false;
+            Neuron currentNeuron;
+            Synapse currentSynapse;
+            while (!lastNeuronUpdated) 
+            {
+                //if () 
+                //{
+                
+                //}
+            
+            }
+            
+            
 
+
+
+        }
+    
+    
+    }
+
+    private void UpdateSingleNeuron() 
+    {
+    
+    
+    }
+
+    private void CalculateMultipleSynapseInputs(List<Synapse> enteringSynapseConnections)
+    {
+
+
+    }
+
+    private void CalculateNeuronAndSynapseOutput(float neuronWeight, float synapseWeight) 
+    {
+
+        //GetTanH
+
+    }
+
+    public double GetSigmoid(double inputNum)
+    {
+        //double tstIpt = 1.8372;
+        //double tstIpt = .2;
+        //double tst = 1.0 / (1.0 + Math.Exp(-tstIpt));
+        double tst = 1.0 / (1.0 + Math.Exp(-inputNum));
+        Debug.Log("tst sigmoid: " + tst);
+
+        return tst;
+    }
+
+
+    //https://keisan.casio.com/exec/system/15411343653769
+    public double GetTanH(double inputNum)
+    {
+        //double tstIpt = 1.8372;
+        //double tstIpt = .2;
+        //double tst = 1.0 / (1.0 + Math.Exp(-tstIpt));
+
+        double tst = Math.Tanh(inputNum);
+        //double tst = 1.0 / (1.0 + Math.Exp(-inputNum));
+        //Debug.Log("tst sigmoid: " + tst + ", should be 0.86261721971");
+        Debug.Log("tst tanH: " + tst);
+        //return MathF.Tanh(inputNum);
+        return tst;
+    }
 
     public void CreateInputLayer()
     {
@@ -103,7 +183,7 @@ public class Brain : MonoBehaviour
         Synapse syn1 = new Synapse();
 
         //attach synapses to the input layer neurons
-        targetAngle.synapseConnections.Add(syn1);
+        targetAngle.leavingSynapseConnections.Add(syn1);
         
         
         //create output layer

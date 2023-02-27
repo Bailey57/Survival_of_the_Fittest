@@ -12,7 +12,8 @@ public class Neuron : MonoBehaviour
     public int type;
     public string neuronName;
     public double weight;
-    public List<Synapse> synapseConnections = new List<Synapse>();
+    public List<Synapse> enteringSynapseConnections = new List<Synapse>();
+    public List<Synapse> leavingSynapseConnections = new List<Synapse>();
 
 
     public Neuron(int type, string neuronName, double weight) 
@@ -24,10 +25,17 @@ public class Neuron : MonoBehaviour
     
     }
 
+    public void AddEnteringSynapseConnection(Synapse synapse) 
+    {
+        enteringSynapseConnections.Add(synapse);
+
+
+    }
+
 
     void Start()
     {
-        GetSigmoid(1);
+        //GetSigmoid(1);
 
 
     }
@@ -42,28 +50,4 @@ public class Neuron : MonoBehaviour
 
 
 
-    public double GetSigmoid(double inputNum) 
-    {
-        double tstIpt = 1.8372;
-        //double tstIpt = .2;
-        double tst = 1.0 / (1.0 + Math.Exp(-tstIpt));
-
-        Debug.Log("tst sigmoid: " + tst + ", should be 0.86261721971");
-
-        return 1.0;
-    }
-
-    
-
-    public double GetTanH(double inputNum)
-    {
-        double tstIpt = 1.8372;
-        //double tstIpt = .2;
-        double tst = 1.0 / (1.0 + Math.Exp(-tstIpt));
-
-        //Debug.Log("tst sigmoid: " + tst + ", should be 0.86261721971");
-
-        //return MathF.Tanh(inputNum);
-        return 1;
-    }
 }
