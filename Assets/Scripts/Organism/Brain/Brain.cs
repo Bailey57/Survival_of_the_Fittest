@@ -10,13 +10,17 @@ public class Brain : MonoBehaviour
     public GameObject inGameOrganism;
     public OrganismActions organismActions;
 
-    public List<Neuron> inputNeurons = new List<Neuron>();
+
+    
+
+
+
 
     //inputs
     public double targetAngle;
-
     public double targetDistance;
-
+    public double energy;
+    public double health;
 
 
 
@@ -25,16 +29,44 @@ public class Brain : MonoBehaviour
 
     public double turnRate;
     public double speed;
+    //for bool: [- input = false], [+ input = true]
+    public bool layingEgg;
     public bool attacking;
 
     //public void getTarget
 
 
 
+    List<List<Neuron>> neuronLayers = new List<List<Neuron>>();
 
-    // Update is called once per frame
+    //Add a finished neuron to a specified layer
+    public void AddNeuronToLayer(int layer, Neuron neuron)
+    {
+        if (layer < this.neuronLayers[layer].Count)
+        {
+            this.neuronLayers[layer].Add(neuron);
+
+        }
+        //List<Neurons> newList = new List<Neurons>();
+        //this.neuronLayers.Add(newList);
 
 
+
+    }
+
+
+    public void AddConnections(Neuron parent, Neuron child, Synapse synapse)
+    {
+        parent.childrenNeurons.Add(child);
+        parent.childrenSynapses.Add(synapse);
+
+    }
+
+    public void RemoveConnections()
+    {
+
+
+    }
 
 
     //input get
@@ -98,27 +130,7 @@ public class Brain : MonoBehaviour
 
     public void UpdateAllBrainNeurons()
     {
-        //run through all the input neurons
-        for (int i = 0; i < inputNeurons.Count; i++) 
-        {
-            //
-            bool lastNeuronUpdated = false;
-            Neuron currentNeuron;
-            Synapse currentSynapse;
-            while (!lastNeuronUpdated) 
-            {
-                //if () 
-                //{
-                
-                //}
-            
-            }
-            
-            
 
-
-
-        }
     
     
     }
@@ -171,25 +183,56 @@ public class Brain : MonoBehaviour
 
     public void CreateInputLayer()
     {
-        Neuron targetAngle = new Neuron(1, "targetAngle", .5);
+        //Neuron targetAngle = new Neuron(1, "targetAngle", .5);
     }
-    public void CreateBrain1()
+   
+    public void MakeBrain1Tst()
     {
-        //make input neurons
-        //CreateInputLayer()
-        Neuron targetAngle = new Neuron(1, "targetAngle", 0);
+        Neuron targetAngle = new Neuron("input", "targetAngle", 0);
+        Neuron targetDistance = new Neuron("input", "targetDistance", 0);
+        Neuron energy = new Neuron("input", "energy", 0);
+        Neuron health = new Neuron("input", "health", 0);
 
-        //create synapses 
-        Synapse syn1 = new Synapse();
 
-        //attach synapses to the input layer neurons
-        targetAngle.leavingSynapseConnections.Add(syn1);
-        
-        
-        //create output layer
-        Neuron turnRate = new Neuron(3, "turnRate", .5);
+        Neuron turnRate = new Neuron("output", "turnRate", 0);
+        Neuron speed = new Neuron("output", "speed", 0);
+
+
+        Neuron hidden1 = new Neuron("output", "hidden1", .1);
+        Neuron hidden2 = new Neuron("output", "hidden2", .2);
+        Neuron hidden3 = new Neuron("output", "hidden3", .3);
+
+        Synapse synapse1 = new Synapse(0.1);
+        Synapse synapse2 = new Synapse(0.2);
+        Synapse synapse3 = new Synapse(0.3);
+        Synapse synapse4 = new Synapse(0.4);
+        Synapse synapse5 = new Synapse(0.5);
+
+
+
+        targetAngle.childrenSynapses.Add(synapse1);
+        targetAngle.childrenNeurons.Add(hidden1);
+
+
+        hidden1.childrenSynapses.Add(synapse2);
+        hidden1.childrenNeurons.Add(hidden2);
+        hidden1.childrenSynapses.Add(synapse3);
+        hidden1.childrenNeurons.Add(hidden3);
+
+        hidden2.childrenSynapses.Add(synapse5);
+        hidden2.childrenNeurons.Add(turnRate);
+
+
+        hidden3.childrenSynapses.Add(synapse4);
+        hidden3.childrenNeurons.Add(turnRate);
+
+
+
+
+
+
+
     }
-
 
     public void UpdateBrain() 
     {
