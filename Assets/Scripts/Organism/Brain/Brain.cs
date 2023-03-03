@@ -9,7 +9,7 @@ public class Brain : MonoBehaviour
 
     public GameObject inGameOrganism;
     public OrganismActions organismActions;
-
+    public Organism organism;
 
     
 
@@ -21,9 +21,6 @@ public class Brain : MonoBehaviour
     public double targetDistance;
     public double energy;
     public double health;
-
-
-
 
     //outputs
 
