@@ -15,9 +15,9 @@ public class Statistics : MonoBehaviour
     public int numOfPlants;
 
 
-    public int MaxnumOfOrganisms;
+    public int maxnumOfOrganisms;
 
-    public int MaxNumOfPlants;
+    public int maxNumOfPlants;
 
 
     public int longestLastingGenNum;
@@ -36,7 +36,7 @@ public class Statistics : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        updateMaxNumOfOrganisms();
     }
 
     IEnumerator UpdateStatistics() 
@@ -50,6 +50,21 @@ public class Statistics : MonoBehaviour
         }
     
 
+    }
+
+    public void updateMaxNumOfOrganisms() 
+    {
+        int numOfOrganisms = GetNumOfOrganisms();
+        if (maxnumOfOrganisms < numOfOrganisms) 
+        {
+            maxnumOfOrganisms = numOfOrganisms;
+
+
+        }
+    
+    
+    
+    
     }
 
 
@@ -67,9 +82,9 @@ public class Statistics : MonoBehaviour
             {
 
                 numOfOrganisms += 1;
-                if (numOfOrganisms > MaxnumOfOrganisms) 
+                if (numOfOrganisms > maxnumOfOrganisms) 
                 {
-                    MaxnumOfOrganisms = numOfOrganisms;
+                    maxnumOfOrganisms = numOfOrganisms;
 
                 }
 

@@ -56,6 +56,31 @@ public class BrainInputs : MonoBehaviour
 
         return targetAngle;
     }
+
+
+    public double GetTargetDistance() 
+    {
+
+
+
+
+        return 0.0;
+    
+    }
+
+
+    public double GetEnergy() 
+    {
+
+        return 0.0;
+    }
+
+
+
+
+
+
+
     //getTargetDistance()
     //getEnergy()
     //getHealth()

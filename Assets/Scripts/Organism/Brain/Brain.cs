@@ -11,7 +11,7 @@ public class Brain : MonoBehaviour
     public OrganismActions organismActions;
     public Organism organism;
 
-    
+    public BrainInputs brainInputs;
 
 
 
@@ -34,10 +34,36 @@ public class Brain : MonoBehaviour
 
 
 
-    List<List<Neuron>> neuronLayers = new List<List<Neuron>>();
+    public List<List<Neuron>> neuronLayers = new List<List<Neuron>>();
 
 
 
+    public void UpdateInputs() 
+    {
+        this.targetAngle = brainInputs.GetTargetAngle();
+        this.targetDistance = brainInputs.GetTargetDistance();
+        this.energy = brainInputs.GetEnergy();
+        //this.health = brainInputs.GetHealth();
+
+        //targetAngle
+        this.neuronLayers[0][0].weight = targetAngle;
+
+
+
+    }
+
+
+
+    public void UpdateOutputs() 
+    {
+        //turnRate = neuronLayers.Count - 1;
+        turnRate = this.neuronLayers[neuronLayers.Count - 1][0].weight;
+
+
+
+
+
+    }
 
 
 
@@ -89,9 +115,17 @@ public class Brain : MonoBehaviour
     {
         GetTanH(1);
         GetSigmoid(1);
+        this.MakeBrain2Tst();
+
+
+        
+
+    }
 
 
 
+    public void TestBrains() 
+    {
         Brain brain1 = new Brain();
         brain1.MakeBrain1Tst();
         //Console.WriteLine(brain1.BrainToString());
@@ -119,12 +153,17 @@ public class Brain : MonoBehaviour
         //Console.WriteLine(brain2.BrainToStringParents());
         Debug.Log(brain2.BrainToStringParents());
 
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        GetTargetAngle();
+        UpdateInputs();
+        //GetTargetAngle();
+        UpdateBrain();
+
+        UpdateOutputs();
 
     }
 
