@@ -89,7 +89,36 @@ public class Brain : MonoBehaviour
     {
         GetTanH(1);
         GetSigmoid(1);
-        
+
+
+
+        Brain brain1 = new Brain();
+        brain1.MakeBrain1Tst();
+        //Console.WriteLine(brain1.BrainToString());
+        Debug.Log(brain1.BrainToString());
+        //Console.WriteLine(brain1.BrainToStringParents());
+
+        brain1.UpdateBrain();
+        //Console.WriteLine("\n Updated: \n");
+        //Console.WriteLine(brain1.BrainToString());
+        Debug.Log("\n Updated: \n");
+        Debug.Log(brain1.BrainToString());
+        //Console.WriteLine(brain1.BrainToStringParents());
+
+        //Console.WriteLine("\n Brain2 Test: \n");
+        Debug.Log("\n Brain2 Test: \n");
+        Brain brain2 = new Brain();
+        brain2.MakeBrain2Tst();
+        //Console.WriteLine(brain2.BrainToString());
+        Debug.Log(brain2.BrainToString());
+        brain2.UpdateBrain();
+        //Console.WriteLine("\n Updated: \n");
+        Debug.Log("\n Updated: \n");
+        //Console.WriteLine(brain2.BrainToString());
+        Debug.Log(brain2.BrainToString());
+        //Console.WriteLine(brain2.BrainToStringParents());
+        Debug.Log(brain2.BrainToStringParents());
+
     }
 
     // Update is called once per frame
@@ -99,102 +128,6 @@ public class Brain : MonoBehaviour
 
     }
 
-
-    public void UpdateAllBrainNeurons()
-    {
-
-    
-    
-    }
-
-    private void UpdateSingleNeuron() 
-    {
-    
-    
-    }
-
-    private void CalculateMultipleSynapseInputs(List<Synapse> enteringSynapseConnections)
-    {
-
-
-    }
-
-    private void CalculateNeuronAndSynapseOutput(float neuronWeight, float synapseWeight) 
-    {
-
-        //GetTanH
-
-    }
-
-    public double GetSigmoid(double inputNum)
-    {
-        //double tstIpt = 1.8372;
-        //double tstIpt = .2;
-        //double tst = 1.0 / (1.0 + Math.Exp(-tstIpt));
-        double tst = 1.0 / (1.0 + Math.Exp(-inputNum));
-        Debug.Log("tst sigmoid: " + tst);
-
-        return tst;
-    }
-
-
-    //https://keisan.casio.com/exec/system/15411343653769
-    public double GetTanH(double inputNum)
-    {
-        //double tstIpt = 1.8372;
-        //double tstIpt = .2;
-        //double tst = 1.0 / (1.0 + Math.Exp(-tstIpt));
-
-        double tst = Math.Tanh(inputNum);
-        //double tst = 1.0 / (1.0 + Math.Exp(-inputNum));
-        //Debug.Log("tst sigmoid: " + tst + ", should be 0.86261721971");
-        Debug.Log("tst tanH: " + tst);
-        //return MathF.Tanh(inputNum);
-        return tst;
-    }
-
-    public void CreateInputLayer()
-    {
-        //Neuron targetAngle = new Neuron(1, "targetAngle", .5);
-    }
-   
-
-
-    /**
-     * Adds a hidden layer in the brain at a random point between two nodes
-     */
-    public void AddHiddenLayerRandom()
-    {
-
-
-    }
-
-    /*
-     * Add a hidden layer into the brain at a specified point 
-     */
-    public void AddHiddenLayer() 
-    {
-    
-    
-    }
-
-    /*
-     * Add a synapse into the brain at a random point 
-     */
-    public void AddSynapseRandom()
-    {
-
-
-    }
-
-    /*
-     * Add a synapse into the brain at a specified point 
-     */
-    public void AddSynapse()
-    {
-
-
-    }
 
     //Add a finished neuron to a specified layer
     public void AddNeuronToLayer(int layer, Neuron neuron)
@@ -218,6 +151,8 @@ public class Brain : MonoBehaviour
         {
             for (int j = 0; j < neuronLayers[i].Count; j++)
             {
+                outputStr += "i:" + i + " j: " + j;
+
                 outputStr += "[ " + neuronLayers[i][j].neuronName + " " + neuronLayers[i][j].weight + " ";
                 for (int l = 0; l < neuronLayers[i][j].childrenNeurons.Count; l++)
                 {
@@ -247,7 +182,7 @@ public class Brain : MonoBehaviour
                 outputStr += "[ " + neuronLayers[i][j].neuronName + " " + neuronLayers[i][j].weight + " ";
                 for (int l = 0; l < neuronLayers[i][j].parentNeurons.Count; l++)
                 {
-                    outputStr += "\n             -- " + neuronLayers[i][j].parentSynapses[l].bias + " --> ";
+                    outputStr += "\n             <-- " + neuronLayers[i][j].parentSynapses[l].bias + " -- ";
                     outputStr += neuronLayers[i][j].parentNeurons[l].neuronName + " " + neuronLayers[i][j].parentNeurons[l].weight;
 
                     //outputStr += "\n";
@@ -282,15 +217,16 @@ public class Brain : MonoBehaviour
 
 
                         //neuronLayers[i][j].weight += GetTanH(neuronLayers[i][j].parentNeurons[l].weight * neuronLayers[i][j].parentSynapses[l].bias);
-                        Console.WriteLine("\n num: " + average);
+                        //Console.WriteLine("\n num: " + average);
 
                     }
                     average = average / neuronLayers[i][j].parentNeurons.Count;
 
                     neuronLayers[i][j].weight = average / neuronLayers[i][j].parentNeurons.Count;
-                    Console.WriteLine("\n average: " + average);
-                    Console.WriteLine("\n count: " + neuronLayers[i][j].parentNeurons.Count);
-                    Console.WriteLine("\n weight: " + neuronLayers[i][j].weight);
+                    //Console.WriteLine("\n name: " + neuronLayers[i][j].neuronName);
+                    //Console.WriteLine("\n average: " + average);
+                    //Console.WriteLine("\n count: " + neuronLayers[i][j].parentNeurons.Count);
+                    //Console.WriteLine("\n weight: " + neuronLayers[i][j].weight);
                     average = 0;
 
 
@@ -314,6 +250,27 @@ public class Brain : MonoBehaviour
 
 
 
+    //https://keisan.casio.com/exec/system/15411343653769
+    public double GetTanH(double inputNum)
+    {
+
+
+        double tanH = Math.Tanh(inputNum);
+        //Debug.Log("tst tanH: " + tst);
+        //Console.WriteLine("");
+        return tanH;
+    }
+
+
+
+    public double GetLinear(double inputNum)
+    {
+        double tanH = Math.Tanh(inputNum);
+        //Debug.Log("tst tanH: " + tst);
+        //Console.WriteLine("");
+        return tanH;
+    }
+
 
 
 
@@ -333,13 +290,47 @@ public class Brain : MonoBehaviour
     }
 
     //insert a hidden layer between two neurons
-    public void AddHiddenNeuronToNeuronList(Neuron hiddenNeuron)
+    public void AddHiddenNeuronToNeuronList(Neuron hiddenNeuron, int hiddenLayerIdx)
     {
-        int hiddenLayerIdx = 1;
         this.neuronLayers[hiddenLayerIdx].Add(hiddenNeuron);
         //return [newParentNode, newChildNode]
     }
 
+
+    /**
+    *
+    */
+    public void AddHiddenNeuronRand()
+    {
+
+
+    }
+
+
+    /**
+    * adds HiddenNeuronBetweenNeurons and adds to list 
+    */
+    public void AddHiddenNeuronBetweenNeuronsAndList(ref Neuron hiddenNeuron, int parentLayerNum, int childLayerNum, ref Neuron parent, ref Neuron child, double synapseBias)
+    {
+        int hiddenLayerIdx = parentLayerNum + 1;
+        ConnectNeurons(ref parent, ref hiddenNeuron, synapseBias);
+        ConnectNeurons(ref hiddenNeuron, ref child, synapseBias);
+        this.neuronLayers[hiddenLayerIdx].Add(hiddenNeuron);
+    }
+
+    /**
+    * adds HiddenNeuronBetweenNeurons and adds to list 
+    */
+    public void AddHiddenNeuronBetweenNeuronsAndList(ref Neuron hiddenNeuron, int parentLayerNum, int childLayerNum, int parentLayerPosition, int childLayerPosition, double synapseBias)
+    {
+        //int hiddenLayerIdx = parentLayerNum + 1;
+        //this.neuronLayers[hiddenLayerIdx][parentLayerPosition]
+        //this.neuronLayers[hiddenLayerIdx][childLayerPosition]
+
+        //ConnectNeurons(ref parent, ref hiddenNeuron, synapseBias);
+        //ConnectNeurons(ref hiddenNeuron, ref child, synapseBias);
+        //this.neuronLayers[hiddenLayerIdx].Add(hiddenNeuron);
+    }
 
 
 
@@ -390,9 +381,95 @@ public class Brain : MonoBehaviour
     }
 
 
+    public void InitializeNeuronLayerList()
+    {
+
+
+        //Input List
+        List<Neuron> NList1 = new List<Neuron>();
+        //Hidden List
+        List<Neuron> NList2 = new List<Neuron>();
+        //Output List
+        List<Neuron> NList3 = new List<Neuron>();
+
+
+        this.neuronLayers.Add(NList1);
+        this.neuronLayers.Add(NList2);
+        this.neuronLayers.Add(NList3);
+
+        //this.neuronLayers[0].Add(targetAngle);
+
+        //this.neuronLayers[2].Add(turnRate);
+    }
+
+    public void AddNewLayerToNeuronLayerList(int indexPosition)
+    {
+        List<Neuron> NList1 = new List<Neuron>();
+        this.neuronLayers.Insert(indexPosition, NList1);
+
+    }
+
+
+
     //https://stackoverflow.com/questions/19396346/how-to-iterate-through-linked-list
 
+    public void MakeBaseBrain1()
+    {
+        Neuron targetAngle = new Neuron("input", "targetAngle", 3);
+        Neuron targetDistance = new Neuron("input", "targetDistance", 0);
+        Neuron energy = new Neuron("input", "energy", 0);
+        Neuron health = new Neuron("input", "health", 0);
 
+
+        Neuron turnRate = new Neuron("output", "turnRate", 0);
+        Neuron speed = new Neuron("output", "speed", 0);
+
+        InitializeNeuronLayerList();
+
+
+
+    }
+
+    public void MakeBrain2Tst()
+    {
+        Neuron targetAngle = new Neuron("input", "targetAngle", 30);
+        Neuron targetDistance = new Neuron("input", "targetDistance", 5);
+        Neuron energy = new Neuron("input", "energy", 110);
+        Neuron health = new Neuron("input", "health", 100);
+
+
+        Neuron turnRate = new Neuron("output", "turnRate", 0);
+        Neuron speed = new Neuron("output", "speed", 0);
+
+
+        Neuron hidden1 = new Neuron("output", "hidden1", 1.1);
+        Neuron hidden2 = new Neuron("output", "hidden2", .28);
+        Neuron hidden3 = new Neuron("output", "hidden3", .39);
+
+
+
+        InitializeNeuronLayerList();
+
+        this.neuronLayers[0].Add(targetAngle);
+        this.neuronLayers[0].Add(targetDistance);
+        this.neuronLayers[0].Add(energy);
+        this.neuronLayers[0].Add(health);
+
+
+        this.neuronLayers[2].Add(turnRate);
+        this.neuronLayers[2].Add(speed);
+
+        double syn1Num = 1.1;
+        int parentLayerNum = 0;
+        int childLayerNum = 2;
+
+
+        this.AddHiddenNeuronBetweenNeuronsAndList(ref hidden1, parentLayerNum, childLayerNum, ref targetAngle, ref turnRate, syn1Num);
+
+        this.AddRandomNeuronNoNewLayer();
+        AddRandomNeuronNewLayer();
+
+    }
 
     public void MakeBrain1Tst()
     {
@@ -488,6 +565,159 @@ public class Brain : MonoBehaviour
 
     }
 
+    /**
+    * Adds a random neuron into a random spot in the brain 
+    */
+    public void AddRandomNeuronNoNewLayer()
+    {
+
+
+        double synapse1Value = this.GetRandomDouble(-5, 5);
+        double synapse2Value = this.GetRandomDouble(-5, 5);
+
+        double newNeuronValue = this.GetRandomDouble(-5, 5);
+
+        int newNeuronLayerNum = this.GetRandomInt(1, this.neuronLayers.Count - 1);
+
+        int newNeuronParentLayer = newNeuronLayerNum - 1;
+        int newNeuronChildLayer = newNeuronLayerNum + 1;
+        //newNeuronParentLayer = this.GetRandomInt(0, this.neuronLayers.Count - 1);
+
+        //newNeuronChildLayer = this.GetRandomInt(1, this.neuronLayers.Count - 1);
+
+
+
+        int newNeuronParentPosition = this.GetRandomInt(0, this.neuronLayers[newNeuronParentLayer].Count);
+
+        int newNeuronChildPosition = this.GetRandomInt(0, this.neuronLayers[newNeuronChildLayer].Count);
+
+
+
+        Neuron newHidden = new Neuron("hidden", "newHidden", newNeuronValue);
+
+        Synapse synapse1 = new Synapse(synapse1Value);
+
+
+
+
+        //get parent neuron
+
+        //get child neuron
+        //Console.WriteLine("NeuronTOStr: " + NeuronToString(this.neuronLayers[newNeuronParentLayer][newNeuronParentPosition]));
+
+        //ref Neuron parentNeuron = ref this.neuronLayers[newNeuronParentLayer][newNeuronParentPosition];
+        Neuron parentNeuron = this.neuronLayers[newNeuronParentLayer][newNeuronParentPosition];
+        Neuron childNeuron = this.neuronLayers[newNeuronChildLayer][newNeuronChildPosition];
+
+
+        //AddHiddenNeuronBetweenNeuronsAndList(ref newHidden, newNeuronParentLayer, newNeuronChildLayer, ref this.neuronLayers[newNeuronParentLayer][newNeuronParentPosition], ref this.neuronLayers[newNeuronChildLayer][newNeuronChildPosition], synapse1Value);
+        AddHiddenNeuronBetweenNeuronsAndList(ref newHidden, newNeuronParentLayer, newNeuronChildLayer, ref parentNeuron, ref childNeuron, synapse1Value);
+
+
+    }
+
+    /**
+    * Adds a random neuron into a random spot in the brain 
+    */
+    public void AddRandomNeuronNewLayer()
+    {
+
+
+        double synapse1Value = this.GetRandomDouble(-5, 5);
+        double synapse2Value = this.GetRandomDouble(-5, 5);
+
+        double newNeuronValue = this.GetRandomDouble(-5, 5);
+
+
+
+
+        int newNeuronLayerNum = this.GetRandomInt(1, this.neuronLayers.Count);
+        //Console.WriteLine("newNeuronLayerNum: " + newNeuronLayerNum);
+
+        int newNeuronParentLayer = newNeuronLayerNum - 1;
+        int newNeuronChildLayer = newNeuronLayerNum + 1;
+        //newNeuronParentLayer = this.GetRandomInt(0, this.neuronLayers.Count - 1);
+
+        //newNeuronChildLayer = this.GetRandomInt(1, this.neuronLayers.Count - 1);
+
+        AddNewLayerToNeuronLayerList(newNeuronLayerNum);
+
+        //Console.WriteLine("Added new layer: \n" + BrainToString());
+
+        int newNeuronParentPosition = this.GetRandomInt(0, this.neuronLayers[newNeuronParentLayer].Count);
+
+        int newNeuronChildPosition = this.GetRandomInt(0, this.neuronLayers[newNeuronChildLayer].Count);
+
+
+
+        Neuron newHidden = new Neuron("hidden", "newHidden", newNeuronValue);
+
+        Synapse synapse1 = new Synapse(synapse1Value);
+
+
+
+
+
+
+        //get parent neuron
+
+        //get child neuron
+        //Console.WriteLine("NeuronTOStr: " + NeuronToString(this.neuronLayers[newNeuronParentLayer][newNeuronParentPosition]));
+
+        //ref Neuron parentNeuron = ref this.neuronLayers[newNeuronParentLayer][newNeuronParentPosition];
+        Neuron parentNeuron = this.neuronLayers[newNeuronParentLayer][newNeuronParentPosition];
+        Neuron childNeuron = this.neuronLayers[newNeuronChildLayer][newNeuronChildPosition];
+        //Console.WriteLine("newNeuronLayerNum: " + newNeuronLayerNum + " newNeuronParentLayer: " + newNeuronParentLayer + " newNeuronChildLayer: " + newNeuronChildLayer);
+
+        //Console.WriteLine("parentNeuron: " + parentNeuron.neuronName + " childNeuron: " + childNeuron.neuronName);
+
+        //AddHiddenNeuronBetweenNeuronsAndList(ref newHidden, newNeuronParentLayer, newNeuronChildLayer, ref this.neuronLayers[newNeuronParentLayer][newNeuronParentPosition], ref this.neuronLayers[newNeuronChildLayer][newNeuronChildPosition], synapse1Value);
+        AddHiddenNeuronBetweenNeuronsAndList(ref newHidden, newNeuronParentLayer, newNeuronChildLayer, ref parentNeuron, ref childNeuron, synapse1Value);
+
+
+    }
+
+
+    public string NeuronToString(Neuron neuron)
+    {
+        string outputStr = "";
+
+
+        outputStr += "[ " + neuron.neuronName + " " + neuron.weight + " ";
+        for (int l = 0; l < neuron.childrenNeurons.Count; l++)
+        {
+            outputStr += "\n             -- " + neuron.childrenSynapses[l].bias + " --> ";
+            outputStr += neuron.childrenNeurons[l].neuronName + " " + neuron.childrenNeurons[l].weight;
+
+            //outputStr += "\n";
+        }
+
+        outputStr += " ]\n";
+
+        return outputStr;
+
+
+    }
+
+
+
+    public void AddRandomSynapse()
+    {
+
+    }
+
+    public double GetRandomDouble(double minimum, double maximum)
+    {
+        System.Random random = new System.Random();
+        return random.NextDouble() * (maximum - minimum) + minimum;
+    }
+
+    public int GetRandomInt(int minimum, int maximum)
+    {
+        System.Random random = new System.Random();
+        return random.Next(minimum, maximum);
+    }
+
 
     public void Start_()
     {
@@ -512,4 +742,97 @@ public class Brain : MonoBehaviour
 
 
     }
+
+
+    public void UpdateAllBrainNeurons()
+    {
+
+    
+    
+    }
+
+    private void UpdateSingleNeuron() 
+    {
+    
+    
+    }
+
+    private void CalculateMultipleSynapseInputs(List<Synapse> enteringSynapseConnections)
+    {
+
+
+    }
+
+    private void CalculateNeuronAndSynapseOutput(float neuronWeight, float synapseWeight) 
+    {
+
+        //GetTanH
+
+    }
+
+    public double GetSigmoid(double inputNum)
+    {
+        //double tstIpt = 1.8372;
+        //double tstIpt = .2;
+        //double tst = 1.0 / (1.0 + Math.Exp(-tstIpt));
+        double tst = 1.0 / (1.0 + Math.Exp(-inputNum));
+        Debug.Log("tst sigmoid: " + tst);
+
+        return tst;
+    }
+
+
+    
+ 
+
+    public void CreateInputLayer()
+    {
+        //Neuron targetAngle = new Neuron(1, "targetAngle", .5);
+    }
+   
+
+
+    /**
+     * Adds a hidden layer in the brain at a random point between two nodes
+     */
+    public void AddHiddenLayerRandom()
+    {
+
+
+    }
+
+    /*
+     * Add a hidden layer into the brain at a specified point 
+     */
+    public void AddHiddenLayer() 
+    {
+    
+    
+    }
+
+    /*
+     * Add a synapse into the brain at a random point 
+     */
+    public void AddSynapseRandom()
+    {
+
+
+    }
+
+    /*
+     * Add a synapse into the brain at a specified point 
+     */
+    public void AddSynapse()
+    {
+
+
+    }
+
+
+
+
+    //https://stackoverflow.com/questions/19396346/how-to-iterate-through-linked-list
+
+
+
 }
