@@ -57,7 +57,19 @@ public class BrainInputs : MonoBehaviour
         return targetAngle;
     }
 
-
+    public float GetDistance()
+    {
+        if (organismActions.travelTarget == null)
+        {
+            return -1;
+        }
+        //Debug.Log("Distance to target: " + Vector2.Distance(transform.position, travelTarget.transform.position));
+        return Vector2.Distance(transform.position, organismActions.travelTarget.transform.position);
+    }
+    public Vector2 GetTravelTargetDirection()
+    {
+        return (organismActions.travelTarget.transform.position - transform.position);
+    }
     public double GetTargetDistance() 
     {
 

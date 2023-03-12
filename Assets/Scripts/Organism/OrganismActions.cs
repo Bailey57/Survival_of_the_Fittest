@@ -51,12 +51,37 @@ public class OrganismActions : MonoBehaviour
         //Turn();
         //Eat();
         LayEgg();
-
-
-
         Wonder();
         //Spin();
     }
+
+    public void RunActions() 
+    {
+
+
+        //inGameOrganism
+
+
+        //brain.turnRate;
+
+        //speed;
+
+        //for bool: [- input = false], [+ input = true]
+
+        //layingEgg;
+
+        //attacking;
+
+
+
+    }
+
+    public void Turn(double tunRate) 
+    {
+    
+    
+    }
+
 
 
     //if there is no food in sight, then wonder around 
