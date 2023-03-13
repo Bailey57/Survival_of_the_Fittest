@@ -17,6 +17,7 @@ public class BrainInputs : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log("Angle: " + GetTargetAngle2());
         
     }
 
@@ -47,9 +48,9 @@ public class BrainInputs : MonoBehaviour
         Vector2 organismVector2 = new Vector2(inGameOrganism.transform.position.x, inGameOrganism.transform.position.y);
         Vector2 targetVector2 = new Vector2(organismActions.travelTarget.transform.position.x, organismActions.travelTarget.transform.position.y);
         targetAngle = Vector2.Angle(organismVector2, targetVector2);
-        Debug.Log("organismVector2 x: " + inGameOrganism.transform.position.x + " organismVector2 y: " + inGameOrganism.transform.position.y
-            + "\ntargetVector2 x: " + organismActions.travelTarget.transform.position.x + " targetVector2 x: " + organismActions.travelTarget.transform.position.y
-            + "\nangle: " + targetAngle);
+        //Debug.Log("organismVector2 x: " + inGameOrganism.transform.position.x + " organismVector2 y: " + inGameOrganism.transform.position.y
+            //+ "\ntargetVector2 x: " + organismActions.travelTarget.transform.position.x + " targetVector2 x: " + organismActions.travelTarget.transform.position.y
+            //+ "\nangle: " + targetAngle);
         //Vector2.Angle();
 
 
@@ -57,15 +58,22 @@ public class BrainInputs : MonoBehaviour
         return targetAngle;
     }
 
-    public float GetDistance()
+    public double GetTargetAngle2() 
     {
-        if (organismActions.travelTarget == null)
+        if (organismActions.travelTarget != null) 
         {
-            return -1;
+        
         }
-        //Debug.Log("Distance to target: " + Vector2.Distance(transform.position, travelTarget.transform.position));
-        return Vector2.Distance(transform.position, organismActions.travelTarget.transform.position);
+
+
+
+        return 0.0;
     }
+
+
+
+
+
     public Vector2 GetTravelTargetDirection()
     {
         return (organismActions.travelTarget.transform.position - transform.position);
@@ -73,19 +81,17 @@ public class BrainInputs : MonoBehaviour
     public double GetTargetDistance() 
     {
 
+        if (organismActions.travelTarget == null)
+        {
+            return -1;
+        }
+        //Debug.Log("Distance to target: " + Vector2.Distance(transform.position, travelTarget.transform.position));
+        return Vector2.Distance(transform.position, organismActions.travelTarget.transform.position);
 
-
-
-        return 0.0;
-    
     }
 
 
-    public double GetEnergy() 
-    {
-
-        return 0.0;
-    }
+ 
 
 
 

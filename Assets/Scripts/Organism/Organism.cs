@@ -46,7 +46,7 @@ public class Organism : MonoBehaviour
     {
         while (true)
         {
-            Debug.Log("waited for 20 sec");
+            //Debug.Log("waited for 1 sec");
             yield return new WaitForSeconds(1);
             energy -= .01f;
 

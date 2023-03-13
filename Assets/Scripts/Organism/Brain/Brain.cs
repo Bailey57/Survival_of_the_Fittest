@@ -26,9 +26,9 @@ public class Brain : MonoBehaviour
 
     public double turnRate;
     public double speed;
-    //for bool: [- input = false], [+ input = true]
-    public bool layingEgg;
-    public bool attacking;
+    //for bool: [- output = false], [+ output = true]
+    public double layingEgg;
+    public double attacking;
 
     //public void getTarget
 
@@ -38,15 +38,47 @@ public class Brain : MonoBehaviour
 
 
 
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        GetTanH(1);
+        GetSigmoid(1);
+        this.MakeBrain2Tst();
+        Debug.Log("BrainToStringParents:\n" + this.BrainToStringParents());
+        
+
+    }
+    // Update is called once per frame
+    void Update()
+    {
+        UpdateInputs();
+       
+        UpdateBrain();
+
+       // UpdateOutputs();
+
+    }
+    private void LateUpdate()
+    {
+        
+    }
+
+
     public void UpdateInputs() 
     {
         this.targetAngle = brainInputs.GetTargetAngle();
         this.targetDistance = brainInputs.GetTargetDistance();
-        this.energy = brainInputs.GetEnergy();
-        //this.health = brainInputs.GetHealth();
+        this.energy = organism.energy;
+        this.health = organism.health;
 
         //targetAngle
         this.neuronLayers[0][0].weight = targetAngle;
+        this.neuronLayers[0][1].weight = targetDistance;
+        this.neuronLayers[0][2].weight = energy;
+        this.neuronLayers[0][3].weight = health;
+        //this.neuronLayers[0][4].weight = health;
+
 
 
 
@@ -59,11 +91,14 @@ public class Brain : MonoBehaviour
         //turnRate = neuronLayers.Count - 1;
         turnRate = this.neuronLayers[neuronLayers.Count - 1][0].weight;
 
+        speed = this.neuronLayers[neuronLayers.Count - 1][1].weight;
+        layingEgg = this.neuronLayers[neuronLayers.Count - 1][2].weight;
+        //for bool: [- input = false], [+ input = true]
+        attacking = this.neuronLayers[neuronLayers.Count - 1][3].weight;
+        //turnRate = this.neuronLayers[neuronLayers.Count - 1][4].weight;
 
 
-
-
-    }
+}
 
 
 
@@ -110,17 +145,7 @@ public class Brain : MonoBehaviour
         
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        GetTanH(1);
-        GetSigmoid(1);
-        this.MakeBrain2Tst();
-
-
-        
-
-    }
+ 
 
 
 
@@ -156,16 +181,7 @@ public class Brain : MonoBehaviour
 
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        UpdateInputs();
-        //GetTargetAngle();
-        UpdateBrain();
-
-        UpdateOutputs();
-
-    }
+ 
 
 
     //Add a finished neuron to a specified layer
@@ -471,14 +487,18 @@ public class Brain : MonoBehaviour
 
     public void MakeBrain2Tst()
     {
+        //inputs
         Neuron targetAngle = new Neuron("input", "targetAngle", 30);
         Neuron targetDistance = new Neuron("input", "targetDistance", 5);
         Neuron energy = new Neuron("input", "energy", 110);
         Neuron health = new Neuron("input", "health", 100);
 
-
+        //outputs doubles
         Neuron turnRate = new Neuron("output", "turnRate", 0);
         Neuron speed = new Neuron("output", "speed", 0);
+        //outputs bool
+        Neuron layingEgg = new Neuron("output", "layingEgg", 0);
+        Neuron attacking = new Neuron("output", "attacking", 0);
 
 
         Neuron hidden1 = new Neuron("output", "hidden1", 1.1);
@@ -497,15 +517,26 @@ public class Brain : MonoBehaviour
 
         this.neuronLayers[2].Add(turnRate);
         this.neuronLayers[2].Add(speed);
+        this.neuronLayers[2].Add(layingEgg);
+        this.neuronLayers[2].Add(attacking);
+
 
         double syn1Num = 1.1;
         int parentLayerNum = 0;
-        int childLayerNum = 2;
+        int childLayerNum = this.neuronLayers.Count - 1;
 
 
         this.AddHiddenNeuronBetweenNeuronsAndList(ref hidden1, parentLayerNum, childLayerNum, ref targetAngle, ref turnRate, syn1Num);
 
-        this.AddRandomNeuronNoNewLayer();
+
+        childLayerNum = this.neuronLayers.Count - 1;
+        this.AddHiddenNeuronBetweenNeuronsAndList(ref hidden2, parentLayerNum, childLayerNum, ref targetDistance, ref speed, syn1Num);
+        childLayerNum = this.neuronLayers.Count - 1;
+        this.AddHiddenNeuronBetweenNeuronsAndList(ref hidden3, parentLayerNum, childLayerNum, ref energy, ref layingEgg, syn1Num);
+        
+        
+
+        AddRandomNeuronNoNewLayer();
         AddRandomNeuronNewLayer();
 
     }

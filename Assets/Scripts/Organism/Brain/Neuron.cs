@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class Neuron : MonoBehaviour
+public class Neuron
 {
     //have neuron types: t1 = input neuron, t2 = hidden layer, t3 = output neuron
     // Start is called before the first frame update

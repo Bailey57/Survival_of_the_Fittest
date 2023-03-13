@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -39,20 +40,27 @@ public class OrganismActions : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         DeathCheck();
 
-
+        //not using brain
         GetPlantTarget();
 
-        MoveToTravelTarget();
+        //MoveToTravelTarget();
 
         //visionArea.
         // Swim();
         //Turn();
         //Eat();
-        LayEgg();
-        Wonder();
+
+        //LayEgg();
+        //Wonder();
+
         //Spin();
+
+
+        //using brain
+        Turn();
     }
 
     public void RunActions() 
@@ -74,11 +82,33 @@ public class OrganismActions : MonoBehaviour
 
 
 
+
+        //GetDistance();
+
+
+
     }
 
-    public void Turn(double tunRate) 
+    public void Turn() 
     {
-    
+        //brain.turnRate
+
+        rb.AddTorque((float)brain.turnRate * Time.fixedDeltaTime);
+        Debug.Log("Torque Added" + (float)brain.turnRate);
+
+
+
+
+
+
+    }
+
+
+    public void TurnTest() 
+    {
+
+
+
     
     }
 
@@ -222,18 +252,18 @@ public class OrganismActions : MonoBehaviour
 
     IEnumerator Eat2() 
     {
-        Debug.Log("Eat2 running");
+        //Debug.Log("Eat2 running");
 
         while (true)
         {
             yield return new WaitForSeconds(1);
-            Debug.Log("Eat2 waited");
+            //Debug.Log("Eat2 waited");
             if (this.travelTarget != null)
             {
                 if ((travelTarget.gameObject.GetComponent("Plant") as Plant) != null && TargetInRange())
                 {
 
-                    Debug.Log("Eat2 eating!");
+                    //Debug.Log("Eat2 eating!");
                     //Debug.Log("Eating");
                     float nutrianceTransferRate = .5f;
                     (travelTarget.gameObject.GetComponent("Plant") as Plant).condition -= nutrianceTransferRate;
@@ -252,7 +282,7 @@ public class OrganismActions : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other)
     {
         //add object to in view list
-        Debug.Log("Trigger entered");
+        //Debug.Log("Trigger entered");
         gameobjectsInSight.Add(other.gameObject);
     }
 
@@ -359,26 +389,26 @@ public class OrganismActions : MonoBehaviour
             float changeAmmount = 0;
             GameObject newOrganism = Instantiate(inGameOrganism) as GameObject;
 
-            float randNum = Random.Range(0, 100);
+            float randNum = UnityEngine.Random.Range(0, 100);
             
             //see if by chance the genes change 
             if (geneChangeChance >= randNum) 
             {
                 //change genes
 
-                changeAmmount = Random.Range(-changeAmmount, maxGeneChangeAmmount);
+                changeAmmount = UnityEngine.Random.Range(-changeAmmount, maxGeneChangeAmmount);
                 (newOrganism.GetComponent(typeof(Genetics)) as Genetics).agility += changeAmmount;
-                changeAmmount = Random.Range(-changeAmmount, maxGeneChangeAmmount);
+                changeAmmount = UnityEngine.Random.Range(-changeAmmount, maxGeneChangeAmmount);
                 (newOrganism.GetComponent(typeof(Genetics)) as Genetics).deathAge += changeAmmount;
-                changeAmmount = Random.Range(-changeAmmount, maxGeneChangeAmmount);
+                changeAmmount = UnityEngine.Random.Range(-changeAmmount, maxGeneChangeAmmount);
                 (newOrganism.GetComponent(typeof(Genetics)) as Genetics).eggLayingAge += changeAmmount;
-                changeAmmount = Random.Range(-changeAmmount, maxGeneChangeAmmount);
+                changeAmmount = UnityEngine.Random.Range(-changeAmmount, maxGeneChangeAmmount);
                 (newOrganism.GetComponent(typeof(Genetics)) as Genetics).maxHealth += changeAmmount;
-                changeAmmount = Random.Range(-changeAmmount, maxGeneChangeAmmount);
+                changeAmmount = UnityEngine.Random.Range(-changeAmmount, maxGeneChangeAmmount);
                 (newOrganism.GetComponent(typeof(Genetics)) as Genetics).visualAngle += changeAmmount;
-                changeAmmount = Random.Range(-changeAmmount, maxGeneChangeAmmount);
+                changeAmmount = UnityEngine.Random.Range(-changeAmmount, maxGeneChangeAmmount);
                 (newOrganism.GetComponent(typeof(Genetics)) as Genetics).physicalRange += changeAmmount;
-                changeAmmount = Random.Range(-changeAmmount, maxGeneChangeAmmount);
+                changeAmmount = UnityEngine.Random.Range(-changeAmmount, maxGeneChangeAmmount);
                 (newOrganism.GetComponent(typeof(Genetics)) as Genetics).visualDistance += changeAmmount;
 
 
