@@ -17,7 +17,7 @@ public class BrainInputs : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("Angle: " + GetTargetAngle2());
+        //Debug.Log("Angle: " + GetTargetAngle2());
         
     }
 
@@ -60,14 +60,50 @@ public class BrainInputs : MonoBehaviour
 
     public double GetTargetAngle2() 
     {
+        float rotation;
+        if (inGameOrganism.transform.eulerAngles.z <= 180f)
+        {
+            rotation = inGameOrganism.transform.eulerAngles.z;
+        }
+        else
+        {
+            rotation = inGameOrganism.transform.eulerAngles.z - 360f;
+        }
+        //Debug.Log("rotation: " + inGameOrganism.transform.eulerAngles.z);
+
+
         if (organismActions.travelTarget != null) 
         {
-        
+            
+            float xDiff = organismActions.travelTarget.transform.position.x - inGameOrganism.transform.position.x;
+            float yDiff = organismActions.travelTarget.transform.position.y - inGameOrganism.transform.position.y;
+            double tAngle =  System.Math.Atan2(yDiff, xDiff) * 180.0 / System.Math.PI;
+
+            if (tAngle <= 180f)
+            {
+                
+            }
+            //else
+            //{
+                //tAngle = tAngle - 360f;
+            //}
+            //Vector2.Angle(inGameOrganism.transform.);
+
+
+            //float realativeAngle = tAngle - 
+
+            //return tAngle - 90;
+
+            //return (tAngle - 90) + rotation;
+            Debug.Log("Organism angle: " + rotation + " plant angle: " + tAngle);
+            return tAngle + rotation;
         }
 
 
+        
 
-        return 0.0;
+
+        return rotation;
     }
 
 

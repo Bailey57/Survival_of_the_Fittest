@@ -92,11 +92,11 @@ public class OrganismActions : MonoBehaviour
     public void Turn() 
     {
         //brain.turnRate
+        float rotateSpeed = (float)brain.turnRate;
+        //rb.AddTorque(rotateSpeed * Time.fixedDeltaTime);
+        //Debug.Log("Torque Added" + (float)brain.turnRate);
 
-        rb.AddTorque((float)brain.turnRate * Time.fixedDeltaTime);
-        Debug.Log("Torque Added" + (float)brain.turnRate);
-
-
+        inGameOrganism.transform.Rotate(0f, 0f, rotateSpeed * Time.deltaTime);
 
 
 

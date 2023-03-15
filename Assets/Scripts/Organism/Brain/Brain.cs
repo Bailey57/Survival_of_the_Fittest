@@ -67,7 +67,7 @@ public class Brain : MonoBehaviour
 
     public void UpdateInputs() 
     {
-        this.targetAngle = brainInputs.GetTargetAngle();
+        this.targetAngle = brainInputs.GetTargetAngle2();
         this.targetDistance = brainInputs.GetTargetDistance();
         this.energy = organism.energy;
         this.health = organism.health;
