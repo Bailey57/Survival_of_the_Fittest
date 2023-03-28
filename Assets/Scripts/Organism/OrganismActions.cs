@@ -61,6 +61,7 @@ public class OrganismActions : MonoBehaviour
 
         //using brain
         Turn();
+        Swim();
     }
 
     public void RunActions() 
@@ -96,7 +97,7 @@ public class OrganismActions : MonoBehaviour
         //rb.AddTorque(rotateSpeed * Time.fixedDeltaTime);
         //Debug.Log("Torque Added" + (float)brain.turnRate);
 
-        inGameOrganism.transform.Rotate(0f, 0f, rotateSpeed * Time.deltaTime);
+        inGameOrganism.transform.Rotate(0f, 0f, rotateSpeed * Time.deltaTime * -1);
 
 
 
@@ -355,7 +356,10 @@ public class OrganismActions : MonoBehaviour
     public void Swim()
     {
         //inGameOrganism.transform.rotation
-        rb.velocity = new Vector2(genetics.agility, rb.velocity.y);
+
+        rb.velocity = transform.up * (float)brain.speed;
+        //rb.velocity = transform.right * (float)brain.speed;
+        //rb.velocity = new Vector2((float)brain.speed, rb.velocity.y);
         //move forward
 
 
