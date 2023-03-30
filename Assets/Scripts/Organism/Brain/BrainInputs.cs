@@ -69,6 +69,10 @@ public class BrainInputs : MonoBehaviour
         {
             rotation = inGameOrganism.transform.eulerAngles.z - 360f;
         }
+        //rotation = inGameOrganism.transform.eulerAngles.z;
+
+
+
         //Debug.Log("rotation: " + inGameOrganism.transform.eulerAngles.z);
 
 
