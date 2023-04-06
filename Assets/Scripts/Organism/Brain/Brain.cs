@@ -56,7 +56,7 @@ public class Brain : MonoBehaviour
        
         UpdateBrain();
 
-       // UpdateOutputs();
+        UpdateOutputs();
 
     }
     private void LateUpdate()
@@ -212,7 +212,10 @@ public class Brain : MonoBehaviour
                 for (int l = 0; l < neuronLayers[i][j].childrenNeurons.Count; l++)
                 {
                     outputStr += "\n             -- " + neuronLayers[i][j].childrenSynapses[l].bias + " --> ";
-                    outputStr += neuronLayers[i][j].childrenNeurons[l].neuronName + " " + neuronLayers[i][j].childrenNeurons[l].weight;
+
+
+                    //outputStr += neuronLayers[i][j].childrenNeurons[l].neuronName + " " + neuronLayers[i][j].childrenNeurons[l].weight;
+                    outputStr += neuronLayers[i][j].childrenNeurons[l].neuronName + " " + Decimal.Round((Decimal)neuronLayers[i][j].childrenNeurons[l].weight, 3);
 
                     //outputStr += "\n";
                 }
@@ -268,7 +271,11 @@ public class Brain : MonoBehaviour
                     for (int l = 0; l < neuronLayers[i][j].parentNeurons.Count; l++)
                     {
                         //https://keisan.casio.com/exec/system/15411343087697
-                        average += GetTanH(neuronLayers[i][j].parentNeurons[l].weight) * neuronLayers[i][j].parentSynapses[l].bias;
+                        //choose what type of function 
+                        //average += GetTanH(neuronLayers[i][j].parentNeurons[l].weight) * neuronLayers[i][j].parentSynapses[l].bias;
+                        average += GetSquareRootSigned(neuronLayers[i][j].parentNeurons[l].weight) * neuronLayers[i][j].parentSynapses[l].bias;
+                        //double tst = GetSquareRootSigned(neuronLayers[i][j].parentNeurons[l].weight) * neuronLayers[i][j].parentSynapses[l].bias;
+
 
 
                         //neuronLayers[i][j].weight += GetTanH(neuronLayers[i][j].parentNeurons[l].weight * neuronLayers[i][j].parentSynapses[l].bias);
@@ -501,7 +508,7 @@ public class Brain : MonoBehaviour
         Neuron attacking = new Neuron("output", "attacking", 0);
 
 
-        Neuron hidden1 = new Neuron("output", "hidden1", 1.1);
+        Neuron hidden1 = new Neuron("output", "hidden1", -1.1);
         Neuron hidden2 = new Neuron("output", "hidden2", .28);
         Neuron hidden3 = new Neuron("output", "hidden3", .39);
 
@@ -528,7 +535,7 @@ public class Brain : MonoBehaviour
 
         this.AddHiddenNeuronBetweenNeuronsAndList(ref hidden1, parentLayerNum, childLayerNum, ref targetAngle, ref turnRate, syn1Num);
 
-
+        syn1Num = .3;
         childLayerNum = this.neuronLayers.Count - 1;
         this.AddHiddenNeuronBetweenNeuronsAndList(ref hidden2, parentLayerNum, childLayerNum, ref targetDistance, ref speed, syn1Num);
         childLayerNum = this.neuronLayers.Count - 1;
@@ -757,7 +764,8 @@ public class Brain : MonoBehaviour
         for (int l = 0; l < neuron.childrenNeurons.Count; l++)
         {
             outputStr += "\n             -- " + neuron.childrenSynapses[l].bias + " --> ";
-            outputStr += neuron.childrenNeurons[l].neuronName + " " + neuron.childrenNeurons[l].weight;
+            //outputStr += neuron.childrenNeurons[l].neuronName + " " + neuron.childrenNeurons[l].weight;
+            outputStr += neuron.childrenNeurons[l].neuronName + " " + Decimal.Round((Decimal)neuron.childrenNeurons[l].weight, 3);
 
             //outputStr += "\n";
         }
@@ -773,6 +781,7 @@ public class Brain : MonoBehaviour
 
     public void AddRandomSynapse()
     {
+        //choose 2 neurons to add between randomly 
 
     }
 
@@ -851,9 +860,29 @@ public class Brain : MonoBehaviour
         return tst;
     }
 
+    public double GetSquareRootSigned(double inputNum) 
+    {
+        double signed = -1;
+        if (inputNum > 0) 
+        {
+            signed = 1;
 
-    
- 
+        }
+        double outputNum = Math.Sqrt(inputNum * signed) * signed;
+        Debug.Log("signed out: " + outputNum);
+        return outputNum;
+
+    }
+
+    public double GetSquared(double inputNum)
+    {
+     
+        return inputNum * inputNum;
+
+    }
+
+
+
 
     public void CreateInputLayer()
     {

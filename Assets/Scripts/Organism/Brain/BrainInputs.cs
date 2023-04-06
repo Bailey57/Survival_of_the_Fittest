@@ -55,6 +55,7 @@ public class BrainInputs : MonoBehaviour
 
 
 
+        //return targetAngle * -1;
         return targetAngle;
     }
 
@@ -63,13 +64,13 @@ public class BrainInputs : MonoBehaviour
         float rotation;
         if (inGameOrganism.transform.eulerAngles.z <= 180f)
         {
-            rotation = inGameOrganism.transform.eulerAngles.z;
+            //rotation = inGameOrganism.transform.eulerAngles.z;
         }
         else
         {
-            rotation = inGameOrganism.transform.eulerAngles.z - 360f;
+            //rotation = inGameOrganism.transform.eulerAngles.z - 360f;
         }
-        //rotation = inGameOrganism.transform.eulerAngles.z;
+        rotation = inGameOrganism.transform.eulerAngles.z;
 
 
 
@@ -83,13 +84,16 @@ public class BrainInputs : MonoBehaviour
             float yDiff = organismActions.travelTarget.transform.position.y - inGameOrganism.transform.position.y;
             double tAngle =  System.Math.Atan2(yDiff, xDiff) * 180.0 / System.Math.PI;
 
-            if (tAngle <= 180f)
+            if (tAngle >= 90f)
             {
-                
+                tAngle += 365;
+
+
             }
+            tAngle -= 90;
             //else
             //{
-                //tAngle = tAngle - 360f;
+            //tAngle = tAngle - 360f;
             //}
             //Vector2.Angle(inGameOrganism.transform.);
 
@@ -99,8 +103,14 @@ public class BrainInputs : MonoBehaviour
             //return tAngle - 90;
 
             //return (tAngle - 90) + rotation;
-            Debug.Log("Organism angle: " + rotation + " plant angle: " + tAngle);
-            return tAngle + rotation;
+
+            Vector2 toVector = organismActions.travelTarget.transform.position - transform.position;
+            float angleToTarget = Vector2.SignedAngle(transform.up, toVector);
+
+
+            Debug.Log("Organism angle: " + rotation + " plant angle: " + tAngle + " angle to target: " + angleToTarget);
+
+            return angleToTarget;
         }
 
 

@@ -62,6 +62,7 @@ public class OrganismActions : MonoBehaviour
         //using brain
         Turn();
         Swim();
+        LayEgg();
     }
 
     public void RunActions() 
@@ -93,7 +94,7 @@ public class OrganismActions : MonoBehaviour
     public void Turn() 
     {
         //brain.turnRate
-        float rotateSpeed = (float)brain.turnRate;
+        float rotateSpeed = -1 * (float)brain.turnRate;
         //rb.AddTorque(rotateSpeed * Time.fixedDeltaTime);
         //Debug.Log("Torque Added" + (float)brain.turnRate);
 
@@ -358,6 +359,8 @@ public class OrganismActions : MonoBehaviour
         //inGameOrganism.transform.rotation
 
         rb.velocity = transform.up * (float)brain.speed;
+        //if (rb.velocity.magnitude  
+
         //rb.velocity = transform.right * (float)brain.speed;
         //rb.velocity = new Vector2((float)brain.speed, rb.velocity.y);
         //move forward
@@ -369,7 +372,7 @@ public class OrganismActions : MonoBehaviour
     {
         //change later to get genetics
         float eggLayingAge = 3;
-        float energyNeededToLayEgg = 200;
+        float energyNeededToLayEgg = 100;
 
         float energyLossRatioAfterLayingEgg = 3;
 
@@ -387,16 +390,38 @@ public class OrganismActions : MonoBehaviour
             float maxGeneChangeAmmount = 1;
 
             float brainChangeChance = 100;
-            float maxBrainChangeAmmount = 1;
+            float maxBrainChangeAmmount = 2;
 
 
             float changeAmmount = 0;
             GameObject newOrganism = Instantiate(inGameOrganism) as GameObject;
+            //increase gen num
+            //create linked list of organisms
 
-            float randNum = UnityEngine.Random.Range(0, 100);
-            
+            float randGeneNum = UnityEngine.Random.Range(0, 100);
+
+            float randBrainNum = UnityEngine.Random.Range(0, 100);
+
+
+            if (brainChangeChance >= randBrainNum) 
+            {
+
+
+
+                float rand = UnityEngine.Random.Range(0, 100);
+                if (rand > 50) 
+                {
+                    //newOrganism.GetComponent(typeof(Brain)) as Brain).
+                    //AddRandomNeuronNoNewLayer();
+                    //AddRandomNeuronNewLayer();
+
+                }
+
+
+            }
+
             //see if by chance the genes change 
-            if (geneChangeChance >= randNum) 
+            if (geneChangeChance >= randGeneNum) 
             {
                 //change genes
 
