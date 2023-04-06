@@ -412,6 +412,7 @@ public class OrganismActions : MonoBehaviour
                 if (rand > 50) 
                 {
                     //newOrganism.GetComponent(typeof(Brain)) as Brain).
+                    //(inGameOrganism.gameObject.GetComponent("Brain") as Brain).BrainToString()
                     //AddRandomNeuronNoNewLayer();
                     //AddRandomNeuronNewLayer();
 

@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+
 public class Brain : MonoBehaviour
 {
     //list all input and output values
@@ -206,12 +208,14 @@ public class Brain : MonoBehaviour
         {
             for (int j = 0; j < neuronLayers[i].Count; j++)
             {
-                outputStr += "i:" + i + " j: " + j;
+                outputStr += "C: " + i + " R: " + j;
 
+                //Mathf.Round();
+                //outputStr += "[ " + neuronLayers[i][j].neuronName + " " + Decimal.Round((Decimal)neuronLayers[i][j].weight, 3) + " ";
                 outputStr += "[ " + neuronLayers[i][j].neuronName + " " + neuronLayers[i][j].weight + " ";
                 for (int l = 0; l < neuronLayers[i][j].childrenNeurons.Count; l++)
                 {
-                    outputStr += "\n             -- " + neuronLayers[i][j].childrenSynapses[l].bias + " --> ";
+                    outputStr += "\n             -- " + Decimal.Round((Decimal)neuronLayers[i][j].childrenSynapses[l].bias, 3) + " --> ";
 
 
                     //outputStr += neuronLayers[i][j].childrenNeurons[l].neuronName + " " + neuronLayers[i][j].childrenNeurons[l].weight;
@@ -237,11 +241,11 @@ public class Brain : MonoBehaviour
         {
             for (int j = 0; j < neuronLayers[i].Count; j++)
             {
-                outputStr += "[ " + neuronLayers[i][j].neuronName + " " + neuronLayers[i][j].weight + " ";
+                outputStr += "[ " + neuronLayers[i][j].neuronName + " " + Decimal.Round((Decimal)neuronLayers[i][j].weight, 3) + " ";
                 for (int l = 0; l < neuronLayers[i][j].parentNeurons.Count; l++)
                 {
                     outputStr += "\n             <-- " + neuronLayers[i][j].parentSynapses[l].bias + " -- ";
-                    outputStr += neuronLayers[i][j].parentNeurons[l].neuronName + " " + neuronLayers[i][j].parentNeurons[l].weight;
+                    outputStr += neuronLayers[i][j].parentNeurons[l].neuronName + " " + Decimal.Round((Decimal)neuronLayers[i][j].parentNeurons[l].weight, 3);
 
                     //outputStr += "\n";
                 }
