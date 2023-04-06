@@ -12,6 +12,8 @@ public class BrainText : MonoBehaviour
 
     public TMP_Text textMeshTxt;
 
+
+
     // Start is called before the first frame update
     void Start()
     {
