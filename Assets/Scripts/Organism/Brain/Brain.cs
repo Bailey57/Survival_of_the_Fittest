@@ -16,7 +16,7 @@ public class Brain : MonoBehaviour
     public BrainInputs brainInputs;
 
 
-
+    
 
     //inputs
     public double targetAngle;
@@ -211,8 +211,12 @@ public class Brain : MonoBehaviour
                 outputStr += "C: " + i + " R: " + j;
 
                 //Mathf.Round();
-                //outputStr += "[ " + neuronLayers[i][j].neuronName + " " + Decimal.Round((Decimal)neuronLayers[i][j].weight, 3) + " ";
-                outputStr += "[ " + neuronLayers[i][j].neuronName + " " + neuronLayers[i][j].weight + " ";
+                outputStr += "[ " + neuronLayers[i][j].neuronName + " " + Math.Round((Double)neuronLayers[i][j].weight, 3) + " ";
+                //outputStr += "[ " + neuronLayers[i][j].neuronName + " " + MathF.Round(neuronLayers[i][j].weight, 3)) + " ";
+                //outputStr += "[ " + neuronLayers[i][j].neuronName + " " + neuronLayers[i][j].weight + " ";
+                //float num = MathF.Round(3.54634);
+
+
                 for (int l = 0; l < neuronLayers[i][j].childrenNeurons.Count; l++)
                 {
                     outputStr += "\n             -- " + Decimal.Round((Decimal)neuronLayers[i][j].childrenSynapses[l].bias, 3) + " --> ";
@@ -532,16 +536,18 @@ public class Brain : MonoBehaviour
         this.neuronLayers[2].Add(attacking);
 
 
-        double syn1Num = 1.1;
+        
         int parentLayerNum = 0;
         int childLayerNum = this.neuronLayers.Count - 1;
 
-
+        double syn1Num = 3;
         this.AddHiddenNeuronBetweenNeuronsAndList(ref hidden1, parentLayerNum, childLayerNum, ref targetAngle, ref turnRate, syn1Num);
 
-        syn1Num = .3;
+        syn1Num = .2;
         childLayerNum = this.neuronLayers.Count - 1;
         this.AddHiddenNeuronBetweenNeuronsAndList(ref hidden2, parentLayerNum, childLayerNum, ref targetDistance, ref speed, syn1Num);
+
+        syn1Num = .3;
         childLayerNum = this.neuronLayers.Count - 1;
         this.AddHiddenNeuronBetweenNeuronsAndList(ref hidden3, parentLayerNum, childLayerNum, ref energy, ref layingEgg, syn1Num);
         
