@@ -371,8 +371,8 @@ public class OrganismActions : MonoBehaviour
     public void LayEgg() 
     {
         //change later to get genetics
-        float eggLayingAge = 3;
-        float energyNeededToLayEgg = 100;
+        float eggLayingAge = 40;
+        float energyNeededToLayEgg = 200;
 
         float energyLossRatioAfterLayingEgg = 3;
 

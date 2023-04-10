@@ -22,10 +22,25 @@ public class Statistics : MonoBehaviour
 
     public int longestLastingGenNum;
 
+    public float simulationTime;
+
 
     public FamilyTree familyTree;
 
 
+
+    public string StatsToString() 
+    {
+        string output = "";
+        output += "numOfOrganisms: " + numOfOrganisms + "\n\n";
+        output += "numOfPlants: " + numOfPlants + "\n\n";
+        output += "maxnumOfOrganisms: " + maxnumOfOrganisms + "\n\n";
+        output += "maxNumOfPlants: " + maxNumOfPlants + "\n\n";
+        output += "longestLastingGenNum: " + longestLastingGenNum + "\n\n";
+
+
+        return output;
+    }
 
 
     void Start()
