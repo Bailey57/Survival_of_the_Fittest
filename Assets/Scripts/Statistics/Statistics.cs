@@ -51,7 +51,8 @@ public class Statistics : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        updateMaxNumOfOrganisms();
+        //updateMaxNumOfOrganisms();
+        UpdateStats();
     }
 
     IEnumerator UpdateStatistics() 
@@ -115,6 +116,47 @@ public class Statistics : MonoBehaviour
 
     public int GetNumOfPlants() 
     {
+        return 0;
+    }
+
+
+    public int UpdateStats()
+    {
+        numOfOrganisms = 0;
+        numOfPlants = 0;
+        List<GameObject> rootObjects = new List<GameObject>();
+        Scene scene = SceneManager.GetActiveScene();
+        scene.GetRootGameObjects(rootObjects);
+
+        for (int i = 0; i < rootObjects.Count; ++i)
+        {
+            if ((rootObjects[i].gameObject.GetComponent("Organism") as Organism))
+            {
+
+                numOfOrganisms += 1;
+                if (numOfOrganisms > maxnumOfOrganisms)
+                {
+                    maxnumOfOrganisms = numOfOrganisms;
+
+                }
+
+
+            }
+            else if ((rootObjects[i].gameObject.GetComponent("Plant") as Plant)) 
+            {
+                numOfPlants += 1;
+                if (numOfPlants > maxNumOfPlants)
+                {
+                    maxNumOfPlants = numOfPlants;
+
+                }
+
+            }
+
+
+        }
+
+
         return 0;
     }
 }

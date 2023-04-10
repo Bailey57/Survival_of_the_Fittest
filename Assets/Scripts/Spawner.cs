@@ -6,8 +6,6 @@ public class Spawner : MonoBehaviour
 {
     // Start is called before the first frame update
 
-
-
     //organism1_32x32
     //GameObject newObject = (GameObject)Instantiate(Resources.Load("organism1_32x32"));
 
@@ -15,6 +13,8 @@ public class Spawner : MonoBehaviour
 
     void Start()
     {
+        
+            
         StartCoroutine(SpawnPlant());
         //SpawnOrganism()
 
@@ -37,7 +37,11 @@ public class Spawner : MonoBehaviour
 
 
             GameObject newObject = (GameObject)Instantiate(Resources.Load("Prefabs/plant1_32x32"));
+            float randX = Random.Range(-10, 10);
+            float randY = Random.Range(-10, 10);
 
+
+            newObject.transform.position = new Vector3(randX, randY, 0);
 
 
         }

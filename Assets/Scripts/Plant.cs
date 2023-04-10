@@ -19,19 +19,38 @@ public class Plant : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        StartCoroutine(AgeIncease());
+
     }
 
     // Update is called once per frame
     void Update()
     {
 
-        if (condition <= 0 || nutreance <= 0) 
+        DeathCheck();
+        
+
+    }
+
+    IEnumerator AgeIncease()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(1);
+            age += 1;
+
+
+        }
+
+    }
+
+    public void DeathCheck()
+    {
+        if (condition <= 0 || nutreance <= 0 || age >= 1000)
         {
             inGamePlant.SetActive(false);
             Destroy(inGamePlant);
 
         }
-        
     }
 }

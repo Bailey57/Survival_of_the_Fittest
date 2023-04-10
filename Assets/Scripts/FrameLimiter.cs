@@ -20,7 +20,8 @@ public class FrameLimiter : MonoBehaviour
 
     private void Awake()
     {
-        Application.targetFrameRate = limit60;
+        //Application.targetFrameRate = limit60;
+        Application.targetFrameRate = noLimit;
     }
 
 }
