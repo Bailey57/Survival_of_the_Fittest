@@ -30,23 +30,6 @@ public class ObjectSelection : MonoBehaviour
         objectsSelected.Add(unitToAdd);
     }
 
-    public void ShiftClickSelect(GameObject unitToAdd)
-    {
-        if (!objectsSelected.Contains(unitToAdd))
-        {
-            objectsSelected.Add(unitToAdd);
-
-        }
-        else
-        {
-            objectsSelected.Remove(unitToAdd);
-        }
-    }
-
-    public void DragSelect(GameObject unitToAdd)
-    {
-        //TODO: Add a drag select to select all units in a drawn box
-    }
 
     public void DeSelectAll()
     {

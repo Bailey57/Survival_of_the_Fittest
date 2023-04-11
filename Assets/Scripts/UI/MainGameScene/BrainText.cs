@@ -6,12 +6,12 @@ using UnityEngine.UI;
 
 public class BrainText : MonoBehaviour
 {
-    public GameObject inGameOrganism;
 
     public Text text;
 
     public TMP_Text textMeshTxt;
 
+    public ObjectClick objectClick;
 
 
     // Start is called before the first frame update
@@ -24,12 +24,13 @@ public class BrainText : MonoBehaviour
     void Update()
     {
 
-        if (inGameOrganism != null)
+        if (objectClick.selectedObject != null)
         {
 
-            textMeshTxt.text = (inGameOrganism.gameObject.GetComponent("Brain") as Brain).BrainToString();
+            //textMeshTxt.text = (inGameOrganism.gameObject.GetComponent("Brain") as Brain).BrainToString();
             //text.text = (inGameOrganism.gameObject.GetComponent("Brain") as Brain).BrainToString();
-
+            textMeshTxt.text = (objectClick.selectedObject.gameObject.GetComponent("Brain") as Brain).BrainToString();
+            
 
         }
 

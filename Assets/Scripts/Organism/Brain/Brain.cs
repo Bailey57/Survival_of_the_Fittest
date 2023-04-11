@@ -865,7 +865,7 @@ public class Brain : MonoBehaviour
         //double tstIpt = .2;
         //double tst = 1.0 / (1.0 + Math.Exp(-tstIpt));
         double tst = 1.0 / (1.0 + Math.Exp(-inputNum));
-        Debug.Log("tst sigmoid: " + tst);
+        //Debug.Log("tst sigmoid: " + tst);
 
         return tst;
     }
@@ -879,7 +879,7 @@ public class Brain : MonoBehaviour
 
         }
         double outputNum = Math.Sqrt(inputNum * signed) * signed;
-        Debug.Log("signed out: " + outputNum);
+        //Debug.Log("signed out: " + outputNum);
         return outputNum;
 
     }

@@ -11,56 +11,54 @@ public class ObjectClick : MonoBehaviour
     [SerializeField] public LayerMask ground;
 
 
-
-
-
-
-
-    /**
-     * Sets the current selected units
-     */
-    public void SelectUnits()
+    public void SelectObject()
     {
 
         if (Input.GetMouseButtonDown(0))
         {
 
-            //RaycastHit hit;
-            //Ray ray = cam.ScreenPointToRay(Input.mousePosition);
-            //Debug.Log();
-            //RaycastHit2D rayHit = Physics2D.GetRayIntersection(Camera.main.ScreenPointToRay(Input.mousePosition));
+
             RaycastHit2D rayHit = Physics2D.GetRayIntersection(Camera.main.ScreenPointToRay(Input.mousePosition));
-            //TODO: Make it by faction and not just Blue for multiplayer
-            if (rayHit.transform != null && rayHit.transform.gameObject != null && (rayHit.transform.gameObject.GetComponent("Organism") as Organism))
+            if (rayHit.transform != null && rayHit.transform.gameObject != null && (rayHit.transform.gameObject.GetComponent("Organism") as Organism) && !(rayHit.collider is BoxCollider2D))
             {
 
                 Debug.Log("Hit " + rayHit.transform.gameObject.name);
-
-                if (Input.GetKey(KeyCode.LeftShift))
-                {
-                    //UnitSelections.Instance.ShiftClickSelect(rayHit.transform.gameObject);
-                }
-                else
-                {
-                    //UnitSelections.Instance.ClickSelect(rayHit.transform.gameObject);
-                }
-                //Debug.Log("Casting ray!");
+                selectedObject = rayHit.transform.gameObject;
+               
+            
             }
             else
             {
                 Debug.Log("Hit Nothing");
+                selectedObject = null;
 
-                if (!Input.GetKey(KeyCode.LeftShift))
-                {
-                    //UnitSelections.Instance.DeSelectAll();
-                }
-                //Debug.Log("Not casting ray!");
+
+
             }
 
 
         }
+        else if (Input.GetMouseButtonDown(1) || Input.GetMouseButtonDown(2))
+        {
+            selectedObject = null;
+
+        }
     }
 
+
+
+
+    public void FollowSelected() 
+    {
+        if (selectedObject != null)
+        {
+            cam.transform.position = new Vector3(selectedObject.transform.position.x, selectedObject.transform.position.y, cam.transform.position.z);
+
+
+        }
+
+
+    }
 
 
     // Start is called before the first frame update
@@ -74,8 +72,10 @@ public class ObjectClick : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        SelectUnits();
-  
+        SelectObject();
+        FollowSelected();
+
+
 
 
     }

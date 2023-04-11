@@ -43,6 +43,12 @@ public class OrganismActions : MonoBehaviour
 
         DeathCheck();
 
+        
+    }
+
+
+    private void LateUpdate()
+    {
         //not using brain
         GetPlantTarget();
 
@@ -63,6 +69,7 @@ public class OrganismActions : MonoBehaviour
         Turn();
         Swim();
         LayEgg();
+
     }
 
     public void RunActions() 
@@ -171,6 +178,10 @@ public class OrganismActions : MonoBehaviour
 
     public void GetPlantTarget()
     {
+        if (this == null) 
+        {
+            return;
+        }
         if (this.travelTarget == null && gameobjectsInSight.Count > 0)
         {
             for (int i = 0; i < gameobjectsInSight.Count; i++) 
@@ -390,7 +401,7 @@ public class OrganismActions : MonoBehaviour
             float maxGeneChangeAmmount = 1;
 
             float brainChangeChance = 100;
-            float maxBrainChangeAmmount = 2;
+            //float maxBrainChangeAmmount = 2;
 
 
             float changeAmmount = 0;

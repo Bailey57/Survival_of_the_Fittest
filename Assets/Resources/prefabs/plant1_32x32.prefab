@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &3854964912042281441
+--- !u!1 &2042115856393596555
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,25 +8,25 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3854964912042281470}
-  - component: {fileID: 3854964912042281469}
-  - component: {fileID: 3854964912042281468}
-  - component: {fileID: 3854964912042281443}
-  - component: {fileID: 3854964912042281442}
-  m_Layer: 0
+  - component: {fileID: 2042115856393596566}
+  - component: {fileID: 2042115856393596567}
+  - component: {fileID: 2042115856393596552}
+  - component: {fileID: 2042115856393596553}
+  - component: {fileID: 2042115856393596554}
+  m_Layer: 6
   m_Name: plant1_32x32
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3854964912042281470
+--- !u!4 &2042115856393596566
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3854964912042281441}
+  m_GameObject: {fileID: 2042115856393596555}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.29, y: 7.06, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -34,13 +34,13 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &3854964912042281469
+--- !u!212 &2042115856393596567
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3854964912042281441}
+  m_GameObject: {fileID: 2042115856393596555}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -85,30 +85,30 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &3854964912042281468
+--- !u!114 &2042115856393596552
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3854964912042281441}
+  m_GameObject: {fileID: 2042115856393596555}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 305db4b907387574b8ed182b03263e36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inGamePlant: {fileID: 3854964912042281441}
+  inGamePlant: {fileID: 2042115856393596555}
   condition: 100
   nutreance: 1000
   age: 0
---- !u!50 &3854964912042281443
+--- !u!50 &2042115856393596553
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3854964912042281441}
+  m_GameObject: {fileID: 2042115856393596555}
   m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
@@ -122,13 +122,13 @@ Rigidbody2D:
   m_SleepingMode: 2
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!60 &3854964912042281442
+--- !u!60 &2042115856393596554
 PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3854964912042281441}
+  m_GameObject: {fileID: 2042115856393596555}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}

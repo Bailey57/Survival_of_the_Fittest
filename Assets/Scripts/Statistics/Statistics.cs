@@ -45,7 +45,7 @@ public class Statistics : MonoBehaviour
 
     void Start()
     {
-        StartCoroutine(UpdateStatistics());
+        //StartCoroutine(UpdateStatistics());
     }
     
     // Update is called once per frame
@@ -68,7 +68,7 @@ public class Statistics : MonoBehaviour
 
     }
 
-    public void updateMaxNumOfOrganisms() 
+    public void UpdateMaxNumOfOrganisms() 
     {
         int numOfOrganisms = GetNumOfOrganisms();
         if (maxnumOfOrganisms < numOfOrganisms) 
@@ -132,6 +132,15 @@ public class Statistics : MonoBehaviour
         {
             if ((rootObjects[i].gameObject.GetComponent("Organism") as Organism))
             {
+
+                if ((rootObjects[i].gameObject.GetComponent("Genetics") as Genetics).generationNum > longestLastingGenNum) 
+                {
+                    longestLastingGenNum = (rootObjects[i].gameObject.GetComponent("Genetics") as Genetics).generationNum;
+
+
+                }
+
+
 
                 numOfOrganisms += 1;
                 if (numOfOrganisms > maxnumOfOrganisms)

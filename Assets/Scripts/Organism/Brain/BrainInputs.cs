@@ -108,7 +108,7 @@ public class BrainInputs : MonoBehaviour
             float angleToTarget = Vector2.SignedAngle(transform.up, toVector);
 
 
-            Debug.Log("Organism angle: " + rotation + " plant angle: " + tAngle + " angle to target: " + angleToTarget);
+            //Debug.Log("Organism angle: " + rotation + " plant angle: " + tAngle + " angle to target: " + angleToTarget);
 
             return angleToTarget;
         }
