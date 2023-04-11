@@ -5,6 +5,7 @@ using UnityEngine;
 
 
 
+
 public class Brain : MonoBehaviour
 {
     //list all input and output values
@@ -19,18 +20,18 @@ public class Brain : MonoBehaviour
     
 
     //inputs
-    public double targetAngle;
-    public double targetDistance;
-    public double energy;
-    public double health;
+    public double targetAngle = 0;
+    public double targetDistance = 0;
+    public double energy = 100;
+    public double health = 100;
 
     //outputs
 
-    public double turnRate;
-    public double speed;
+    public double turnRate = 0;
+    public double speed = 0;
     //for bool: [- output = false], [+ output = true]
-    public double layingEgg;
-    public double attacking;
+    public double layingEgg = 0;
+    public double attacking = 0;
 
     //public void getTarget
 
@@ -46,11 +47,15 @@ public class Brain : MonoBehaviour
     {
         GetTanH(1);
         GetSigmoid(1);
-        this.MakeBrain2Tst();
-        Debug.Log("BrainToStringParents:\n" + this.BrainToStringParents());
+        //base brain that can function
+        MakeBrain2Tst();
+        //complete random starts
+        //MakeBaseBrain1Random();
+        //Debug.Log("BrainToStringParents:\n" + this.BrainToStringParents());
         
 
     }
+
     // Update is called once per frame
     void Update()
     {
@@ -65,6 +70,9 @@ public class Brain : MonoBehaviour
     {
         
     }
+
+
+
 
 
     public void UpdateInputs() 
@@ -380,11 +388,12 @@ public class Brain : MonoBehaviour
     /**
     * adds HiddenNeuronBetweenNeurons and adds to list 
     */
-    public void AddHiddenNeuronBetweenNeuronsAndList(ref Neuron hiddenNeuron, int parentLayerNum, int childLayerNum, ref Neuron parent, ref Neuron child, double synapseBias)
+    public void AddHiddenNeuronBetweenNeuronsAndList(ref Neuron hiddenNeuron, int parentLayerNum, int childLayerNum, ref Neuron parent, ref Neuron child, double synapseBias1, double synapseBias2)
     {
+        Debug.Log("Added in brain");
         int hiddenLayerIdx = parentLayerNum + 1;
-        ConnectNeurons(ref parent, ref hiddenNeuron, synapseBias);
-        ConnectNeurons(ref hiddenNeuron, ref child, synapseBias);
+        ConnectNeurons(ref parent, ref hiddenNeuron, synapseBias1);
+        ConnectNeurons(ref hiddenNeuron, ref child, synapseBias2);
         this.neuronLayers[hiddenLayerIdx].Add(hiddenNeuron);
     }
 
@@ -480,23 +489,44 @@ public class Brain : MonoBehaviour
     }
 
 
+    public void MakeBaseBrain1Random()
+    {
 
-    //https://stackoverflow.com/questions/19396346/how-to-iterate-through-linked-list
+        MakeBaseBrain1();
+
+        //randomized parts
+        AddRandomNeuronNoNewLayer();
+        //AddRandomNeuronNewLayer();
+        AddRandomNeuronNoNewLayer();
+        AddRandomNeuronNoNewLayer();
+    }
 
     public void MakeBaseBrain1()
     {
         Neuron targetAngle = new Neuron("input", "targetAngle", 3);
         Neuron targetDistance = new Neuron("input", "targetDistance", 0);
-        Neuron energy = new Neuron("input", "energy", 0);
-        Neuron health = new Neuron("input", "health", 0);
+        Neuron energy = new Neuron("input", "energy", 100);
+        Neuron health = new Neuron("input", "health", 100);
 
-
+        //outputs doubles
         Neuron turnRate = new Neuron("output", "turnRate", 0);
         Neuron speed = new Neuron("output", "speed", 0);
+        //outputs bool
+        Neuron layingEgg = new Neuron("output", "layingEgg", 0);
+        Neuron attacking = new Neuron("output", "attacking", 0);
 
         InitializeNeuronLayerList();
 
+        this.neuronLayers[0].Add(targetAngle);
+        this.neuronLayers[0].Add(targetDistance);
+        this.neuronLayers[0].Add(energy);
+        this.neuronLayers[0].Add(health);
 
+
+        this.neuronLayers[2].Add(turnRate);
+        this.neuronLayers[2].Add(speed);
+        this.neuronLayers[2].Add(layingEgg);
+        this.neuronLayers[2].Add(attacking);
 
     }
 
@@ -541,15 +571,18 @@ public class Brain : MonoBehaviour
         int childLayerNum = this.neuronLayers.Count - 1;
 
         double syn1Num = 3;
-        this.AddHiddenNeuronBetweenNeuronsAndList(ref hidden1, parentLayerNum, childLayerNum, ref targetAngle, ref turnRate, syn1Num);
+        double syn2Num = 3.1;
+        this.AddHiddenNeuronBetweenNeuronsAndList(ref hidden1, parentLayerNum, childLayerNum, ref targetAngle, ref turnRate, syn1Num, syn2Num);
 
         syn1Num = .2;
+        syn2Num = .21;
         childLayerNum = this.neuronLayers.Count - 1;
-        this.AddHiddenNeuronBetweenNeuronsAndList(ref hidden2, parentLayerNum, childLayerNum, ref targetDistance, ref speed, syn1Num);
+        this.AddHiddenNeuronBetweenNeuronsAndList(ref hidden2, parentLayerNum, childLayerNum, ref targetDistance, ref speed, syn1Num, syn2Num);
 
         syn1Num = .3;
+        syn2Num = .24;
         childLayerNum = this.neuronLayers.Count - 1;
-        this.AddHiddenNeuronBetweenNeuronsAndList(ref hidden3, parentLayerNum, childLayerNum, ref energy, ref layingEgg, syn1Num);
+        this.AddHiddenNeuronBetweenNeuronsAndList(ref hidden3, parentLayerNum, childLayerNum, ref energy, ref layingEgg, syn1Num, syn2Num);
         
         
 
@@ -664,6 +697,8 @@ public class Brain : MonoBehaviour
 
         double newNeuronValue = this.GetRandomDouble(-5, 5);
 
+        Debug.Log("syn1: " + synapse1Value + " syn2: " + synapse2Value);
+
         int newNeuronLayerNum = this.GetRandomInt(1, this.neuronLayers.Count - 1);
 
         int newNeuronParentLayer = newNeuronLayerNum - 1;
@@ -698,7 +733,7 @@ public class Brain : MonoBehaviour
 
 
         //AddHiddenNeuronBetweenNeuronsAndList(ref newHidden, newNeuronParentLayer, newNeuronChildLayer, ref this.neuronLayers[newNeuronParentLayer][newNeuronParentPosition], ref this.neuronLayers[newNeuronChildLayer][newNeuronChildPosition], synapse1Value);
-        AddHiddenNeuronBetweenNeuronsAndList(ref newHidden, newNeuronParentLayer, newNeuronChildLayer, ref parentNeuron, ref childNeuron, synapse1Value);
+        AddHiddenNeuronBetweenNeuronsAndList(ref newHidden, newNeuronParentLayer, newNeuronChildLayer, ref parentNeuron, ref childNeuron, synapse1Value, synapse2Value);
 
 
     }
@@ -759,7 +794,7 @@ public class Brain : MonoBehaviour
         //Console.WriteLine("parentNeuron: " + parentNeuron.neuronName + " childNeuron: " + childNeuron.neuronName);
 
         //AddHiddenNeuronBetweenNeuronsAndList(ref newHidden, newNeuronParentLayer, newNeuronChildLayer, ref this.neuronLayers[newNeuronParentLayer][newNeuronParentPosition], ref this.neuronLayers[newNeuronChildLayer][newNeuronChildPosition], synapse1Value);
-        AddHiddenNeuronBetweenNeuronsAndList(ref newHidden, newNeuronParentLayer, newNeuronChildLayer, ref parentNeuron, ref childNeuron, synapse1Value);
+        AddHiddenNeuronBetweenNeuronsAndList(ref newHidden, newNeuronParentLayer, newNeuronChildLayer, ref parentNeuron, ref childNeuron, synapse1Value, synapse2Value);
 
 
     }
@@ -797,14 +832,20 @@ public class Brain : MonoBehaviour
 
     public double GetRandomDouble(double minimum, double maximum)
     {
-        System.Random random = new System.Random();
-        return random.NextDouble() * (maximum - minimum) + minimum;
+        //System.Random random = new System.Random();
+        
+        //return random.NextDouble() * (maximum - minimum) + minimum;
+
+        return (double)UnityEngine.Random.Range((float)minimum, (float)maximum);
     }
 
     public int GetRandomInt(int minimum, int maximum)
     {
-        System.Random random = new System.Random();
-        return random.Next(minimum, maximum);
+        //System.Random random = new System.Random();
+        //return random.Next(minimum, maximum);
+
+
+        return (int)UnityEngine.Random.Range(minimum, maximum);
     }
 
 

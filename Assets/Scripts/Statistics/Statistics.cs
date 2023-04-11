@@ -22,7 +22,7 @@ public class Statistics : MonoBehaviour
 
     public int longestLastingGenNum;
 
-    public float simulationTime;
+    public int simulationTime;//in seconds
 
 
     public FamilyTree familyTree;
@@ -38,6 +38,7 @@ public class Statistics : MonoBehaviour
         output += "maxNumOfPlants: " + maxNumOfPlants + "\n\n";
         output += "longestLastingGenNum: " + longestLastingGenNum + "\n\n";
 
+        output += TimeToString(simulationTime) + "\n\n";
 
         return output;
     }
@@ -46,6 +47,7 @@ public class Statistics : MonoBehaviour
     void Start()
     {
         //StartCoroutine(UpdateStatistics());
+        StartCoroutine(UpdateTimePassed());
     }
     
     // Update is called once per frame
@@ -53,6 +55,39 @@ public class Statistics : MonoBehaviour
     {
         //updateMaxNumOfOrganisms();
         UpdateStats();
+    }
+
+
+    IEnumerator UpdateTimePassed()
+    {
+        while (true) 
+        {
+            yield return new WaitForSeconds(1);
+            simulationTime += 1;
+
+        }
+        
+    }
+
+    public string TimeToString(int seconds) 
+    {
+
+        int minuets = seconds / 60;
+        int remainderSeconds = seconds % 60;
+
+        int hours = minuets / 60;
+        int remainderMin = minuets % 60;
+
+        int days = hours / 60;
+        int remainderHrs = hours % 60;
+
+        int weeks = days / 7;
+        int remainderDays = days % 7;
+
+
+        return "Days: " + days + " Hours: " + remainderHrs  + " Minutes: " + remainderMin  + " Seconds: " + remainderSeconds;
+
+
     }
 
     IEnumerator UpdateStatistics() 

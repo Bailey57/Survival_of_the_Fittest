@@ -100,14 +100,18 @@ public class OrganismActions : MonoBehaviour
 
     public void Turn() 
     {
-        //brain.turnRate
-        float rotateSpeed = -1 * (float)brain.turnRate;
-        //rb.AddTorque(rotateSpeed * Time.fixedDeltaTime);
-        //Debug.Log("Torque Added" + (float)brain.turnRate);
+        
+        if (!Double.IsNaN(brain.turnRate)) 
+        {
+            //brain.turnRate
+            float rotateSpeed = -1 * (float)brain.turnRate;
+            //rb.AddTorque(rotateSpeed * Time.fixedDeltaTime);
+            //Debug.Log("Torque Added" + (float)brain.turnRate);
 
-        inGameOrganism.transform.Rotate(0f, 0f, rotateSpeed * Time.deltaTime * -1);
+            inGameOrganism.transform.Rotate(0f, 0f, rotateSpeed * Time.deltaTime * -1);
 
 
+        }
 
 
     }
@@ -368,13 +372,17 @@ public class OrganismActions : MonoBehaviour
     public void Swim()
     {
         //inGameOrganism.transform.rotation
+        if (!Double.IsNaN(brain.speed)) 
+        {
+            rb.velocity = transform.up * (float)brain.speed;
+            //if (rb.velocity.magnitude  
 
-        rb.velocity = transform.up * (float)brain.speed;
-        //if (rb.velocity.magnitude  
+            //rb.velocity = transform.right * (float)brain.speed;
+            //rb.velocity = new Vector2((float)brain.speed, rb.velocity.y);
+            //move forward
 
-        //rb.velocity = transform.right * (float)brain.speed;
-        //rb.velocity = new Vector2((float)brain.speed, rb.velocity.y);
-        //move forward
+        }
+
 
 
     }
