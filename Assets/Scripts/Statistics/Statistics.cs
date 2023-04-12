@@ -78,8 +78,8 @@ public class Statistics : MonoBehaviour
         int hours = minuets / 60;
         int remainderMin = minuets % 60;
 
-        int days = hours / 60;
-        int remainderHrs = hours % 60;
+        int days = hours / 24;
+        int remainderHrs = hours % 24;
 
         int weeks = days / 7;
         int remainderDays = days % 7;

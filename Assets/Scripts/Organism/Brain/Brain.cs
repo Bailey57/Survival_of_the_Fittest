@@ -390,7 +390,7 @@ public class Brain : MonoBehaviour
     */
     public void AddHiddenNeuronBetweenNeuronsAndList(ref Neuron hiddenNeuron, int parentLayerNum, int childLayerNum, ref Neuron parent, ref Neuron child, double synapseBias1, double synapseBias2)
     {
-        Debug.Log("Added in brain");
+        //Debug.Log("Added in brain");
         int hiddenLayerIdx = parentLayerNum + 1;
         ConnectNeurons(ref parent, ref hiddenNeuron, synapseBias1);
         ConnectNeurons(ref hiddenNeuron, ref child, synapseBias2);
@@ -697,7 +697,7 @@ public class Brain : MonoBehaviour
 
         double newNeuronValue = this.GetRandomDouble(-5, 5);
 
-        Debug.Log("syn1: " + synapse1Value + " syn2: " + synapse2Value);
+        //Debug.Log("syn1: " + synapse1Value + " syn2: " + synapse2Value);
 
         int newNeuronLayerNum = this.GetRandomInt(1, this.neuronLayers.Count - 1);
 

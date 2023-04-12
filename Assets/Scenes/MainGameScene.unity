@@ -1396,6 +1396,7 @@ GameObject:
   - component: {fileID: 953726399}
   - component: {fileID: 953726398}
   - component: {fileID: 953726397}
+  - component: {fileID: 953726400}
   m_Layer: 5
   m_Name: Brain Text Scroll
   m_TagString: Untagged
@@ -1493,6 +1494,32 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 953726395}
   m_CullTransparentMesh: 1
+--- !u!61 &953726400
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 953726395}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.9048462, y: 0.49157715}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 402.92194, y: 512.78345}
+  m_EdgeRadius: 0
 --- !u!1 &954390827
 GameObject:
   m_ObjectHideFlags: 0

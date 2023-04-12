@@ -13,20 +13,30 @@ public class ObjectClick : MonoBehaviour
 
     public void SelectObject()
     {
+        RaycastHit2D rayHit = Physics2D.GetRayIntersection(Camera.main.ScreenPointToRay(Input.mousePosition));
 
         if (Input.GetMouseButtonDown(0))
         {
-
-
-            RaycastHit2D rayHit = Physics2D.GetRayIntersection(Camera.main.ScreenPointToRay(Input.mousePosition));
-            if (rayHit.transform != null && rayHit.transform.gameObject != null && (rayHit.transform.gameObject.GetComponent("Organism") as Organism) && !(rayHit.collider is BoxCollider2D))
+            if (rayHit.transform != null && rayHit.transform.gameObject != null && rayHit.transform.gameObject.layer == 5)
             {
+
+                return;
+
+            }
+
+
+
+            
+            if (rayHit.transform != null && rayHit.transform.gameObject != null && (((rayHit.transform.gameObject.GetComponent("Organism") as Organism) && !(rayHit.collider is BoxCollider2D))))
+            {
+                
 
                 Debug.Log("Hit " + rayHit.transform.gameObject.name);
                 selectedObject = rayHit.transform.gameObject;
                
             
             }
+        
             else
             {
                 Debug.Log("Hit Nothing");
