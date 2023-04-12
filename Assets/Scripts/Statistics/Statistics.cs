@@ -25,6 +25,9 @@ public class Statistics : MonoBehaviour
     public int simulationTime;//in seconds
 
 
+    public List<(int numOfOrganisms, int numOfPlants, int maxnumOfOrganisms, int maxNumOfPlants, int longestLastingGenNum, int simulationTime)> dataOverTime = new List<(int numOfOrganisms, int numOfPlants, int maxnumOfOrganisms, int maxNumOfPlants, int longestLastingGenNum, int simulationTime)>();
+
+
     public FamilyTree familyTree;
 
 
@@ -48,6 +51,9 @@ public class Statistics : MonoBehaviour
     {
         //StartCoroutine(UpdateStatistics());
         StartCoroutine(UpdateTimePassed());
+        StartCoroutine(AppendTODataOverTime());
+
+       
     }
     
     // Update is called once per frame
@@ -55,6 +61,19 @@ public class Statistics : MonoBehaviour
     {
         //updateMaxNumOfOrganisms();
         UpdateStats();
+    }
+
+    IEnumerator AppendTODataOverTime() 
+    {
+        while (true) 
+        {
+            yield return new WaitForSeconds(1);
+            dataOverTime.Add((numOfOrganisms, numOfPlants, maxnumOfOrganisms, maxNumOfPlants, longestLastingGenNum, simulationTime));
+            Debug.Log("Num Of Organisms: " + dataOverTime[dataOverTime.Count - 1].numOfOrganisms);
+
+        }
+        
+
     }
 
 
