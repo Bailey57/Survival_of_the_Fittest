@@ -67,9 +67,10 @@ public class Statistics : MonoBehaviour
     {
         while (true) 
         {
-            yield return new WaitForSeconds(1);
+            int saveInterval = 60;
+            yield return new WaitForSeconds(saveInterval);
             dataOverTime.Add((numOfOrganisms, numOfPlants, maxnumOfOrganisms, maxNumOfPlants, longestLastingGenNum, simulationTime));
-            Debug.Log("Num Of Organisms: " + dataOverTime[dataOverTime.Count - 1].numOfOrganisms);
+            //Debug.Log("Num Of Organisms: " + dataOverTime[dataOverTime.Count - 1].numOfOrganisms);
 
         }
         

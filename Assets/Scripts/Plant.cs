@@ -46,7 +46,7 @@ public class Plant : MonoBehaviour
 
     public void DeathCheck()
     {
-        if (condition <= 0 || nutreance <= 0 || age >= 1000)
+        if (condition <= 0 || nutreance <= 0 || age >= 1500)
         {
             inGamePlant.SetActive(false);
             Destroy(inGamePlant);

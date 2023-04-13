@@ -1,6 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
+using System;
+using UnityEngine.UI;
+using TMPro;
 
 public class SaveToCSV : MonoBehaviour
 {
@@ -11,7 +15,15 @@ public class SaveToCSV : MonoBehaviour
 
     [SerializeField] GameObject statistics;
 
+    public TMP_Text textMeshTxt;
+
     private int worldNumber = 0;
+
+    private string fileName = "";
+
+    public string debugStr = "Debug:\n\n";
+
+
 
 
     // Start is called before the first frame update
@@ -19,29 +31,125 @@ public class SaveToCSV : MonoBehaviour
     {
         worldNumber = UnityEngine.Random.Range(-10000000, 10000000);
 
-     
+        //generate world name hash
+        //GenerateWorldNameHash();
+
+        MakeCSVFileDirectory();
+        MakeFileName();
+        MakeCSVFile();
+
+        StartCoroutine(SaveToCSVFileAuto());
     }
+
+
 
     // Update is called once per frame
     void Update()
     {
-        
+        textMeshTxt.text = debugStr;
+
+
     }
 
 
+    public void AddToDebug(string input) 
+    {
+        debugStr += input + "\n\n";
+
+
+    }
+
+
+    public void MakeCSVFile() 
+    {
+        File.AppendText(fileName);
+
+    }
+
+    public void MakeFileName() 
+    {
+        //make names from hash
+        fileName = Directory.GetCurrentDirectory() + @"\CSV_files\world_" + worldNumber + ".csv";
+        AddToDebug(fileName);
+
+    }
+
+
+    public void MakeCSVFileDirectory() 
+    {
+        try
+        {
+     
+            string path = Directory.GetCurrentDirectory() + @"\CSV_files";
+            Debug.Log(path);
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
+
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine("Failed to make file path", e.ToString());
+            Debug.Log("Failed to make file path");
+            AddToDebug("Failed to make file path");
+        }
+        
+
+
+
+
+    }
+
     public void SaveToCSVFile() 
     {
-        //(statistics.gameObject.GetComponent("Statistics") as Statistics).
+        string outStr = "";
 
+        outStr += "simulationTime,numOfOrganisms,numOfPlants,maxnumOfOrganisms,maxNumOfPlants,longestLastingGenNum";
+
+
+        for (int i = 0; i < (statistics.gameObject.GetComponent("Statistics") as Statistics).dataOverTime.Count; i++) 
+        {
+            outStr += (statistics.gameObject.GetComponent("Statistics") as Statistics).dataOverTime[i].simulationTime + ",";
+
+            outStr += (statistics.gameObject.GetComponent("Statistics") as Statistics).dataOverTime[i].numOfOrganisms + ",";
+            outStr += (statistics.gameObject.GetComponent("Statistics") as Statistics).dataOverTime[i].numOfPlants + ",";
+            outStr += (statistics.gameObject.GetComponent("Statistics") as Statistics).dataOverTime[i].maxnumOfOrganisms + ",";
+            outStr += (statistics.gameObject.GetComponent("Statistics") as Statistics).dataOverTime[i].maxNumOfPlants + ",";
+            outStr += (statistics.gameObject.GetComponent("Statistics") as Statistics).dataOverTime[i].longestLastingGenNum + ",";
+            outStr += "\n";
+        }
+
+        Debug.Log(outStr);
+        AddToDebug(outStr);
+        try 
+        {
+            //File.AppendAllText(fileName, outStr);
+            File.WriteAllText(fileName, outStr);
+            Debug.Log("Wrote to file");
+            AddToDebug("Wrote to file");
+        }
+        catch(Exception ex) 
+        {
+            Debug.Log("Couldnt Write to file");
+            AddToDebug("Couldnt Write to file");
+            return;
+        }
 
     }
 
     IEnumerator SaveToCSVFileAuto()
     {
-        //(statistics.gameObject.GetComponent("Statistics") as Statistics).
+        while (true) 
+        {
+            //(statistics.gameObject.GetComponent("Statistics") as Statistics).
 
-        yield return new WaitForSeconds(600);//600 sec = 10 min
-        SaveToCSVFile();
+            yield return new WaitForSeconds(600);//600 sec = 10 min
+            //yield return new WaitForSeconds(10);//10 sec for testing
+            SaveToCSVFile();
+
+        }
+        
     }
 
 }

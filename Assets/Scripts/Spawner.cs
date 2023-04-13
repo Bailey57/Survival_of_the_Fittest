@@ -53,11 +53,12 @@ public class Spawner : MonoBehaviour
 
     IEnumerator SpawnOrganism()
     {
+        int maxNewSpawn = 5;
         while (true)
         {
             yield return new WaitForSeconds(20);
             //if less than 5 organisms, a new one spawns
-            if ((statistics.gameObject.GetComponent("Statistics") as Statistics).numOfOrganisms < 10) 
+            if ((statistics.gameObject.GetComponent("Statistics") as Statistics).numOfOrganisms < maxNewSpawn) 
             {
                 //Debug.Log("waited for 20 sec");
                 
