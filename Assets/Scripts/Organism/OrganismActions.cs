@@ -408,7 +408,7 @@ public class OrganismActions : MonoBehaviour
             float geneChangeChance = 100;
             float maxGeneChangeAmmount = 1;
 
-            float brainChangeChance = 100;
+            float brainChangeChance = 25;
             //float maxBrainChangeAmmount = 2;
 
 

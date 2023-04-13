@@ -35,12 +35,12 @@ public class Spawner : MonoBehaviour
         while (true) 
         {
             //Debug.Log("waited for 20 sec");
-            yield return new WaitForSeconds(40);
+            yield return new WaitForSeconds(35);
 
 
             GameObject newObject = (GameObject)Instantiate(Resources.Load("Prefabs/plant1_32x32"));
-            float randX = Random.Range(-15, 15);
-            float randY = Random.Range(-15, 15);
+            float randX = Random.Range(-25, 25);
+            float randY = Random.Range(-25, 25);
 
 
             newObject.transform.position = new Vector3(randX, randY, 0);
@@ -53,7 +53,7 @@ public class Spawner : MonoBehaviour
 
     IEnumerator SpawnOrganism()
     {
-        int maxNewSpawn = 5;
+        int maxNewSpawn = 8;
         while (true)
         {
             yield return new WaitForSeconds(20);
