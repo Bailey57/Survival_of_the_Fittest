@@ -25,6 +25,9 @@ public class Brain : MonoBehaviour
     public double energy = 100;
     public double health = 100;
 
+    public int organismsInSightNum = 0;
+    public int plantsInSightNum = 0;
+
     //outputs
 
     public double turnRate = 0;
@@ -158,7 +161,8 @@ public class Brain : MonoBehaviour
         
     }
 
- 
+
+    
 
 
 
@@ -829,7 +833,44 @@ public class Brain : MonoBehaviour
 
     public void AddRandomSynapse()
     {
+        /*
+        double synapse1Value = this.GetRandomDouble(-1, 1);
+
+
+        int newNeuronLayerNum = this.GetRandomInt(1, this.neuronLayers.Count - 1);
+
+
+
+        int newNeuronParentPosition = this.GetRandomInt(0, this.neuronLayers[newNeuronParentLayer].Count);
+
+        int newNeuronChildPosition = this.GetRandomInt(0, this.neuronLayers[newNeuronChildLayer].Count);
+
+
+
+        Neuron newHidden = new Neuron("hidden", "newHidden", newNeuronValue);
+
+        Synapse synapse1 = new Synapse(synapse1Value);
+
+
+        Neuron parentNeuron = this.neuronLayers[newNeuronParentLayer][newNeuronParentPosition];
+        Neuron childNeuron = this.neuronLayers[newNeuronChildLayer][newNeuronChildPosition];
+
+
+
+
+
         //choose 2 neurons to add between randomly 
+
+
+
+
+        Synapse synapse = new Synapse(synapseBias);
+
+        parent.childrenSynapses.Add(synapse);
+        parent.childrenNeurons.Add(child);
+        child.parentNeurons.Add(parent);
+        child.parentSynapses.Add(synapse);
+        */
 
     }
 

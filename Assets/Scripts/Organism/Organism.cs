@@ -39,7 +39,18 @@ public class Organism : MonoBehaviour
 
     }
 
+    public string OrganismToString() 
+    {
+        string outputStr = "\nhealth: " + health + "\n\n";
+        outputStr += "energy: " + energy + "\n\n";
+        outputStr += "age: " + age + "\n\n";
 
+
+
+        return outputStr;
+
+
+    }
 
 
     IEnumerator EnergyDrain()

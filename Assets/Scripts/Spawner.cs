@@ -39,8 +39,8 @@ public class Spawner : MonoBehaviour
 
 
             GameObject newObject = (GameObject)Instantiate(Resources.Load("Prefabs/plant1_32x32"));
-            float randX = Random.Range(-25, 25);
-            float randY = Random.Range(-25, 25);
+            float randX = Random.Range(-35, 35);
+            float randY = Random.Range(-35, 35);
 
 
             newObject.transform.position = new Vector3(randX, randY, 0);

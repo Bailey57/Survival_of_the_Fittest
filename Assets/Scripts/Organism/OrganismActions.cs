@@ -70,6 +70,25 @@ public class OrganismActions : MonoBehaviour
         Swim();
         LayEgg();
 
+        if (organism.age > 40) 
+        {
+            Grow();
+
+
+        }
+            
+            
+            
+
+    }
+
+    public string OrganismInfoToString() 
+    {
+        //organism
+        //genetics
+
+
+        return "";
     }
 
     public void RunActions() 
@@ -112,6 +131,14 @@ public class OrganismActions : MonoBehaviour
 
 
         }
+
+
+    }
+    
+    public void Grow() 
+    {
+        //make more intricate
+        inGameOrganism.transform.localScale = new Vector3(1, 1, 1);
 
 
     }
@@ -301,6 +328,18 @@ public class OrganismActions : MonoBehaviour
         //add object to in view list
         //Debug.Log("Trigger entered");
         gameobjectsInSight.Add(other.gameObject);
+        if ((other.gameObject.GetComponent("Organism") as Organism) != null)
+        {
+            brain.organismsInSightNum += 1;
+
+        }
+        else if ((other.gameObject.GetComponent("Plant") as Plant) != null) 
+        {
+            brain.plantsInSightNum += 1;
+
+        }
+
+
     }
 
 
@@ -308,6 +347,16 @@ public class OrganismActions : MonoBehaviour
     {
         //Debug.Log("Trigger exited");
         //add object to in view list
+        if ((other.gameObject.GetComponent("Organism") as Organism) != null)
+        {
+            brain.organismsInSightNum -= 1;
+
+        }
+        else if ((other.gameObject.GetComponent("Plant") as Plant) != null)
+        {
+            brain.plantsInSightNum -= 1;
+
+        }
         gameobjectsInSight.Remove(other.gameObject);
         if (this.travelTarget == other.gameObject) 
         {
@@ -405,8 +454,8 @@ public class OrganismActions : MonoBehaviour
             //newOrganism.SetActive(true);
 
             //make new organism and give genes
-            float geneChangeChance = 100;
-            float maxGeneChangeAmmount = 1;
+            float geneChangeChance = 25;
+            float maxGeneChangeAmmount = .2f;
 
             float brainChangeChance = 25;
             //float maxBrainChangeAmmount = 2;
@@ -421,15 +470,19 @@ public class OrganismActions : MonoBehaviour
 
             float randBrainNum = UnityEngine.Random.Range(0, 100);
 
+            bool bothCHanged = false;
+            
+
 
             if (brainChangeChance >= randBrainNum) 
             {
 
 
-
+                (newOrganism.gameObject.GetComponent("SpriteRenderer") as SpriteRenderer).color = Color.red;
                 float rand = UnityEngine.Random.Range(0, 100);
                 if (rand > 50)
                 {
+                    bothCHanged = true;
                     //newOrganism.GetComponent(typeof(Brain)) as Brain).
                     (inGameOrganism.gameObject.GetComponent("Brain") as Brain).AddRandomNeuronNoNewLayer();
                     //AddRandomNeuronNoNewLayer();
@@ -445,10 +498,11 @@ public class OrganismActions : MonoBehaviour
             }
 
             //see if by chance the genes change 
-            if (geneChangeChance >= randGeneNum) 
+            if (geneChangeChance >= randGeneNum)
             {
+                
                 //change genes
-
+                (newOrganism.gameObject.GetComponent("SpriteRenderer") as SpriteRenderer).color = Color.blue;
                 changeAmmount = UnityEngine.Random.Range(-changeAmmount, maxGeneChangeAmmount);
                 (newOrganism.GetComponent(typeof(Genetics)) as Genetics).agility += changeAmmount;
                 changeAmmount = UnityEngine.Random.Range(-changeAmmount, maxGeneChangeAmmount);
@@ -466,6 +520,19 @@ public class OrganismActions : MonoBehaviour
 
 
             }
+            else 
+            {
+                bothCHanged = false;
+
+            }
+
+
+
+            if (bothCHanged) 
+            {
+                (newOrganism.gameObject.GetComponent("SpriteRenderer") as SpriteRenderer).color = Color.green;
+
+            }
 
 
             (newOrganism.GetComponent(typeof(Organism)) as Organism).energy = 100;
@@ -473,7 +540,12 @@ public class OrganismActions : MonoBehaviour
 
             (newOrganism.GetComponent(typeof(Genetics)) as Genetics).generationNum += 1;
 
+            //make smol
+            newOrganism.transform.localScale = new Vector3(.3f, .3f, 1);
 
+            //Color color = new Color(0, 0, 0, 1);
+            (newOrganism.gameObject.GetComponent("SpriteRenderer") as SpriteRenderer).color = new Color ((newOrganism.gameObject.GetComponent("SpriteRenderer") as SpriteRenderer).color.r, (newOrganism.gameObject.GetComponent("SpriteRenderer") as SpriteRenderer).color.g, ((newOrganism.gameObject.GetComponent("SpriteRenderer") as SpriteRenderer).color.b + 50), (newOrganism.gameObject.GetComponent("SpriteRenderer") as SpriteRenderer).color.a);
+            //(newOrganism.gameObject.GetComponent("SpriteRenderer") as SpriteRenderer).color = Color.red;
 
             Vector2 newV = new Vector2(inGameOrganism.transform.position.x, inGameOrganism.transform.position.y -2);
             newOrganism.transform.position = newV;

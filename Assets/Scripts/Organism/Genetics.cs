@@ -28,6 +28,19 @@ public class Genetics : MonoBehaviour
     public float physicalRange;
 
 
+
+    public string GeneticsToString() 
+    {
+        string outputStr = "\ngenerationNum: " + generationNum + "\n\n";
+        outputStr += "agility: " + agility + "\n\n";
+        outputStr += "deathAge: " + deathAge + "\n\n";
+        outputStr += "physicalRange: " + physicalRange + "\n\n";
+
+      
+
+        return outputStr;
+    }
+
     // Start is called before the first frame update
     void Start()
     {

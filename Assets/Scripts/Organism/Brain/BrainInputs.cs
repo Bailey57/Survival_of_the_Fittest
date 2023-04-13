@@ -21,6 +21,11 @@ public class BrainInputs : MonoBehaviour
         
     }
 
+    
+
+
+
+
     //public double targetAngle;
     //public double targetDistance;
     //public double energy;
