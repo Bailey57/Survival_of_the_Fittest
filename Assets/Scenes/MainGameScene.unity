@@ -6684,6 +6684,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: organism1_32x32
       objectReference: {fileID: 0}
+    - target: {fileID: 1910527590555519720, guid: 0153a39e3b023704a847b99e07bca32e, type: 3}
+      propertyPath: deathAge
+      value: 10000
+      objectReference: {fileID: 0}
     - target: {fileID: 1910527590555519727, guid: 0153a39e3b023704a847b99e07bca32e, type: 3}
       propertyPath: m_RootOrder
       value: 2

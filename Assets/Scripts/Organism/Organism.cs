@@ -59,7 +59,7 @@ public class Organism : MonoBehaviour
         {
             //Debug.Log("waited for 1 sec");
             yield return new WaitForSeconds(1);
-            energy -= .01f;
+            energy -= .1f;
 
 
         }
