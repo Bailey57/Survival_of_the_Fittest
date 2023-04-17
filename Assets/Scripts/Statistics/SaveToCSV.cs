@@ -105,7 +105,7 @@ public class SaveToCSV : MonoBehaviour
     {
         string outStr = "";
 
-        outStr += "simulationTime,numOfOrganisms,numOfPlants,maxNumOfOrganisms,maxNumOfPlants,longestLastingGenNum\n";
+        outStr += "simulationTime,numOfOrganisms,numOfPlants,maxNumOfOrganisms,maxNumOfPlants,longestLastingGenNum,numberOfChildren\n";
 
 
         for (int i = 0; i < (statistics.gameObject.GetComponent("Statistics") as Statistics).dataOverTime.Count; i++) 
@@ -117,6 +117,8 @@ public class SaveToCSV : MonoBehaviour
             outStr += (statistics.gameObject.GetComponent("Statistics") as Statistics).dataOverTime[i].maxnumOfOrganisms + ",";
             outStr += (statistics.gameObject.GetComponent("Statistics") as Statistics).dataOverTime[i].maxNumOfPlants + ",";
             outStr += (statistics.gameObject.GetComponent("Statistics") as Statistics).dataOverTime[i].longestLastingGenNum + ",";
+            outStr += (statistics.gameObject.GetComponent("Statistics") as Statistics).dataOverTime[i].numberOfChildren + ",";
+            
             outStr += "\n";
         }
 

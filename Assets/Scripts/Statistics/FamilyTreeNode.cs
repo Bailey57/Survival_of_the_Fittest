@@ -7,6 +7,7 @@ public class FamilyTreeNode : MonoBehaviour
     public string organismName;
     public Genetics genetics;
     public Brain brain;
+    public int birthTime;//at what time it was born
     public List<BodyPart> bodyParts;
     public List<FamilyTreeNode> children;
 
@@ -20,6 +21,36 @@ public class FamilyTreeNode : MonoBehaviour
         this.children = children;
     
     
+    }
+
+    /*
+     * Prints a string version of the FamilyTreeNode without the children
+     */
+    public string FamilyTreeNodeToStringWithoutChildren() 
+    {
+        //later add bodyparts
+        string outputString = "";
+
+        outputString += "organismName: \n" + organismName + "\n";
+
+        outputString += "genetics: \n" + genetics.GeneticsToString() + "\n";
+        outputString += "brain: \n" + brain.BrainToString() + "\n";
+        outputString += "birthTime: \n" + birthTime + "\n";
+
+        return outputString;
+    }
+
+
+    /*
+     * Get a string used to hash a node
+     */
+    public string FamilyTreeNodeHashString()
+    {
+        //later add bodyparts
+        string outputString = "";
+        outputString += "genetics: \n" + genetics.GeneticsToString() + "\n";
+        outputString += "birthTime: \n" + birthTime + "\n";
+        return outputString;
     }
 
 

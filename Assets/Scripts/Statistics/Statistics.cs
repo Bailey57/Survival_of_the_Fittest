@@ -22,10 +22,12 @@ public class Statistics : MonoBehaviour
 
     public int longestLastingGenNum;
 
+    public int numberOfChildren;
+
     public int simulationTime;//in seconds
 
 
-    public List<(int numOfOrganisms, int numOfPlants, int maxnumOfOrganisms, int maxNumOfPlants, int longestLastingGenNum, int simulationTime)> dataOverTime = new List<(int numOfOrganisms, int numOfPlants, int maxnumOfOrganisms, int maxNumOfPlants, int longestLastingGenNum, int simulationTime)>();
+    public List<(int numOfOrganisms, int numOfPlants, int maxnumOfOrganisms, int maxNumOfPlants, int longestLastingGenNum, int numberOfChildren, int simulationTime)> dataOverTime = new List<(int numOfOrganisms, int numOfPlants, int maxnumOfOrganisms, int maxNumOfPlants, int longestLastingGenNum, int numberOfChildren, int simulationTime)>();
 
 
     public FamilyTree familyTree;
@@ -40,6 +42,7 @@ public class Statistics : MonoBehaviour
         output += "maxnumOfOrganisms: " + maxnumOfOrganisms + "\n\n";
         output += "maxNumOfPlants: " + maxNumOfPlants + "\n\n";
         output += "longestLastingGenNum: " + longestLastingGenNum + "\n\n";
+        output += "numberOfChildren: " + numberOfChildren + "\n\n";
 
         output += TimeToString(simulationTime) + "\n\n";
 
@@ -63,13 +66,18 @@ public class Statistics : MonoBehaviour
         UpdateStats();
     }
 
+
+
+
+
+
     IEnumerator AppendTODataOverTime() 
     {
         while (true) 
         {
             int saveInterval = 60;
             yield return new WaitForSeconds(saveInterval);
-            dataOverTime.Add((numOfOrganisms, numOfPlants, maxnumOfOrganisms, maxNumOfPlants, longestLastingGenNum, simulationTime));
+            dataOverTime.Add((numOfOrganisms, numOfPlants, maxnumOfOrganisms, maxNumOfPlants, longestLastingGenNum, numberOfChildren, simulationTime));
             //Debug.Log("Num Of Organisms: " + dataOverTime[dataOverTime.Count - 1].numOfOrganisms);
 
         }
@@ -162,12 +170,14 @@ public class Statistics : MonoBehaviour
 
             }
             
-            
         }
 
 
         return numOfOrganisms;
     }
+
+
+
 
     public int GetNumOfPlants() 
     {
@@ -179,6 +189,7 @@ public class Statistics : MonoBehaviour
     {
         numOfOrganisms = 0;
         numOfPlants = 0;
+        numberOfChildren = 0;
         List<GameObject> rootObjects = new List<GameObject>();
         Scene scene = SceneManager.GetActiveScene();
         scene.GetRootGameObjects(rootObjects);
@@ -187,16 +198,21 @@ public class Statistics : MonoBehaviour
         {
             if ((rootObjects[i].gameObject.GetComponent("Organism") as Organism))
             {
+                //get number of children
+                if ((rootObjects[i].gameObject.GetComponent("Genetics") as Genetics).generationNum > 0)
+                {
+                    numberOfChildren += 1;
+                }
 
+                //get longest gen number
                 if ((rootObjects[i].gameObject.GetComponent("Genetics") as Genetics).generationNum > longestLastingGenNum) 
                 {
                     longestLastingGenNum = (rootObjects[i].gameObject.GetComponent("Genetics") as Genetics).generationNum;
 
-
                 }
 
 
-
+                //increase organism count
                 numOfOrganisms += 1;
                 if (numOfOrganisms > maxnumOfOrganisms)
                 {
@@ -206,6 +222,7 @@ public class Statistics : MonoBehaviour
 
 
             }
+            //update plant number
             else if ((rootObjects[i].gameObject.GetComponent("Plant") as Plant)) 
             {
                 numOfPlants += 1;
