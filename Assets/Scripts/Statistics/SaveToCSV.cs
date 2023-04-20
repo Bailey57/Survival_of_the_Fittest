@@ -140,6 +140,83 @@ public class SaveToCSV : MonoBehaviour
 
     }
 
+
+
+
+    public string GetOutputForCSVFile()
+    {
+        string outStr = "";
+
+        outStr += "simulationTime,numOfOrganisms,numOfPlants,maxNumOfOrganisms,maxNumOfPlants,longestLastingGenNum,numberOfChildren\n";
+
+
+        for (int i = 0; i < (statistics.gameObject.GetComponent("Statistics") as Statistics).dataOverTime.Count; i++)
+        {
+            outStr += (statistics.gameObject.GetComponent("Statistics") as Statistics).dataOverTime[i].simulationTime + ",";
+
+            outStr += (statistics.gameObject.GetComponent("Statistics") as Statistics).dataOverTime[i].numOfOrganisms + ",";
+            outStr += (statistics.gameObject.GetComponent("Statistics") as Statistics).dataOverTime[i].numOfPlants + ",";
+            outStr += (statistics.gameObject.GetComponent("Statistics") as Statistics).dataOverTime[i].maxnumOfOrganisms + ",";
+            outStr += (statistics.gameObject.GetComponent("Statistics") as Statistics).dataOverTime[i].maxNumOfPlants + ",";
+            outStr += (statistics.gameObject.GetComponent("Statistics") as Statistics).dataOverTime[i].longestLastingGenNum + ",";
+            outStr += (statistics.gameObject.GetComponent("Statistics") as Statistics).dataOverTime[i].numberOfChildren + ",";
+
+            outStr += "\n";
+        }
+
+        return outStr;
+
+    }
+
+    public string GetOutputForCSVFileWithFamilyTree()
+    {
+        string outStr = "";
+
+        outStr += "simulationTime,numOfOrganisms,numOfPlants,maxNumOfOrganisms,maxNumOfPlants,longestLastingGenNum,numberOfChildren\n";
+
+
+        for (int i = 0; i < (statistics.gameObject.GetComponent("Statistics") as Statistics).dataOverTime.Count; i++)
+        {
+            outStr += (statistics.gameObject.GetComponent("Statistics") as Statistics).dataOverTime[i].simulationTime + ",";
+
+            outStr += (statistics.gameObject.GetComponent("Statistics") as Statistics).dataOverTime[i].numOfOrganisms + ",";
+            outStr += (statistics.gameObject.GetComponent("Statistics") as Statistics).dataOverTime[i].numOfPlants + ",";
+            outStr += (statistics.gameObject.GetComponent("Statistics") as Statistics).dataOverTime[i].maxnumOfOrganisms + ",";
+            outStr += (statistics.gameObject.GetComponent("Statistics") as Statistics).dataOverTime[i].maxNumOfPlants + ",";
+            outStr += (statistics.gameObject.GetComponent("Statistics") as Statistics).dataOverTime[i].longestLastingGenNum + ",";
+            outStr += (statistics.gameObject.GetComponent("Statistics") as Statistics).dataOverTime[i].numberOfChildren + ",";
+
+            outStr += "\n";
+        }
+
+        return outStr;
+
+    }
+
+
+
+
+
+
+    public void SaveToFile(string outStr) 
+    {
+        Debug.Log(outStr);
+        AddToDebug(outStr);
+        try
+        {
+            //File.AppendAllText(fileName, outStr);
+            File.WriteAllText(fileName, outStr);
+            Debug.Log("Wrote to file");
+            AddToDebug("Wrote to file");
+        }
+        catch (Exception ex)
+        {
+            Debug.Log("Couldnt Write to file");
+            AddToDebug("Couldnt Write to file");
+            return;
+        }
+    }
+
     IEnumerator SaveToCSVFileAuto()
     {
         while (true) 
@@ -148,7 +225,14 @@ public class SaveToCSV : MonoBehaviour
 
             yield return new WaitForSeconds(600);//600 sec = 10 min
             //yield return new WaitForSeconds(10);//10 sec for testing
-            SaveToCSVFile();
+            //SaveToCSVFile();
+            //SaveToCSVFileWithFamilyTree();
+
+            //GetOutputForCSVFileWithFamilyTree
+            string outStr = GetOutputForCSVFile();
+
+            SaveToFile(outStr);
+
 
         }
         

@@ -88,11 +88,18 @@ public class Brain : MonoBehaviour
         this.energy = organism.energy;
         this.health = organism.health;
 
+        //public int organismsInSightNum = 0; //updated in organismActions
+        //public int plantsInSightNum = 0; //updated in organismActions
+
+
         //targetAngle
         this.neuronLayers[0][0].weight = targetAngle;
         this.neuronLayers[0][1].weight = targetDistance;
         this.neuronLayers[0][2].weight = energy;
         this.neuronLayers[0][3].weight = health;
+
+        this.neuronLayers[0][4].weight = organismsInSightNum;
+        this.neuronLayers[0][5].weight = plantsInSightNum;
         //this.neuronLayers[0][4].weight = health;
 
 
@@ -515,6 +522,9 @@ public class Brain : MonoBehaviour
         Neuron energy = new Neuron("input", "energy", 100);
         Neuron health = new Neuron("input", "health", 100);
 
+        Neuron organismsInSightNum = new Neuron("input", "organismsInSightNum", 0);
+        Neuron plantsInSightNum = new Neuron("input", "plantsInSightNum", 0);
+
         //outputs doubles
         Neuron turnRate = new Neuron("output", "turnRate", 0);
         Neuron speed = new Neuron("output", "speed", 0);
@@ -528,6 +538,9 @@ public class Brain : MonoBehaviour
         this.neuronLayers[0].Add(targetDistance);
         this.neuronLayers[0].Add(energy);
         this.neuronLayers[0].Add(health);
+
+        this.neuronLayers[0].Add(organismsInSightNum);
+        this.neuronLayers[0].Add(plantsInSightNum);
 
 
         this.neuronLayers[2].Add(turnRate);
@@ -544,6 +557,9 @@ public class Brain : MonoBehaviour
         Neuron targetDistance = new Neuron("input", "targetDistance", 5);
         Neuron energy = new Neuron("input", "energy", 110);
         Neuron health = new Neuron("input", "health", 100);
+
+        Neuron organismsInSightNum = new Neuron("input", "organismsInSightNum", 0);
+        Neuron plantsInSightNum = new Neuron("input", "plantsInSightNum", 0);
 
         //outputs doubles
         Neuron turnRate = new Neuron("output", "turnRate", 0);
@@ -565,6 +581,10 @@ public class Brain : MonoBehaviour
         this.neuronLayers[0].Add(targetDistance);
         this.neuronLayers[0].Add(energy);
         this.neuronLayers[0].Add(health);
+
+        this.neuronLayers[0].Add(organismsInSightNum);
+        this.neuronLayers[0].Add(plantsInSightNum);
+
 
 
         this.neuronLayers[2].Add(turnRate);

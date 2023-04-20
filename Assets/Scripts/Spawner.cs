@@ -10,6 +10,7 @@ public class Spawner : MonoBehaviour
     //GameObject newObject = (GameObject)Instantiate(Resources.Load("organism1_32x32"));
 
     [SerializeField] GameObject statistics;
+    [SerializeField] GameObject familyTree;
 
 
     void Start()
@@ -61,9 +62,9 @@ public class Spawner : MonoBehaviour
             if ((statistics.gameObject.GetComponent("Statistics") as Statistics).numOfOrganisms < maxNewSpawn) 
             {
                 //Debug.Log("waited for 20 sec");
+
+
                 
-
-
                 GameObject newObject = (GameObject)Instantiate(Resources.Load("Prefabs/organism1_32x32"));
                 (newObject.GetComponent(typeof(Organism)) as Organism).energy = 100;
                 (newObject.GetComponent(typeof(Genetics)) as Genetics).deathAge = 1000;
@@ -71,6 +72,10 @@ public class Spawner : MonoBehaviour
                 float randY = Random.Range(-15, 15);
                 newObject.transform.position = new Vector3(randX, randY, 0);
 
+
+                //add to tree
+                (familyTree.gameObject.GetComponent("FamilyTree") as FamilyTree).GenerateAndAddNodeFromGameOrganism(newObject);
+                
 
             }
             

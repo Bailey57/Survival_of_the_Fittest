@@ -23,6 +23,8 @@ public class OrganismActions : MonoBehaviour
 
     public List<GameObject> gameobjectsInSight = new List<GameObject>();
 
+    public GameObject familyTree;
+
 
     // Start is called before the first frame update
     void Start()
@@ -550,7 +552,12 @@ public class OrganismActions : MonoBehaviour
             Vector2 newV = new Vector2(inGameOrganism.transform.position.x, inGameOrganism.transform.position.y -2);
             newOrganism.transform.position = newV;
             //loose energy after laying egg
-            organism.energy = organism.energy / energyLossRatioAfterLayingEgg;
+            organism.energy /= energyLossRatioAfterLayingEgg;
+
+
+            //add the organism to the family tree 
+            //null issues
+            (familyTree.GetComponent("FamilyTree") as FamilyTree).GenerateAndAddChildToFamilyTree(inGameOrganism, newOrganism);
 
 
         }
