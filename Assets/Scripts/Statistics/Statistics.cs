@@ -50,6 +50,31 @@ public class Statistics : MonoBehaviour
     }
 
 
+    /**
+     * Returns a simplified game time to be used in file names
+     */
+    public string GetGameTimeSimpleToString()
+    {
+        int seconds = simulationTime;
+
+        int minuets = seconds / 60;
+        int remainderSeconds = seconds % 60;
+
+        int hours = minuets / 60;
+        int remainderMin = minuets % 60;
+
+        int days = hours / 24;
+        int remainderHrs = hours % 24;
+
+        int weeks = days / 7;
+        int remainderDays = days % 7;
+
+        string output = "_T_" + days + "-" + remainderHrs + "-" + remainderMin + "-" + remainderSeconds;
+        return output;
+
+    }
+
+
     void Start()
     {
         //StartCoroutine(UpdateStatistics());

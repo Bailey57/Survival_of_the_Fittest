@@ -479,23 +479,35 @@ public class OrganismActions : MonoBehaviour
             if (brainChangeChance >= randBrainNum) 
             {
 
-
+                //(inGameOrganism.gameObject.GetComponent("Brain") as Brain).AddRandomNeuronNoNewLayer();
+                //
+                //(inGameOrganism.gameObject.GetComponent("Brain") as Brain).AddRandomNeuronNewLayer();
+                //(inGameOrganism.gameObject.GetComponent("Brain") as Brain).EditNeuronStrengthRand();
                 (newOrganism.gameObject.GetComponent("SpriteRenderer") as SpriteRenderer).color = Color.red;
                 float rand = UnityEngine.Random.Range(0, 100);
-                if (rand > 50)
+                if (rand > 75)
                 {
-                    bothCHanged = true;
-                    //newOrganism.GetComponent(typeof(Brain)) as Brain).
-                    (inGameOrganism.gameObject.GetComponent("Brain") as Brain).AddRandomNeuronNoNewLayer();
-                    //AddRandomNeuronNoNewLayer();
-                    //AddRandomNeuronNewLayer();
+                    (inGameOrganism.gameObject.GetComponent("Brain") as Brain).EditNeuronStrengthRand();
+                    
+                }
+                else if (75 > rand && rand > 50) 
+                {
+                    (inGameOrganism.gameObject.GetComponent("Brain") as Brain).AddSynapseConnectionRand();
 
                 }
-                else 
+                else if (50 > rand && rand > 25)
                 {
                     (inGameOrganism.gameObject.GetComponent("Brain") as Brain).AddRandomNeuronNewLayer();
                 }
-
+                else if (rand < 25)
+                {
+                    (inGameOrganism.gameObject.GetComponent("Brain") as Brain).AddRandomNeuronNoNewLayer();
+                }
+                else
+                {
+                    
+                }
+                bothCHanged = true;
 
             }
 

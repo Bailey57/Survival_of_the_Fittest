@@ -2,9 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-
-
+using UnityEngine.Animations;
 
 public class Brain : MonoBehaviour
 {
@@ -445,6 +443,21 @@ public class Brain : MonoBehaviour
 
 
     /**
+    * connects 2 neurons by adding a synapse between them and putting them in each others neuron lists
+    */
+    public void ConnectNeuronsNoRef(Neuron parent, Neuron child, double synapseBias)
+    {
+        Synapse synapse = new Synapse(synapseBias);
+
+        parent.childrenSynapses.Add(synapse);
+        parent.childrenNeurons.Add(child);
+        child.parentNeurons.Add(parent);
+        child.parentSynapses.Add(synapse);
+
+    }
+
+
+    /**
     * insert a synapse between two neurons
     */
     private void ConnectSynapse(Neuron parent, Neuron child, double synapseBias)
@@ -454,7 +467,7 @@ public class Brain : MonoBehaviour
     }
 
 
-    public void AddConnections(Neuron parent, Neuron child, Synapse synapse)
+    public void AddSynapseConnection(Neuron parent, Neuron child, Synapse synapse)
     {
         parent.childrenNeurons.Add(child);
         parent.childrenSynapses.Add(synapse);
@@ -463,9 +476,95 @@ public class Brain : MonoBehaviour
 
 
 
+    public void AddSynapseConnectionRand()
+    {
+        //Debug.Log("before: " + BrainToString());
+        double synapse1Value = this.GetRandomDouble(-1, 1);
 
 
 
+        int newNeuronLayerNum = this.GetRandomInt(1, this.neuronLayers.Count - 1);
+
+        int newNeuronParentLayer = newNeuronLayerNum;
+        int newNeuronChildLayer = newNeuronLayerNum + 1;
+        //newNeuronParentLayer = this.GetRandomInt(0, this.neuronLayers.Count - 1);
+
+        //newNeuronChildLayer = this.GetRandomInt(1, this.neuronLayers.Count - 1);
+
+
+
+        int newNeuronParentPosition = this.GetRandomInt(0, this.neuronLayers[newNeuronParentLayer].Count);
+
+        int newNeuronChildPosition = this.GetRandomInt(0, this.neuronLayers[newNeuronChildLayer].Count);
+
+
+        //ref Neuron parent = this.neuronLayers[newNeuronParentLayer][newNeuronParentPosition];
+
+
+        ConnectNeuronsNoRef(this.neuronLayers[newNeuronParentLayer][newNeuronParentPosition], this.neuronLayers[newNeuronChildLayer][newNeuronChildPosition], synapse1Value);
+
+        //Debug.Log("after: " + BrainToString());
+
+        //List<Neurons> newList = new List<Neurons>();
+        //this.neuronLayers.Add(newList);
+
+
+
+    }
+
+    /**
+    * Randomly edit the bias of a synapse
+    */
+    public void EditSynapseStrengthRand() 
+    {
+        double synapse1ValueChange = this.GetRandomDouble(-.1, .1);
+
+
+
+        int neuronLayerNum = this.GetRandomInt(0, this.neuronLayers.Count - 2);
+
+        int newNeuronParentLayer = neuronLayerNum;
+        int newNeuronChildLayer = neuronLayerNum + 1;
+        //newNeuronParentLayer = this.GetRandomInt(0, this.neuronLayers.Count - 1);
+
+        //newNeuronChildLayer = this.GetRandomInt(1, this.neuronLayers.Count - 1);
+
+
+
+        int newNeuronParentPosition = this.GetRandomInt(0, this.neuronLayers[newNeuronParentLayer].Count);
+
+        int synapsePosition = neuronLayers[newNeuronParentPosition][newNeuronParentLayer].childrenSynapses.Count;
+
+        this.neuronLayers[newNeuronParentPosition][newNeuronParentLayer].childrenSynapses[synapsePosition].bias += synapse1ValueChange;
+
+    }
+
+    /**
+     * Randomly edit the weight of a neuron
+     */
+    public void EditNeuronStrengthRand()
+    {
+        double synapse1ValueChange = this.GetRandomDouble(-.1, .1);
+
+
+
+        int newNeuronLayerNum = this.GetRandomInt(1, this.neuronLayers.Count - 1);
+
+        int newNeuronParentLayer = newNeuronLayerNum;
+        int newNeuronChildLayer = newNeuronLayerNum + 1;
+        //newNeuronParentLayer = this.GetRandomInt(0, this.neuronLayers.Count - 1);
+
+        //newNeuronChildLayer = this.GetRandomInt(1, this.neuronLayers.Count - 1);
+
+
+
+        int newNeuronParentPosition = this.GetRandomInt(0, this.neuronLayers[newNeuronParentLayer].Count);
+
+        int newNeuronChildPosition = this.GetRandomInt(0, this.neuronLayers[newNeuronChildLayer].Count);
+
+        this.neuronLayers[newNeuronParentPosition][newNeuronParentLayer].weight = synapse1ValueChange;
+
+    }
 
     public void RemoveConnections()
     {
@@ -610,9 +709,9 @@ public class Brain : MonoBehaviour
         syn2Num = .24;
         childLayerNum = this.neuronLayers.Count - 1;
         this.AddHiddenNeuronBetweenNeuronsAndList(ref hidden3, parentLayerNum, childLayerNum, ref energy, ref layingEgg, syn1Num, syn2Num);
-        
-        
 
+
+        AddSynapseConnectionRand();
         AddRandomNeuronNoNewLayer();
         AddRandomNeuronNewLayer();
 

@@ -68,6 +68,7 @@ public class SaveToCSV : MonoBehaviour
 
     public void MakeFileName() 
     {
+        //(statistics.gameObject.GetComponent("Statistics") as Statistics).GetGameTimeSimpleToString();
         //make names from hash
         fileName = Directory.GetCurrentDirectory() + @"\CSV_files\world_" + worldNumber + ".csv";
         AddToDebug(fileName);
