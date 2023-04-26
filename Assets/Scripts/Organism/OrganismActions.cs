@@ -72,7 +72,9 @@ public class OrganismActions : MonoBehaviour
         Swim();
         LayEgg();
 
-        if (organism.age > 40) 
+
+        //make genetic 
+        if (organism.age > 500) 
         {
             Grow();
 
@@ -215,6 +217,8 @@ public class OrganismActions : MonoBehaviour
         {
             return;
         }
+
+
         if (this.travelTarget == null && gameobjectsInSight.Count > 0)
         {
             for (int i = 0; i < gameobjectsInSight.Count; i++) 
@@ -248,6 +252,45 @@ public class OrganismActions : MonoBehaviour
 
     }
 
+
+    public void UpdateSight()
+    {
+        if (this == null)
+        {
+            return;
+        }
+        if (this.travelTarget == null && gameobjectsInSight.Count > 0)
+        {
+            for (int i = 0; i < gameobjectsInSight.Count; i++)
+            {
+                if (gameobjectsInSight[i] == null)
+                {
+                    gameobjectsInSight.Remove(gameobjectsInSight[i]);
+
+
+                }
+                if (gameobjectsInSight[i] != null && (gameobjectsInSight[i].gameObject.GetComponent("Plant") as Plant))
+                {
+                    this.travelTarget = gameobjectsInSight[i];
+                    return;
+
+                }
+                else if (gameobjectsInSight[i] == null)
+                {
+                    gameobjectsInSight.Remove(gameobjectsInSight[i]);
+                }
+
+            }
+
+
+        }
+        else if (gameobjectsInSight.Count <= 0)
+        {
+            this.travelTarget = null;
+        }
+
+
+    }
 
     public void BiteTarget() 
     {
@@ -311,7 +354,7 @@ public class OrganismActions : MonoBehaviour
 
                     //Debug.Log("Eat2 eating!");
                     //Debug.Log("Eating");
-                    float nutrianceTransferRate = .5f;
+                    float nutrianceTransferRate = 1f;
                     (travelTarget.gameObject.GetComponent("Plant") as Plant).condition -= nutrianceTransferRate;
                     (travelTarget.gameObject.GetComponent("Plant") as Plant).nutreance -= nutrianceTransferRate;
                     organism.energy += nutrianceTransferRate;
@@ -329,7 +372,13 @@ public class OrganismActions : MonoBehaviour
     {
         //add object to in view list
         //Debug.Log("Trigger entered");
+        if (gameobjectsInSight.Contains(other.gameObject))
+        {
+            return;
+        }
         gameobjectsInSight.Add(other.gameObject);
+
+
         if ((other.gameObject.GetComponent("Organism") as Organism) != null)
         {
             brain.organismsInSightNum += 1;
@@ -349,6 +398,10 @@ public class OrganismActions : MonoBehaviour
     {
         //Debug.Log("Trigger exited");
         //add object to in view list
+        if (!gameobjectsInSight.Contains(other.gameObject))
+        {
+            return;
+        }
         if ((other.gameObject.GetComponent("Organism") as Organism) != null)
         {
             brain.organismsInSightNum -= 1;
@@ -440,13 +493,17 @@ public class OrganismActions : MonoBehaviour
 
     public void LayEgg() 
     {
+
+        //increase children count
+
+
         //change later to get genetics
-        float eggLayingAge = 40;
-        float energyNeededToLayEgg = 200;
+        float eggLayingAge = 500;
+        float energyNeededToLayEgg = 150;
 
-        float energyLossRatioAfterLayingEgg = 3;
+        float energyLossRatioAfterLayingEgg = 2;
 
-        if (organism.age > eggLayingAge && organism.energy > energyNeededToLayEgg) 
+        if (organism.age > eggLayingAge && organism.energy > energyNeededToLayEgg)
         {
             //GameObject newOrganism = inGameOrganism;
             //add atributes
@@ -473,10 +530,10 @@ public class OrganismActions : MonoBehaviour
             float randBrainNum = UnityEngine.Random.Range(0, 100);
 
             bool bothCHanged = false;
-            
 
 
-            if (brainChangeChance >= randBrainNum) 
+
+            if (brainChangeChance >= randBrainNum)
             {
 
                 //(inGameOrganism.gameObject.GetComponent("Brain") as Brain).AddRandomNeuronNoNewLayer();
@@ -488,9 +545,9 @@ public class OrganismActions : MonoBehaviour
                 if (rand > 75)
                 {
                     (inGameOrganism.gameObject.GetComponent("Brain") as Brain).EditNeuronStrengthRand();
-                    
+
                 }
-                else if (75 > rand && rand > 50) 
+                else if (75 > rand && rand > 50)
                 {
                     (inGameOrganism.gameObject.GetComponent("Brain") as Brain).AddSynapseConnectionRand();
 
@@ -505,7 +562,7 @@ public class OrganismActions : MonoBehaviour
                 }
                 else
                 {
-                    
+
                 }
                 bothCHanged = true;
 
@@ -514,7 +571,7 @@ public class OrganismActions : MonoBehaviour
             //see if by chance the genes change 
             if (geneChangeChance >= randGeneNum)
             {
-                
+
                 //change genes
                 (newOrganism.gameObject.GetComponent("SpriteRenderer") as SpriteRenderer).color = Color.blue;
                 changeAmmount = UnityEngine.Random.Range(-changeAmmount, maxGeneChangeAmmount);
@@ -534,7 +591,7 @@ public class OrganismActions : MonoBehaviour
 
 
             }
-            else 
+            else
             {
                 bothCHanged = false;
 
@@ -542,7 +599,7 @@ public class OrganismActions : MonoBehaviour
 
 
 
-            if (bothCHanged) 
+            if (bothCHanged)
             {
                 (newOrganism.gameObject.GetComponent("SpriteRenderer") as SpriteRenderer).color = Color.green;
 
@@ -558,10 +615,10 @@ public class OrganismActions : MonoBehaviour
             newOrganism.transform.localScale = new Vector3(.3f, .3f, 1);
 
             //Color color = new Color(0, 0, 0, 1);
-            (newOrganism.gameObject.GetComponent("SpriteRenderer") as SpriteRenderer).color = new Color ((newOrganism.gameObject.GetComponent("SpriteRenderer") as SpriteRenderer).color.r, (newOrganism.gameObject.GetComponent("SpriteRenderer") as SpriteRenderer).color.g, ((newOrganism.gameObject.GetComponent("SpriteRenderer") as SpriteRenderer).color.b + 50), (newOrganism.gameObject.GetComponent("SpriteRenderer") as SpriteRenderer).color.a);
+            (newOrganism.gameObject.GetComponent("SpriteRenderer") as SpriteRenderer).color = new Color((newOrganism.gameObject.GetComponent("SpriteRenderer") as SpriteRenderer).color.r, (newOrganism.gameObject.GetComponent("SpriteRenderer") as SpriteRenderer).color.g, ((newOrganism.gameObject.GetComponent("SpriteRenderer") as SpriteRenderer).color.b + 50), (newOrganism.gameObject.GetComponent("SpriteRenderer") as SpriteRenderer).color.a);
             //(newOrganism.gameObject.GetComponent("SpriteRenderer") as SpriteRenderer).color = Color.red;
 
-            Vector2 newV = new Vector2(inGameOrganism.transform.position.x, inGameOrganism.transform.position.y -2);
+            Vector2 newV = new Vector2(inGameOrganism.transform.position.x, inGameOrganism.transform.position.y - 2);
             newOrganism.transform.position = newV;
             //loose energy after laying egg
             organism.energy /= energyLossRatioAfterLayingEgg;
@@ -569,7 +626,12 @@ public class OrganismActions : MonoBehaviour
 
             //add the organism to the family tree 
             //null issues
-            (familyTree.GetComponent("FamilyTree") as FamilyTree).GenerateAndAddChildToFamilyTree(inGameOrganism, newOrganism);
+            if (familyTree != null && (familyTree.GetComponent("FamilyTree") as FamilyTree) != null) 
+            {
+                (familyTree.GetComponent("FamilyTree") as FamilyTree).GenerateAndAddChildToFamilyTree(inGameOrganism, newOrganism);
+
+            }
+            
 
 
         }

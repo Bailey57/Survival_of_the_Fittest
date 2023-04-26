@@ -224,10 +224,33 @@ public class Brain : MonoBehaviour
     public string BrainToString()
     {
         string outputStr = "";
+        string outputStrFinal = "";
+
+
+        int inputCount = neuronLayers[0].Count;
+        int outputCount = neuronLayers[neuronLayers.Count - 1].Count;
+
+
+
+        int hiddenCount = 0;
+
+        
+
+
         for (int i = 0; i < neuronLayers.Count; i++)
         {
             for (int j = 0; j < neuronLayers[i].Count; j++)
             {
+                //if true, then a hidden neuron
+                if (i > 0 && i < neuronLayers.Count - 1) 
+                {
+
+                    hiddenCount += 1;
+
+
+                }
+
+
                 outputStr += "C: " + i + " R: " + j;
 
                 //Mathf.Round();
@@ -253,7 +276,15 @@ public class Brain : MonoBehaviour
             outputStr += "\n";
 
         }
-        return outputStr;
+
+
+        outputStrFinal += "Selected Organism Brain Data:\n\n";
+        outputStrFinal += "Input Neuron Count: " + inputCount + "\n";
+        outputStrFinal += "Output Neuron Count: " + outputCount + "\n";
+        outputStrFinal += "Hidden Neuron Count: " + hiddenCount + "\n\n";
+        
+        outputStrFinal += outputStr;
+        return outputStrFinal;
 
     }
 
