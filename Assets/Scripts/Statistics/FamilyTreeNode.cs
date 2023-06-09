@@ -7,6 +7,10 @@ public class FamilyTreeNode : MonoBehaviour
     public string organismName;
     public Genetics genetics;
     public Brain brain;
+
+
+
+
     public int birthTime;//at what time it was born
     public List<BodyPart> bodyParts;
     public List<FamilyTreeNode> children;

@@ -32,11 +32,12 @@ public class Statistics : MonoBehaviour
 
     public FamilyTree familyTree;
 
-
+    public int numberOfOverallOrganisms;
 
     public string StatsToString() 
     {
         string output = "";
+        output += "numberOfOverallOrganisms: " + (numberOfOverallOrganisms + 1) + "\n\n";
         output += "numOfOrganisms: " + numOfOrganisms + "\n\n";
         output += "numOfPlants: " + numOfPlants + "\n\n";
         output += "maxnumOfOrganisms: " + maxnumOfOrganisms + "\n\n";

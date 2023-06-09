@@ -606,6 +606,20 @@ public class OrganismActions : MonoBehaviour
             }
 
 
+            GameObject statistics = GameObject.Find("Statistics");
+            //Debug.Log("Stats not null?");
+            //set number of organism if statistics not false
+            if (statistics != null) 
+            {
+                //Debug.Log("Stats not null!");
+                (statistics.gameObject.GetComponent("Statistics") as Statistics).numberOfChildren += 1;
+                string newName = "Organism " + ((statistics.gameObject.GetComponent("Statistics") as Statistics).numberOfChildren).ToString();
+
+                (newOrganism.GetComponent(typeof(Organism)) as Organism).organismName = newName;
+                newOrganism.name = newName;
+                
+            }
+
             (newOrganism.GetComponent(typeof(Organism)) as Organism).energy = 100;
             (newOrganism.GetComponent(typeof(Organism)) as Organism).age = 0;
 
@@ -626,12 +640,21 @@ public class OrganismActions : MonoBehaviour
 
             //add the organism to the family tree 
             //null issues
-            if (familyTree != null && (familyTree.GetComponent("FamilyTree") as FamilyTree) != null) 
+            //if (familyTree != null && (familyTree.GetComponent("FamilyTree") as FamilyTree) != null) 
+            //{
+                //(familyTree.GetComponent("FamilyTree") as FamilyTree).GenerateAndAddChildToFamilyTree(inGameOrganism, newOrganism);
+
+            //}
+
+            GameObject familyTree = GameObject.Find("Statistics");
+            Debug.Log("FamTree not null?");
+            //set number of organism if statistics not false
+            if (statistics != null)
             {
+                Debug.Log("FamTree not null!");
                 (familyTree.GetComponent("FamilyTree") as FamilyTree).GenerateAndAddChildToFamilyTree(inGameOrganism, newOrganism);
 
             }
-            
 
 
         }

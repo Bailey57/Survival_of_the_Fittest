@@ -75,7 +75,22 @@ public class Spawner : MonoBehaviour
 
                 //add to tree
                 (familyTree.gameObject.GetComponent("FamilyTree") as FamilyTree).GenerateAndAddNodeFromGameOrganism(newObject);
-                
+
+
+
+                GameObject statistics = GameObject.Find("Statistics");
+                //Debug.Log("Stats not null?");
+                //set number of organism if statistics not false
+                if (statistics != null)
+                {
+                    (statistics.gameObject.GetComponent("Statistics") as Statistics).numberOfOverallOrganisms += 1;
+                    //Debug.Log("Stats not null!");
+                    string newName = "Organism " + ((statistics.gameObject.GetComponent("Statistics") as Statistics).numberOfOverallOrganisms).ToString();
+
+                    (newObject.GetComponent(typeof(Organism)) as Organism).organismName = newName;
+                    newObject.name = newName;
+
+                }
 
             }
             

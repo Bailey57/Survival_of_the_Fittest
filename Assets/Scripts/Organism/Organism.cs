@@ -5,7 +5,7 @@ using UnityEngine;
 public class Organism : MonoBehaviour
 {
 
-    
+    public string organismName;
 
     public float health;
 
@@ -41,7 +41,9 @@ public class Organism : MonoBehaviour
 
     public string OrganismToString() 
     {
-        string outputStr = "\nhealth: " + health + "\n\n";
+        string outputStr = "\n";
+        outputStr += "name:" + organismName + "\n\n";
+        outputStr += "health: " + health + "\n\n";
         outputStr += "energy: " + energy + "\n\n";
         outputStr += "age: " + age + "\n\n";
 

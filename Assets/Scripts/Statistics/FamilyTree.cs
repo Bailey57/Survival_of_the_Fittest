@@ -35,15 +35,20 @@ public class FamilyTree : MonoBehaviour
     public string FamilyTreeToString() 
     {
         string outputStr = "";
-        outputStr += familyTreeNodes.Count + "\n";
+        outputStr += "FamilyTreeNodes: " + familyTreeNodes.Count + "\n";
 
-
+        
         foreach (DictionaryEntry entry in familyTreeNodes)
         {
             //outputStr += "Entry: " +  ((FamilyTreeNode)entry.Value).brain.BrainToString() + "\n";
-            outputStr += "Entry: " + ((FamilyTreeNode)entry.Value).numOfOrganisms + "\n";
 
+            //outputStr += "Entry: " + ((FamilyTreeNode)entry.Value).numOfOrganisms + "\n";
+            outputStr += "Entry: " + ((FamilyTreeNode)entry.Value).organismName + "\n";
+            
         }
+        
+
+
 
         return outputStr;
 
@@ -51,7 +56,7 @@ public class FamilyTree : MonoBehaviour
 
 
 
-    public void GetNode(FamilyTreeNode newNode)
+    public void GetNode(FamilyTreeNode node)
     {
         //FamilyTreeNode newNode = 
 
@@ -90,7 +95,7 @@ public class FamilyTree : MonoBehaviour
 
     public void GenerateAndAddNodeFromGameOrganism(GameObject organism) 
     {
-        FamilyTreeNode newNode = new FamilyTreeNode("", (organism.GetComponent(typeof(Genetics)) as Genetics), (organism.GetComponent(typeof(Brain)) as Brain));
+        FamilyTreeNode newNode = new FamilyTreeNode((organism.GetComponent(typeof(Organism)) as Organism).organismName, (organism.GetComponent(typeof(Genetics)) as Genetics), (organism.GetComponent(typeof(Brain)) as Brain));
 
         Debug.Log("Generating famTreeNode for : \n\n" + (organism.GetComponent(typeof(Genetics)) as Genetics).ToString());
 
@@ -101,7 +106,7 @@ public class FamilyTree : MonoBehaviour
 
     public FamilyTreeNode GetGameOrganismTreeNodeFromHash(GameObject organism) 
     {
-        FamilyTreeNode newNode = new FamilyTreeNode("", (organism.GetComponent(typeof(Genetics)) as Genetics), (organism.GetComponent(typeof(Brain)) as Brain));
+        FamilyTreeNode newNode = new FamilyTreeNode((organism.GetComponent(typeof(Organism)) as Organism).organismName, (organism.GetComponent(typeof(Genetics)) as Genetics), (organism.GetComponent(typeof(Brain)) as Brain));
         string nodeString = newNode.FamilyTreeNodeHashString();
         string hash = ComputeSha256Hash(nodeString);
 
@@ -118,18 +123,45 @@ public class FamilyTree : MonoBehaviour
     {
 
 
+        
+
+
+
+        //TODO: USE HASH INSTEAD OF LOOKING THROUGH ALL 
+        bool inAlready = false;
+        foreach (DictionaryEntry entry in familyTreeNodes)
+        {
+           
+
+
+            if (((FamilyTreeNode) entry.Value).organismName == (parent.GetComponent(typeof(Organism)) as Organism).organismName)
+            {
+                inAlready = true;
+            }
+            //outputStr += "Entry: " + ((FamilyTreeNode)entry.Value).organismName + "\n";
+
+        }
+        if (!inAlready) 
+        {
+            GenerateAndAddNodeFromGameOrganism(parent);
+        }
+        //
+
+
+
 
         GenerateAndAddNodeFromGameOrganism(child);
 
         //null issues
         GetGameOrganismTreeNodeFromHash(parent).children.Add(GetGameOrganismTreeNodeFromHash(child));
 
-        Debug.Log("Added:\n " + GetGameOrganismTreeNodeFromHash(child).FamilyTreeNodeHashString() + "\n\nTO:\n" + GetGameOrganismTreeNodeFromHash(parent).FamilyTreeNodeHashString());
+        Debug.Log("Added C:\n " + GetGameOrganismTreeNodeFromHash(child).FamilyTreeNodeToStringWithoutChildren() + "\n\nTO:\n" + GetGameOrganismTreeNodeFromHash(parent).FamilyTreeNodeToStringWithoutChildren());
     }
 
 
 
     //public void AddChild()
+
 
 
 
@@ -154,6 +186,9 @@ public class FamilyTree : MonoBehaviour
             return builder.ToString();
         }
     }
+
+
+
 
     //public FamilyTreeNode GetNode(key) 
     //{
