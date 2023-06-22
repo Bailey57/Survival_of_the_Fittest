@@ -70,7 +70,13 @@ public class SaveToCSV : MonoBehaviour
     {
         //(statistics.gameObject.GetComponent("Statistics") as Statistics).GetGameTimeSimpleToString();
         //make names from hash
-        fileName = Directory.GetCurrentDirectory() + @"\CSV_files\world_" + worldNumber + ".csv";
+        var dt = DateTime.Now;
+        string dateAndTimeStr = dt.ToLongDateString() + "_" + dt.ToLongTimeString();
+        //worldNumber
+        //dateAndTimeStr
+        
+        fileName = Directory.GetCurrentDirectory() + @"\CSV_files\world_" + DateTime.Now.ToString("yyyy-MM-dd_hh.mm.ss") + ".csv";
+        Debug.Log(fileName);
         AddToDebug(fileName);
 
     }
