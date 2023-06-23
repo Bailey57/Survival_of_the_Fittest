@@ -491,6 +491,37 @@ public class OrganismActions : MonoBehaviour
 
     }
 
+
+
+    public void ChangeChildColorRand(GameObject newOrganism) 
+    {
+        int color = UnityEngine.Random.Range(0, 3);
+
+
+        float randBrainNum = UnityEngine.Random.Range(0, 100);
+
+        float r = (inGameOrganism.GetComponent("SpriteRenderer") as SpriteRenderer).color.r;
+        float g = (inGameOrganism.GetComponent("SpriteRenderer") as SpriteRenderer).color.g;
+        float b = (inGameOrganism.GetComponent("SpriteRenderer") as SpriteRenderer).color.b;
+
+        if (color == 1)
+        {
+
+        }
+        else if (color == 2)
+        {
+            //-.05f
+        }
+        else 
+        {
+        
+        }
+
+        (newOrganism.gameObject.GetComponent("SpriteRenderer") as SpriteRenderer).color = new Color(r, g, b, 255);
+
+
+    }
+
     public void LayEgg() 
     {
 
@@ -540,7 +571,8 @@ public class OrganismActions : MonoBehaviour
                 //
                 //(inGameOrganism.gameObject.GetComponent("Brain") as Brain).AddRandomNeuronNewLayer();
                 //(inGameOrganism.gameObject.GetComponent("Brain") as Brain).EditNeuronStrengthRand();
-                (newOrganism.gameObject.GetComponent("SpriteRenderer") as SpriteRenderer).color = Color.red;
+
+                //(newOrganism.gameObject.GetComponent("SpriteRenderer") as SpriteRenderer).color = Color.red;
                 float rand = UnityEngine.Random.Range(0, 100);
                 if (rand > 75)
                 {
@@ -571,9 +603,9 @@ public class OrganismActions : MonoBehaviour
             //see if by chance the genes change 
             if (geneChangeChance >= randGeneNum)
             {
-
+                int a;
                 //change genes
-                (newOrganism.gameObject.GetComponent("SpriteRenderer") as SpriteRenderer).color = Color.blue;
+                //(newOrganism.gameObject.GetComponent("SpriteRenderer") as SpriteRenderer).color = Color.blue;
                 changeAmmount = UnityEngine.Random.Range(-changeAmmount, maxGeneChangeAmmount);
                 (newOrganism.GetComponent(typeof(Genetics)) as Genetics).agility += changeAmmount;
                 changeAmmount = UnityEngine.Random.Range(-changeAmmount, maxGeneChangeAmmount);
@@ -601,7 +633,8 @@ public class OrganismActions : MonoBehaviour
 
             if (bothCHanged)
             {
-                (newOrganism.gameObject.GetComponent("SpriteRenderer") as SpriteRenderer).color = Color.green;
+                int a;
+                //(newOrganism.gameObject.GetComponent("SpriteRenderer") as SpriteRenderer).color = Color.green;
 
             }
 
@@ -628,9 +661,17 @@ public class OrganismActions : MonoBehaviour
             //make smol
             newOrganism.transform.localScale = new Vector3(.3f, .3f, 1);
 
+
+
             //Color color = new Color(0, 0, 0, 1);
-            (newOrganism.gameObject.GetComponent("SpriteRenderer") as SpriteRenderer).color = new Color((newOrganism.gameObject.GetComponent("SpriteRenderer") as SpriteRenderer).color.r, (newOrganism.gameObject.GetComponent("SpriteRenderer") as SpriteRenderer).color.g, ((newOrganism.gameObject.GetComponent("SpriteRenderer") as SpriteRenderer).color.b + 50), (newOrganism.gameObject.GetComponent("SpriteRenderer") as SpriteRenderer).color.a);
+            //(newOrganism.gameObject.GetComponent("SpriteRenderer") as SpriteRenderer).color = new Color((newOrganism.gameObject.GetComponent("SpriteRenderer") as SpriteRenderer).color.r, (newOrganism.gameObject.GetComponent("SpriteRenderer") as SpriteRenderer).color.g, ((newOrganism.gameObject.GetComponent("SpriteRenderer") as SpriteRenderer).color.b + 50), 255);
+            
+            //Debug.Log("Color: " + (inGameOrganism.GetComponent("SpriteRenderer") as SpriteRenderer).color.b);
+            //(newOrganism.gameObject.GetComponent("SpriteRenderer") as SpriteRenderer).color = new Color((inGameOrganism.GetComponent("SpriteRenderer") as SpriteRenderer).color.r, (inGameOrganism.GetComponent("SpriteRenderer") as SpriteRenderer).color.g, ((inGameOrganism.GetComponent("SpriteRenderer") as SpriteRenderer).color.b - .05f), 255);
+            
+            //(newOrganism.gameObject.GetComponent("SpriteRenderer") as SpriteRenderer).color = Color.green;
             //(newOrganism.gameObject.GetComponent("SpriteRenderer") as SpriteRenderer).color = Color.red;
+
 
             Vector2 newV = new Vector2(inGameOrganism.transform.position.x, inGameOrganism.transform.position.y - 2);
             newOrganism.transform.position = newV;
