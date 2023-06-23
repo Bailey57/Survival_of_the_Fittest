@@ -500,21 +500,47 @@ public class OrganismActions : MonoBehaviour
 
         float randBrainNum = UnityEngine.Random.Range(0, 100);
 
+        float randChange = UnityEngine.Random.Range(-.05f, .05f);
+
         float r = (inGameOrganism.GetComponent("SpriteRenderer") as SpriteRenderer).color.r;
         float g = (inGameOrganism.GetComponent("SpriteRenderer") as SpriteRenderer).color.g;
         float b = (inGameOrganism.GetComponent("SpriteRenderer") as SpriteRenderer).color.b;
 
         if (color == 1)
         {
+            if (r >= .95)
+            {
+                r -= .05f;
+            }
+            else 
+            {
+                r += randChange;
+            }
 
         }
         else if (color == 2)
         {
-            //-.05f
+            
+            if (g >= .95)
+            {
+                g -= .05f;
+            }
+            else
+            {
+                g += randChange;
+            }
         }
         else 
         {
-        
+            if (b >= .95)
+            {
+                b -= .05f;
+            }
+            else
+            {
+                b += randChange;
+            }
+
         }
 
         (newOrganism.gameObject.GetComponent("SpriteRenderer") as SpriteRenderer).color = new Color(r, g, b, 255);
@@ -596,6 +622,8 @@ public class OrganismActions : MonoBehaviour
                 {
 
                 }
+
+                ChangeChildColorRand(newOrganism);
                 bothCHanged = true;
 
             }
@@ -603,6 +631,7 @@ public class OrganismActions : MonoBehaviour
             //see if by chance the genes change 
             if (geneChangeChance >= randGeneNum)
             {
+                ChangeChildColorRand(newOrganism);
                 int a;
                 //change genes
                 //(newOrganism.gameObject.GetComponent("SpriteRenderer") as SpriteRenderer).color = Color.blue;
