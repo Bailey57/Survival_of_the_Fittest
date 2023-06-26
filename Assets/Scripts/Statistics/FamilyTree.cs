@@ -43,8 +43,18 @@ public class FamilyTree : MonoBehaviour
             //outputStr += "Entry: " +  ((FamilyTreeNode)entry.Value).brain.BrainToString() + "\n";
 
             //outputStr += "Entry: " + ((FamilyTreeNode)entry.Value).numOfOrganisms + "\n";
-            outputStr += "Entry: " + ((FamilyTreeNode)entry.Value).organismName + "\n";
-            
+            outputStr += "Entry: " + ((FamilyTreeNode)entry.Value).organismName + "";
+
+
+            for (int i = 0; i < ((FamilyTreeNode)entry.Value).children.Count; i++) 
+            {
+                outputStr += "\n---> " + ((FamilyTreeNode)entry.Value).children[i].organismName;
+
+
+            }
+            outputStr += "\n";
+
+
         }
         
 
@@ -75,9 +85,12 @@ public class FamilyTree : MonoBehaviour
 
         //else add it to hash 
 
-        string hash = ComputeSha256Hash(nodeString);
+        //string hash = ComputeSha256Hash(nodeString);
+        string hash = ComputeSha256Hash(newNode.organismName);
+
+
         //Convert.ToBase64String(SHA256.HashData(Encoding.UTF8.GetBytes(nodeString)));
-        Debug.Log(!familyTreeNodes.ContainsKey(hash));
+        Debug.Log("contains " + newNode.organismName + "? " + !familyTreeNodes.ContainsKey(hash));
         Debug.Log(FamilyTreeToString());
         if (!familyTreeNodes.ContainsKey(hash)) 
         {
@@ -101,14 +114,15 @@ public class FamilyTree : MonoBehaviour
 
         AddNode(newNode);
 
-        Debug.Log("Added:\n " + GetGameOrganismTreeNodeFromHash(organism).FamilyTreeNodeHashString() + "\n\nTo family tree.");
+        Debug.Log("Added:\n " + GetGameOrganismTreeNodeFromHash(organism).organismName + "\n\nTo family tree.");
     }
 
     public FamilyTreeNode GetGameOrganismTreeNodeFromHash(GameObject organism) 
     {
         FamilyTreeNode newNode = new FamilyTreeNode((organism.GetComponent(typeof(Organism)) as Organism).organismName, (organism.GetComponent(typeof(Genetics)) as Genetics), (organism.GetComponent(typeof(Brain)) as Brain));
         string nodeString = newNode.FamilyTreeNodeHashString();
-        string hash = ComputeSha256Hash(nodeString);
+        //string hash = ComputeSha256Hash(nodeString);
+        string hash = ComputeSha256Hash((organism.GetComponent(typeof(Organism)) as Organism).organismName);
 
         if (familyTreeNodes.Contains(hash) == true)
         {
@@ -152,10 +166,12 @@ public class FamilyTree : MonoBehaviour
 
         GenerateAndAddNodeFromGameOrganism(child);
 
+
+        Debug.Log("Trying to add Child " + (child.GetComponent(typeof(Organism)) as Organism).organismName + " to parent " + (parent.GetComponent(typeof(Organism)) as Organism).organismName);
         //null issues
         GetGameOrganismTreeNodeFromHash(parent).children.Add(GetGameOrganismTreeNodeFromHash(child));
 
-        Debug.Log("Added C:\n " + GetGameOrganismTreeNodeFromHash(child).FamilyTreeNodeToStringWithoutChildren() + "\n\nTO:\n" + GetGameOrganismTreeNodeFromHash(parent).FamilyTreeNodeToStringWithoutChildren());
+        //Debug.Log("Added C:\n " + GetGameOrganismTreeNodeFromHash(child).FamilyTreeNodeToStringWithoutChildren() + "\n\nTO:\n" + GetGameOrganismTreeNodeFromHash(parent).FamilyTreeNodeToStringWithoutChildren());
     }
 
 

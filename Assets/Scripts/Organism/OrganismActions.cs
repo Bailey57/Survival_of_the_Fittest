@@ -675,7 +675,8 @@ public class OrganismActions : MonoBehaviour
             {
                 //Debug.Log("Stats not null!");
                 (statistics.gameObject.GetComponent("Statistics") as Statistics).numberOfChildren += 1;
-                string newName = "Organism " + ((statistics.gameObject.GetComponent("Statistics") as Statistics).numberOfChildren).ToString();
+                (statistics.gameObject.GetComponent("Statistics") as Statistics).numberOfOverallOrganisms += 1;
+                string newName = "Organism " + ((statistics.gameObject.GetComponent("Statistics") as Statistics).numberOfOverallOrganisms).ToString();
 
                 (newOrganism.GetComponent(typeof(Organism)) as Organism).organismName = newName;
                 newOrganism.name = newName;

@@ -284,7 +284,18 @@ public class Brain : MonoBehaviour
         outputStrFinal += "Hidden Neuron Count: " + hiddenCount + "\n\n";
         
         outputStrFinal += outputStr;
-        return outputStrFinal;
+        
+        Debug.Log("outputStrFinal: " + outputStrFinal);
+        if (outputStrFinal != null)
+        {
+            return outputStrFinal;
+
+        }
+        else 
+        {
+            return "n/a\n";
+        }
+        
 
     }
 

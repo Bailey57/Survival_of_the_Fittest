@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FamilyTreeNode : MonoBehaviour
+public class FamilyTreeNode
 {
     public string organismName;
     public Genetics genetics;
@@ -45,6 +45,7 @@ public class FamilyTreeNode : MonoBehaviour
 
 
     }
+
 
 
 

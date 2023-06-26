@@ -73,8 +73,7 @@ public class Spawner : MonoBehaviour
                 newObject.transform.position = new Vector3(randX, randY, 0);
 
 
-                //add to tree
-                (familyTree.gameObject.GetComponent("FamilyTree") as FamilyTree).GenerateAndAddNodeFromGameOrganism(newObject);
+                
 
 
 
@@ -91,6 +90,8 @@ public class Spawner : MonoBehaviour
                     newObject.name = newName;
 
                 }
+                //add to tree
+                (familyTree.gameObject.GetComponent("FamilyTree") as FamilyTree).GenerateAndAddNodeFromGameOrganism(newObject);
 
             }
             

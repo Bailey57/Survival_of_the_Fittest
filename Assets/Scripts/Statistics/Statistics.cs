@@ -37,7 +37,7 @@ public class Statistics : MonoBehaviour
     public string StatsToString() 
     {
         string output = "";
-        output += "numberOfOverallOrganisms: " + (numberOfOverallOrganisms + 1) + "\n\n";
+        output += "numberOfOverallOrganisms: " + numberOfOverallOrganisms + "\n\n";
         output += "numOfOrganisms: " + numOfOrganisms + "\n\n";
         output += "numOfPlants: " + numOfPlants + "\n\n";
         output += "maxnumOfOrganisms: " + maxnumOfOrganisms + "\n\n";
