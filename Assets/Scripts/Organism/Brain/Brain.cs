@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Animations;
-
+[System.Serializable]
 public class Brain : MonoBehaviour
 {
     //list all input and output values

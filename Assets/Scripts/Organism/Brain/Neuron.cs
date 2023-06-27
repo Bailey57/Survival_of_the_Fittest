@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
+[System.Serializable]
 public class Neuron
 {
     //have neuron types: t1 = input neuron, t2 = hidden layer, t3 = output neuron

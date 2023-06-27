@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+
+[System.Serializable]
 public class Statistics : MonoBehaviour
 {
     // Start is called before the first frame update

@@ -4,6 +4,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Text;
+
+
+[System.Serializable]
 public class FamilyTree : MonoBehaviour
 {
     // Start is called before the first frame update
