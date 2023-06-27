@@ -15,12 +15,18 @@ public class GameData
     public List<PlantSave> plants = new List<PlantSave>();
 
 
+    public StatisticsSave statisticsSave = new StatisticsSave();
+
+
     private OrganismSave organismSave = new OrganismSave();
     private PlantSave plantSave = new PlantSave();
 
 
     public void UpdateGameData()
     {
+
+
+
         organisms = new List<OrganismSave>();
         List<GameObject> rootObjects = new List<GameObject>();
         Scene scene = SceneManager.GetActiveScene();
@@ -35,9 +41,17 @@ public class GameData
             }
             else if ((rootObjects[i].gameObject.GetComponent("Plant") as Plant))
             {
-
+                Debug.Log("saving: Plant");
                 plants.Add(plantSave.MakePlantSave(rootObjects[i].gameObject));
                
+            }
+            else if ((rootObjects[i].gameObject.GetComponent("Statistics") as Statistics))
+            {
+
+                Debug.Log("saving: Satistics");
+                Debug.Log(rootObjects[i].gameObject.name);
+                
+                statisticsSave = statisticsSave.MakeStatisticsSave(rootObjects[i].gameObject);
             }
         }
     }
