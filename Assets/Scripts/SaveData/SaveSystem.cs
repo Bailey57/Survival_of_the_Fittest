@@ -10,18 +10,23 @@ using System;
 using UnityEngine.UI;
 using TMPro;
 using System.Runtime.InteropServices.ComTypes;
+using UnityEditor;
+
+
+
+
 
 public class SaveSystem : MonoBehaviour
 {
 
-    private string fileName = "";
+    private string filePath = "";
     public GameData gameData;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        MakeFileName();
+        MakefilePath();
         MakeSaveFileDirectory();
 
 
@@ -47,9 +52,9 @@ public class SaveSystem : MonoBehaviour
     public void SaveGame() 
     {
         BinaryFormatter bf = new BinaryFormatter();
-        string path = ".sotf";
+        //string path = ".sotf";
 
-        FileStream stream = new FileStream(fileName, FileMode.Create);
+        FileStream stream = new FileStream(filePath, FileMode.Create);
 
         gameData.UpdateGameData();
 
@@ -61,14 +66,45 @@ public class SaveSystem : MonoBehaviour
 
 
 
+    private void GetFile() 
+    {
+        filePath = EditorUtility.OpenFilePanel("Saves", Directory.GetCurrentDirectory() + @"\GameSave_files", "sotf");
+
+
+    }
+
 
 
 
     public void LoadGame() 
     {
-        
-    
-    
+        GetFile();
+        //GetFile();
+
+        if (File.Exists(filePath))
+        {
+            BinaryFormatter bf = new BinaryFormatter();
+
+
+
+
+            FileStream stream = new FileStream(filePath, FileMode.Open);
+
+
+
+            gameData = bf.Deserialize(stream) as GameData;
+
+            Debug.Log("Loaded save! " + gameData.organisms[0].organismName);
+            stream.Close();
+            
+            //return newGameData;
+        }
+        else 
+        {
+            Debug.LogError("Save file not found " + filePath);
+            //return null;
+        }
+
     }
 
 
@@ -97,7 +133,7 @@ public class SaveSystem : MonoBehaviour
 
 
 
-    public void MakeFileName()
+    public void MakefilePath()
     {
         //(statistics.gameObject.GetComponent("Statistics") as Statistics).GetGameTimeSimpleToString();
         //make names from hash
@@ -106,9 +142,9 @@ public class SaveSystem : MonoBehaviour
         //worldNumber
         //dateAndTimeStr
 
-        fileName = Directory.GetCurrentDirectory() + @"\GameSave_files\world_" + DateTime.Now.ToString("yyyy-MM-dd_hh.mm.ss") + ".sotf";
-        Debug.Log(fileName);
-        //AddToDebug(fileName);
+        filePath = Directory.GetCurrentDirectory() + @"\GameSave_files\world_" + DateTime.Now.ToString("yyyy-MM-dd_hh.mm.ss") + ".sotf";
+        Debug.Log(filePath);
+        //AddToDebug(filePath);
     }
 
 }
