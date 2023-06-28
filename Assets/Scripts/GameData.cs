@@ -28,6 +28,8 @@ public class GameData
 
 
         organisms = new List<OrganismSave>();
+        plants = new List<PlantSave>();
+        statisticsSave = new StatisticsSave();
         List<GameObject> rootObjects = new List<GameObject>();
         Scene scene = SceneManager.GetActiveScene();
         scene.GetRootGameObjects(rootObjects);
