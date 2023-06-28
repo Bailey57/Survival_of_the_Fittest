@@ -49,8 +49,13 @@ public class Brain : MonoBehaviour
         GetTanH(1);
         GetSigmoid(1);
 
-        //base brain that can function
-        MakeBrain2Tst();
+        if (neuronLayers.Count == 0) 
+        {
+            //base brain that can function
+            MakeBrain2Tst();
+
+        }
+        
 
         //complete random starts
         //MakeBaseBrain1Random();

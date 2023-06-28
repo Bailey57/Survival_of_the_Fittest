@@ -141,7 +141,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &95720035
 RectTransform:
   m_ObjectHideFlags: 0
@@ -578,13 +578,14 @@ GameObject:
   - component: {fileID: 770257500}
   - component: {fileID: 770257499}
   - component: {fileID: 770257498}
+  - component: {fileID: 770257502}
   m_Layer: 5
   m_Name: 'Load Save Button '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &770257497
 RectTransform:
   m_ObjectHideFlags: 0
@@ -661,8 +662,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 770257498}
-        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+      - m_Target: {fileID: 770257502}
+        m_TargetAssemblyTypeName: SaveSystem, Assembly-CSharp
         m_MethodName: LoadGame
         m_Mode: 1
         m_Arguments:
@@ -711,6 +712,30 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 770257496}
   m_CullTransparentMesh: 1
+--- !u!114 &770257502
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 770257496}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40679d2b04769c944b847e0284ba6419, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameData:
+    organisms: []
+    plants: []
+    statisticsSave:
+      numOfOrganisms: 0
+      numOfPlants: 0
+      maxnumOfOrganisms: 0
+      maxNumOfPlants: 0
+      longestLastingGenNum: 0
+      numberOfChildren: 0
+      simulationTime: 0
+      numberOfOverallOrganisms: 0
 --- !u!1001 &1035110081
 PrefabInstance:
   m_ObjectHideFlags: 0
